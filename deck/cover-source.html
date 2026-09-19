@@ -1,0 +1,198 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  @font-face{font-family:"Lora";src:url("/usr/share/fonts/truetype/google-fonts/Lora-Variable.ttf");font-weight:400 700}
+  @font-face{font-family:"Lora";src:url("/usr/share/fonts/truetype/google-fonts/Lora-Italic-Variable.ttf");font-weight:400 700;font-style:italic}
+  html,body{margin:0;background:#2b2b2b}
+  .note{position:relative;width:1920px;height:1080px;overflow:hidden;background:#EDE6CF;font-family:"Lora","Bitstream Charter",serif;color:#173F30}
+  .note svg.bg{position:absolute;inset:0;width:100%;height:100%}
+  .abs{position:absolute}
+  .sans{font-family:"DejaVu Sans",sans-serif}
+  .mono{font-family:"DejaVu Sans Mono",monospace}
+  /* serial numbers: digits grow left → right like a real note */
+  .serial{position:absolute;font-family:"DejaVu Sans Mono",monospace;font-weight:700;color:#7A1F2B;letter-spacing:3px;display:flex;align-items:flex-end;gap:2px}
+  .serial span{line-height:1}
+  .micro{position:absolute;font-family:"DejaVu Sans",sans-serif;font-size:6.6px;letter-spacing:1.4px;color:#8E6B12;opacity:.85;white-space:nowrap;overflow:hidden}
+  /* center content */
+  .center{position:absolute;left:300px;width:1000px;top:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .kicker{font-family:"DejaVu Sans",sans-serif;font-size:17px;letter-spacing:8px;font-weight:700;color:#173F30;display:flex;align-items:center;gap:20px}
+  .kicker:before,.kicker:after{content:"";display:block;width:130px;height:1px;background:#B7891C}
+  .badge{font-family:"DejaVu Sans",sans-serif;font-size:13.5px;letter-spacing:3.5px;font-weight:700;border:1.5px solid #173F30;border-radius:14px;padding:6px 20px;margin-top:14px;background:rgba(237,230,207,.7)}
+  h1{font-family:"Lora",serif;font-weight:700;font-size:116px;letter-spacing:6px;margin:48px 0 0;white-space:nowrap;line-height:1;color:#173F30;text-shadow:0 1px 0 #fff, 2px 3px 0 rgba(23,63,48,.16), 0 0 1px #173F30}
+  .rule{display:flex;align-items:center;gap:14px;margin:14px 0 8px}
+  .rule i{display:block;width:210px;height:1px;background:#B7891C}
+  .rule b{width:8px;height:8px;border-radius:50%;background:#B7891C}
+  .tag{font-family:"Lora",serif;font-style:italic;font-weight:500;font-size:40px;color:#7A1F2B}
+  .promise{margin-top:34px;font-family:"Bitstream Charter","Lora",serif;font-size:16.5px;letter-spacing:2.5px;color:#173F30;text-transform:uppercase;border-top:1px solid #173F30;border-bottom:1px solid #173F30;padding:10px 26px}
+  .team{margin-top:24px}
+  .team .t{font-family:"DejaVu Sans",sans-serif;font-weight:700;letter-spacing:5px;font-size:17px;color:#173F30}
+  .team .n{font-family:"Bitstream Charter","Lora",serif;font-size:25px;letter-spacing:2px;margin-top:10px;color:#173F30}
+  .team .n span{color:#B7891C;margin:0 14px}
+  .team .c{font-family:"DejaVu Sans",sans-serif;font-size:13.5px;letter-spacing:3.5px;color:#7A1F2B;margin-top:10px;font-weight:700}
+  .sign{margin-top:16px;font-family:"Lora",serif;font-style:italic;font-size:19px;color:#173F30;opacity:.85}
+  /* denomination numerals */
+  .denom{position:absolute;font-family:"Lora",serif;font-weight:700;color:#173F30;line-height:1;text-shadow:0 1px 0 #fff,1px 2px 0 rgba(23,63,48,.18)}
+  .denom small{display:block;font-family:"DejaVu Sans",sans-serif;font-weight:700;letter-spacing:3px;font-size:11px;color:#7A1F2B;text-shadow:none;margin-top:4px}
+  /* language panel */
+  .langs{position:absolute;left:112px;top:378px;width:170px;font-family:"FreeSerif",serif;font-size:12.5px;line-height:1.55;color:#173F30;border-left:1px solid #B7891C;padding-left:12px}
+  .langs div{white-space:nowrap}
+  .langs .h{font-family:"DejaVu Sans",sans-serif;font-size:8px;letter-spacing:2.5px;font-weight:700;color:#8E6B12;margin-bottom:6px}
+  /* bleed lines & id mark */
+  .bleed{position:absolute;left:44px;top:470px;display:flex;flex-direction:column;gap:9px}
+  .bleed i{display:block;width:28px;height:5px;background:#173F30;border-radius:1px}
+  .bleed2{position:absolute;right:44px;top:470px;display:flex;flex-direction:column;gap:9px}
+  .bleed2 i{display:block;width:28px;height:5px;background:#173F30;border-radius:1px;margin-left:auto}
+  .idmark{position:absolute;left:112px;top:600px;width:40px;height:40px;border:2px solid #173F30;transform:rotate(45deg);display:grid;place-items:center}
+  .idmark:after{content:"";width:16px;height:16px;background:#173F30}
+  .foot{position:absolute;left:330px;width:1000px;bottom:86px;text-align:center;font-family:"DejaVu Sans",sans-serif;font-size:11.5px;letter-spacing:2.5px;color:#4E5D55}
+  .words{position:absolute;left:330px;width:1000px;bottom:118px;text-align:center;font-family:"DejaVu Sans",sans-serif;font-size:12px;letter-spacing:5px;font-weight:700;color:#173F30}
+</style></head><body>
+<div class="note">
+  <svg class="bg" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="wave" width="120" height="13" patternUnits="userSpaceOnUse"><path d="M0 6.5 Q 30 0 60 6.5 T 120 6.5" fill="none" stroke="#173F30" stroke-width=".5" opacity=".3"/></pattern>
+      <pattern id="wave2" width="160" height="21" patternUnits="userSpaceOnUse" patternTransform="rotate(-7)"><path d="M0 10.5 Q 40 2 80 10.5 T 160 10.5" fill="none" stroke="#B7891C" stroke-width=".5" opacity=".28"/></pattern>
+      <pattern id="wave3" width="90" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(90)"><path d="M0 4.5 Q 22 0 45 4.5 T 90 4.5" fill="none" stroke="#173F30" stroke-width=".35" opacity=".22"/></pattern>
+      <pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse"><path d="M0 2.5 H5" stroke="#173F30" stroke-width="1" opacity=".9"/></pattern>
+      <pattern id="hatch2" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 3.5 H7" stroke="#173F30" stroke-width=".6" opacity=".6"/></pattern>
+      <pattern id="dots" width="4" height="4" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".6" fill="#173F30" opacity=".5"/></pattern>
+      <linearGradient id="tint" x1="0" x2="1"><stop offset="0" stop-color="#D9E3D0"/><stop offset=".2" stop-color="#EDE6CF"/><stop offset=".62" stop-color="#EDE6CF"/><stop offset=".78" stop-color="#F7F2E2"/><stop offset="1" stop-color="#E4E8D6"/></linearGradient>
+      <linearGradient id="vband" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#173F30" stop-opacity=".0"/><stop offset=".5" stop-color="#173F30" stop-opacity=".16"/><stop offset="1" stop-color="#173F30" stop-opacity="0"/></linearGradient>
+      <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff" stop-opacity="1"/><stop offset=".6" stop-color="#F7F2E2" stop-opacity=".6"/><stop offset="1" stop-color="#F7F2E2" stop-opacity="0"/></radialGradient>
+      <radialGradient id="fade" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff"/><stop offset=".72" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+      <mask id="wmmask"><rect x="1340" y="110" width="560" height="860" fill="url(#fade)"/></mask>
+      <g id="rosette">
+        <g fill="none" stroke="#173F30" stroke-width=".55">
+          <g id="pet"><ellipse rx="150" ry="46"/></g>
+          <use href="#pet" transform="rotate(10)"/><use href="#pet" transform="rotate(20)"/><use href="#pet" transform="rotate(30)"/><use href="#pet" transform="rotate(40)"/><use href="#pet" transform="rotate(50)"/><use href="#pet" transform="rotate(60)"/><use href="#pet" transform="rotate(70)"/><use href="#pet" transform="rotate(80)"/><use href="#pet" transform="rotate(90)"/><use href="#pet" transform="rotate(100)"/><use href="#pet" transform="rotate(110)"/><use href="#pet" transform="rotate(120)"/><use href="#pet" transform="rotate(130)"/><use href="#pet" transform="rotate(140)"/><use href="#pet" transform="rotate(150)"/><use href="#pet" transform="rotate(160)"/><use href="#pet" transform="rotate(170)"/>
+        </g>
+        <g fill="none" stroke="#B7891C" stroke-width=".5">
+          <g id="pet2"><ellipse rx="105" ry="22"/></g>
+          <use href="#pet2" transform="rotate(15)"/><use href="#pet2" transform="rotate(30)"/><use href="#pet2" transform="rotate(45)"/><use href="#pet2" transform="rotate(60)"/><use href="#pet2" transform="rotate(75)"/><use href="#pet2" transform="rotate(90)"/><use href="#pet2" transform="rotate(105)"/><use href="#pet2" transform="rotate(120)"/><use href="#pet2" transform="rotate(135)"/><use href="#pet2" transform="rotate(150)"/><use href="#pet2" transform="rotate(165)"/>
+        </g>
+        <circle r="62" fill="none" stroke="#173F30" stroke-width=".8"/><circle r="56" fill="none" stroke="#B7891C" stroke-width=".6"/><circle r="34" fill="none" stroke="#173F30" stroke-width=".6"/>
+      </g>
+      <!-- lace border tile -->
+      <pattern id="lace" width="24" height="12" patternUnits="userSpaceOnUse">
+        <path d="M0 6 Q 6 0 12 6 T 24 6" fill="none" stroke="#173F30" stroke-width=".8"/>
+        <path d="M0 6 Q 6 12 12 6 T 24 6" fill="none" stroke="#B7891C" stroke-width=".6"/>
+        <circle cx="12" cy="6" r="1.4" fill="#173F30"/>
+      </pattern>
+    </defs>
+    <!-- paper: single dominant hue with a lighter watermark window on the right -->
+    <rect width="1920" height="1080" fill="url(#tint)"/>
+    <rect width="1920" height="1080" fill="url(#wave)"/>
+    <rect width="1920" height="1080" fill="url(#wave2)"/>
+    <rect x="0" y="0" width="330" height="1080" fill="url(#wave3)"/>
+    <!-- intaglio colour band across the middle -->
+    <rect x="0" y="300" width="1920" height="480" fill="url(#vband)"/>
+    <!-- border: lace inside a double rule -->
+    <rect x="34" y="34" width="1852" height="1012" fill="none" stroke="#173F30" stroke-width="2.2"/>
+    <rect x="44" y="44" width="1832" height="992" fill="none" stroke="#B7891C" stroke-width="1"/>
+    <rect x="50" y="50" width="1820" height="12" fill="url(#lace)"/><rect x="50" y="1018" width="1820" height="12" fill="url(#lace)"/>
+    <g transform="translate(62,50) rotate(90)"><rect x="0" y="-12" width="980" height="12" fill="url(#lace)"/></g>
+    <g transform="translate(1870,50) rotate(90)"><rect x="0" y="-12" width="980" height="12" fill="url(#lace)"/></g>
+    <rect x="66" y="66" width="1788" height="948" fill="none" stroke="#173F30" stroke-width=".8" opacity=".7"/>
+    <!-- windowed security thread -->
+    <g transform="translate(1272,0)">
+      <rect x="-9" y="66" width="18" height="948" fill="#173F30" opacity=".12"/>
+      <g fill="#173F30" opacity=".92">
+        <rect x="-9" y="66" width="18" height="92"/><rect x="-9" y="230" width="18" height="92"/><rect x="-9" y="394" width="18" height="92"/><rect x="-9" y="558" width="18" height="92"/><rect x="-9" y="722" width="18" height="92"/><rect x="-9" y="886" width="18" height="128"/>
+      </g>
+      <g font-family="DejaVu Sans" font-size="7" fill="#F7F2E2" font-weight="700" letter-spacing="1.5" transform="rotate(90)">
+        <text x="72" y="3">VASOOL RAJA ₹ VASOOL RAJA ₹</text><text x="236" y="3">VASOOL RAJA ₹ VASOOL RAJA ₹</text><text x="400" y="3">VASOOL RAJA ₹ VASOOL RAJA ₹</text><text x="564" y="3">VASOOL RAJA ₹ VASOOL RAJA ₹</text><text x="728" y="3">VASOOL RAJA ₹ VASOOL RAJA ₹</text><text x="892" y="3">VASOOL RAJA ₹ VASOOL RAJA ₹ VASOOL RAJA</text>
+      </g>
+    </g>
+    <!-- central guilloche band behind the title -->
+    <g opacity=".5" transform="translate(830,540)">
+      <g fill="none" stroke="#173F30" stroke-width=".45">
+        <ellipse rx="560" ry="150"/><ellipse rx="560" ry="150" transform="rotate(6)"/><ellipse rx="560" ry="150" transform="rotate(-6)"/><ellipse rx="560" ry="150" transform="rotate(12)"/><ellipse rx="560" ry="150" transform="rotate(-12)"/>
+        <ellipse rx="500" ry="118"/><ellipse rx="500" ry="118" transform="rotate(9)"/><ellipse rx="500" ry="118" transform="rotate(-9)"/>
+      </g>
+    </g>
+    <!-- corner rosettes with ₹ seals -->
+    <g opacity=".9"><use href="#rosette" transform="translate(205,215) scale(.62)"/></g>
+    <g opacity=".9"><use href="#rosette" transform="translate(205,865) scale(.62)"/></g>
+    <g opacity=".9"><use href="#rosette" transform="translate(1715,215) scale(.62)"/></g>
+    <g opacity=".9"><use href="#rosette" transform="translate(1715,865) scale(.62)"/></g>
+    <g font-family="FreeSerif, DejaVu Serif" font-size="46" font-weight="700" text-anchor="middle">
+      <text x="205" y="232" fill="#173F30">₹</text><text x="205" y="882" fill="#7A1F2B">₹</text><text x="1715" y="232" fill="#7A1F2B">₹</text><text x="1715" y="882" fill="#173F30">₹</text>
+    </g>
+    <!-- see-through register: half ₹ either side of the thread -->
+    <g font-family="FreeSerif, DejaVu Serif" font-size="44" font-weight="700" fill="none" stroke="#173F30" stroke-width="1" opacity=".55">
+      <text x="1226" y="118" text-anchor="middle">₹</text>
+    </g>
+    <!-- WATERMARK WINDOW -->
+    <g mask="url(#wmmask)">
+      <rect x="1340" y="110" width="560" height="860" fill="url(#glow)"/>
+      <g transform="translate(1615,548)">
+        <g fill="none" stroke="#173F30" stroke-width=".5" opacity=".5">
+          <ellipse rx="250" ry="370"/><ellipse rx="250" ry="370" transform="rotate(8)"/><ellipse rx="250" ry="370" transform="rotate(-8)"/><ellipse rx="250" ry="370" transform="rotate(16)"/><ellipse rx="250" ry="370" transform="rotate(-16)"/>
+          <ellipse rx="215" ry="330"/><ellipse rx="215" ry="330" transform="rotate(12)"/><ellipse rx="215" ry="330" transform="rotate(-12)"/>
+        </g>
+        <text y="215" text-anchor="middle" font-family="FreeSerif, DejaVu Serif" font-size="560" font-weight="700" fill="url(#hatch)" opacity=".36">₹</text>
+        <text y="215" text-anchor="middle" font-family="FreeSerif, DejaVu Serif" font-size="560" font-weight="700" fill="url(#hatch2)" opacity=".24">₹</text>
+        <text y="215" text-anchor="middle" font-family="FreeSerif, DejaVu Serif" font-size="560" font-weight="700" fill="none" stroke="#173F30" stroke-width="1.6" opacity=".5">₹</text>
+        <text y="215" text-anchor="middle" font-family="FreeSerif, DejaVu Serif" font-size="560" font-weight="700" fill="none" stroke="#B7891C" stroke-width="6" opacity=".14">₹</text>
+        <!-- electrotype "100" below the watermark, like the denomination watermark -->
+        <text y="330" text-anchor="middle" font-family="Lora" font-size="64" font-weight="700" fill="url(#dots)" opacity=".8">100</text>
+      </g>
+    </g>
+    <!-- latent micro ₹ column at the far right -->
+    <g font-family="FreeSerif, DejaVu Serif" font-size="12" fill="#8E6B12" opacity=".55" text-anchor="middle">
+      <text x="1850" y="330">₹</text><text x="1850" y="365">₹</text><text x="1850" y="400">₹</text><text x="1850" y="435">₹</text><text x="1850" y="470">₹</text><text x="1850" y="505">₹</text><text x="1850" y="540">₹</text><text x="1850" y="575">₹</text><text x="1850" y="610">₹</text><text x="1850" y="645">₹</text><text x="1850" y="680">₹</text><text x="1850" y="715">₹</text><text x="1850" y="750">₹</text>
+    </g>
+  </svg>
+
+  <!-- micro-text -->
+  <div class="micro" id="mt" style="left:80px;right:80px;top:70px;height:9px"></div>
+  <div class="micro" id="mb" style="left:80px;right:80px;bottom:70px;height:9px"></div>
+
+  <!-- serial numbers (growing digits) -->
+  <div class="serial" style="left:112px;top:96px"><span style="font-size:15px">2</span><span style="font-size:16px">2</span><span style="font-size:17px">V</span><span style="font-size:18px">R</span><span style="font-size:19px">&nbsp;</span><span style="font-size:20px">0</span><span style="font-size:21px">7</span><span style="font-size:22px">6</span><span style="font-size:23px">2</span><span style="font-size:24px">0</span><span style="font-size:25px">2</span><span style="font-size:26px">6</span></div>
+  <div class="serial" style="right:112px;bottom:96px"><span style="font-size:15px">2</span><span style="font-size:16px">2</span><span style="font-size:17px">V</span><span style="font-size:18px">R</span><span style="font-size:19px">&nbsp;</span><span style="font-size:20px">0</span><span style="font-size:21px">7</span><span style="font-size:22px">6</span><span style="font-size:23px">2</span><span style="font-size:24px">0</span><span style="font-size:25px">2</span><span style="font-size:26px">6</span></div>
+
+  <!-- denominations: ₹100/day is the hook -->
+  <div class="denom" style="right:112px;top:88px;font-size:84px;text-align:right">100<small>RUPEES · PER DAY</small></div>
+  <div class="denom" style="left:112px;bottom:92px;font-size:84px">100<small>RBI/2019-20/67</small></div>
+  <div class="denom" style="right:112px;top:290px;font-size:34px;color:#7A1F2B;text-shadow:none;letter-spacing:2px">₹100</div>
+  <div class="denom" style="left:112px;top:322px;font-size:34px;color:#7A1F2B;text-shadow:none;letter-spacing:2px">₹100</div>
+
+  <!-- language panel: the tagline in Indian scripts -->
+  <div class="langs">
+    <div class="h">THE MONEY GUARDIAN</div>
+    <div>பணக் காவலன்</div>
+    <div>धन रक्षक</div>
+    <div>പണക്കാവൽക്കാരൻ</div>
+    <div>ಹಣದ ಕಾವಲುಗಾರ</div>
+    <div>డబ్బు కాపలాదారు</div>
+    <div>টাকার রক্ষক</div>
+    <div>નાણાં રક્ષક</div>
+    <div>پیسے کا محافظ</div>
+  </div>
+  <div class="bleed"><i></i><i></i><i></i><i></i></div>
+  <div class="bleed2"><i></i><i></i><i></i><i></i></div>
+  <div class="idmark"></div>
+
+  <div class="center">
+    <div class="kicker">HACKVERSE 2.0</div>
+    <div class="badge">DIGITAL TWINS &nbsp;•&nbsp; FINTECH</div>
+    <h1>VASOOL RAJA</h1>
+    <div class="rule"><i></i><b></b><i></i></div>
+    <div class="tag">the money guardian</div>
+    <div class="promise">Vasool Raja promises to check the rules for the bearer</div>
+    <div class="team">
+      <div class="t">TEAM MAD ANGLES</div>
+      <div class="n">NANDANA R<span>•</span>NAVEEN KUMAR D<span>•</span>NETHRA DEVI R</div>
+      <div class="c">COIMBATORE INSTITUTE OF TECHNOLOGY</div>
+    </div>
+  </div>
+  <div class="words">ONE HUNDRED RUPEES PER DAY · TWENTY-TWO RULES · SEVENTY-SIX TESTS</div>
+  <div class="foot">A CONCEPT NOTE &nbsp;—&nbsp; NOT LEGAL TENDER &nbsp;—&nbsp; VALUE: PEOPLE’S RIGHTS &nbsp;—&nbsp; MA · 2026 · HV2.0</div>
+</div>
+<script>
+  const s = "VASOOL RAJA · THE MONEY GUARDIAN · RBI RULEBOOK · REGULATORY DIGITAL TWIN · RULE-DRIVEN · EVIDENCE-BACKED · HUMAN-CONFIRMED · ";
+  document.getElementById("mt").textContent = s.repeat(10);
+  document.getElementById("mb").textContent = s.repeat(10);
+</script>
+</body></html>

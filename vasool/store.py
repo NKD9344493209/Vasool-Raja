@@ -234,6 +234,7 @@ def _finding_from(d: dict[str, Any]) -> Finding:
         priority=Priority(d.get("priority", "COMBINE")), priority_score=d.get("priority_score", 0.0),
         priority_reasons=d.get("priority_reasons", []), id=d["id"], group_key=d.get("group_key", ""),
         occurred_on=date.fromisoformat(d["occurred_on"]) if d.get("occurred_on") else None,
+        twin=d.get("twin") or {},
     )
 
 

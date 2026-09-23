@@ -126,12 +126,13 @@ class AccountProfile:
     language: str = "ta"
     holder_name: str = ""
     account_last4: str = ""
+    holder_phone: str = ""     # E.164 (+91...) — where the Tamil voice call goes
 
     def to_dict(self) -> dict[str, Any]:
         return {
             "bank": self.bank, "account_type": self.account_type.value, "city_tier": self.city_tier.value,
             "min_balance_required": self.min_balance_required, "language": self.language,
-            "holder_name": self.holder_name, "account_last4": self.account_last4,
+            "holder_name": self.holder_name, "account_last4": self.account_last4, "holder_phone": self.holder_phone,
         }
 
     @classmethod
@@ -144,6 +145,7 @@ class AccountProfile:
             language=d.get("language", "ta"),
             holder_name=d.get("holder_name", ""),
             account_last4=d.get("account_last4", ""),
+            holder_phone=d.get("holder_phone", ""),
         )
 
 
@@ -202,10 +204,11 @@ class Finding:
     id: str = field(default_factory=lambda: "f_" + uuid.uuid4().hex[:8])
     group_key: str = ""                    # findings with the same key can be combined
     occurred_on: Optional[date] = None
+    twin: dict[str, Any] = field(default_factory=dict)   # structured actual-vs-expected data for the Twin View
 
     def to_dict(self) -> dict[str, Any]:
         return {
-            "id": self.id, "rule_id": self.rule_id, "label": self.label.value,
+            "id": self.id, "rule_id": self.rule_id, "label": self.label.value, "twin": self.twin,
             "confidence": self.confidence.value, "amount": round(self.amount, 2),
             "evidence": self.evidence, "calculation": self.calculation,
             "expected": self.expected, "actual": self.actual,

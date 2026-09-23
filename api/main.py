@@ -23,7 +23,7 @@ from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, PlainTex
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
-from vasool import __version__, cases as case_mod, complaint, guardian as guardian_mod, merge, notify, printable, rulebook as rb_mod, scan
+from vasool import __version__, cases as case_mod, complaint, guardian as guardian_mod, merge, notify, printable, rulebook as rb_mod, scan, voice
 from vasool.assistant import Assistant
 from vasool.models import AccountProfile, AccountType, Case, CaseState, CityTier, Guardian, Label
 from vasool.rules.user_claims import card_closure_claim, gold_release_claim, unauthorised_txn_claim
@@ -38,6 +38,7 @@ app.add_middleware(CORSMiddleware, allow_origins=os.getenv("VASOOL_CORS", "*").s
 _store: Optional[Store] = None
 _channel = guardian_mod.ConsoleChannel()
 _email = notify.EmailChannel()
+_voice = voice.TwilioChannel()
 
 
 def _public_url(request: Request) -> str:
@@ -80,10 +81,12 @@ class ProfileIn(BaseModel):
     language: str = "ta"
     holder_name: str = ""
     account_last4: str = ""
+    holder_phone: str = ""
 
     def to_model(self) -> AccountProfile:
         return AccountProfile(bank=self.bank.upper(), account_type=AccountType(self.account_type), city_tier=CityTier(self.city_tier),
-                              min_balance_required=self.min_balance_required, language=self.language, holder_name=self.holder_name, account_last4=self.account_last4)
+                              min_balance_required=self.min_balance_required, language=self.language, holder_name=self.holder_name, account_last4=self.account_last4,
+                              holder_phone=self.holder_phone.replace(" ", ""))
 
 
 class AnswersIn(BaseModel):
@@ -111,6 +114,15 @@ class GuardianIn(BaseModel):
 
 class TestMailIn(BaseModel):
     to: str = ""
+
+
+class TestCallIn(BaseModel):
+    to: str = ""
+    lang: str = "ta"
+
+
+class AsOfIn(BaseModel):
+    as_of: date
 
 
 class AskIn(BaseModel):
@@ -161,6 +173,7 @@ def _result_payload(account_id: str, res: scan.ScanResult) -> dict[str, Any]:
     d["coverage"] = cov.to_dict()
     acct = store().get_account(account_id)
     d["account_answers"] = acct["answers"] if acct else {}
+    d["as_of"] = acct["as_of"].isoformat() if acct else None
     if cov.gaps:
         d["summary"]["warnings"] = list(d["summary"].get("warnings", [])) + [
             f"No statement covers {a.isoformat()} → {b.isoformat()}. Rules that count by month (ATM, minimum balance) are judged only on the months we can see." for a, b in cov.gaps]
@@ -224,7 +237,15 @@ def _rescan_and_save(account_id: str, acct: dict[str, Any]) -> scan.ScanResult:
 # --------------------------------------------------------------------------- #
 @app.get("/api/health")
 def health():
-    return {"ok": True, "version": __version__, "rulebook": rb().version, "rules": len(rb().all()), "notify": _email.cfg.status()}
+    return {"ok": True, "version": __version__, "rulebook": rb().version, "rules": len(rb().all()), "notify": _email.cfg.status() | _voice.cfg.status()}
+
+
+@app.post("/api/notify/test-call")
+def notify_test_call(body: TestCallIn):
+    """Place a real test call so the team can check Twilio before the demo."""
+    text = ("வணக்கம். Vasool Raja பேசுறோம். இது ஒரு test call. எல்லாம் சரியா வேலை செய்யுது." if body.lang == "ta"
+            else "Hello. This is Vasool Raja. This is a test call. Everything is working.")
+    return _voice.call(body.to or _voice.cfg.demo_phone, text, body.lang, kind="voice_test")
 
 
 @app.post("/api/notify/test")
@@ -350,6 +371,16 @@ def post_answers(account_id: str, body: AnswersIn):
     return _result_payload(account_id, res)
 
 
+@app.post("/api/accounts/{account_id}/as-of")
+def set_as_of(account_id: str, body: AsOfIn):
+    """Move the 'as of' date: every ₹/day claim is recomputed for that day (the time slider)."""
+    acct = _load(account_id)
+    store().update_transactions(account_id, acct["transactions"], as_of=body.as_of)
+    acct["as_of"] = body.as_of
+    res = _rescan_and_save(account_id, acct)
+    return _result_payload(account_id, res)
+
+
 @app.patch("/api/accounts/{account_id}/profile")
 def patch_profile(account_id: str, body: ProfileIn):
     acct = _load(account_id)
@@ -424,10 +455,13 @@ def request_approval(case_id: str, request: Request, lang: Optional[str] = None)
     lang = lang or prof.language
     g = store().get_guardian(c.account_id)
     findings = store().get_findings(c.account_id)
-    script = guardian_mod.holder_voice_script(c.amount, g, lang)
+    script = guardian_mod.holder_voice_script(c.amount, g, lang, holder_name=prof.holder_name, bank=prof.bank or "", case=c, findings=findings)
     call_ref = _channel.call("holder", script)
     token = store().new_approval(c.id, c.account_id)
     store().log_notification(c.account_id, {"kind": "voice_call", "to": "holder", "lang": lang, "text": script.text, "options": script.ivr_options, "case_id": c.id, "token": token})
+    # the real one: Twilio dials the holder's phone and speaks the same script
+    real_call = _voice.call(prof.holder_phone or (g.phone if g else ""), script.text, lang)
+    store().log_notification(c.account_id, real_call | {"case_id": c.id})
     msg = None
     mail = None
     if g:
@@ -444,7 +478,7 @@ def request_approval(case_id: str, request: Request, lang: Optional[str] = None)
         store().save_case(c)
     store().audit(c.account_id, "case.request_approval", f"{c.id} token={token}")
     return {"case": c.to_dict(), "approve_token": token, "holder_call": {"text": script.text, "options": script.ivr_options, "lang": lang},
-            "guardian_message": msg.text if msg else None, "email": mail, "status_text": case_mod.user_status(c, prof.language)}
+            "guardian_message": msg.text if msg else None, "email": mail, "call": real_call, "status_text": case_mod.user_status(c, prof.language)}
 
 
 @app.get("/api/approvals/{token}")

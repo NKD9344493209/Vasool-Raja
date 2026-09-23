@@ -25,15 +25,20 @@ class MinBalanceNotice(RuleEvaluator):
             above_min_all_month = lowest_prev is not None and req is not None and lowest_prev >= req
             gst = _gst_after(ctx, t)
             amount = t.debit + gst
+            prev_key = ctx.prior_month_key(t.date)
+            path = [[x.date.isoformat(), x.balance] for x in ctx.transactions_in_month(prev_key) if x.balance is not None]
+            twin = {"kind": "minbal", "charge_date": t.date.isoformat(), "penalty": t.debit, "gst": gst, "required": req,
+                    "month": prev_key, "lowest": lowest_prev, "path": path, "notice_answer": ans,
+                    "month_visible": bool(path), "as_of": ctx.as_of.isoformat()}
             if above_min_all_month:
                 out.append(self.finding(
                     ctx, label=Label.RECOVERABLE, confidence=Confidence.CONFIRMED, amount=amount, evidence=[t.id] + ([gst_id(ctx, t)] if gst else []),
-                    calculation=f"Penalty {inr(t.debit)} on {dmy(t.date)}" + (f" + GST {inr(gst)}" if gst else "") + f" · lowest balance in {month_key(t.date - timedelta(days=28))}: {inr(lowest_prev)} · required: {inr(req)} → balance never fell below the minimum",
+                    calculation=f"Penalty {inr(t.debit)} on {dmy(t.date)}" + (f" + GST {inr(gst)}" if gst else "") + f" · lowest balance in {prev_key}: {inr(lowest_prev)} · required: {inr(req)} → balance never fell below the minimum",
                     expected="No penalty when the balance stayed at or above the required minimum.",
                     actual=f"Penalty of {inr(t.debit)} charged.",
                     summary_en=f"You were charged {inr(amount)} as a minimum-balance penalty on {dmy(t.date)}, but your balance never went below {inr(req)} the month before. This is recoverable.",
                     summary_ta=f"{dmy(t.date)} அன்று {inr(amount)} minimum-balance penalty போட்டாங்க, ஆனா முந்தைய மாசம் உங்க balance {inr(req)}-க்கு கீழ போகவே இல்ல. இது திரும்ப வாங்கலாம்.",
-                    group_key="MINBAL", occurred_on=t.date,
+                    group_key="MINBAL", occurred_on=t.date, twin=twin,
                 ))
                 continue
             if ans == "no":
@@ -46,7 +51,7 @@ class MinBalanceNotice(RuleEvaluator):
                     summary_ta=f"{dmy(t.date)} அன்று எச்சரிக்கை இல்லாம {inr(amount)} minimum-balance penalty. RBI படி முன்னாடி SMS/email அனுப்பி ஒரு மாசம் time தரணும். திரும்ப வாங்கலாம்.",
                     prevention_en="Ask for a free conversion to a Basic Savings account (no minimum balance) — the bank must do it within 7 days.",
                     prevention_ta="Basic Savings account-ஆ மாத்த சொல்லுங்க (minimum balance இல்ல) — 7 நாளுக்குள்ள bank பண்ணணும்.",
-                    group_key="MINBAL", occurred_on=t.date,
+                    group_key="MINBAL", occurred_on=t.date, twin=twin,
                 ))
             elif ans == "yes":
                 out.append(self.finding(
@@ -57,7 +62,7 @@ class MinBalanceNotice(RuleEvaluator):
                     summary_ta=f"{dmy(t.date)} penalty-க்கு முன்னாடி எச்சரிக்கை வந்ததால அது சரி. அடுத்ததை தடுக்கலாம்.",
                     prevention_en="Convert to a Basic Savings account (no minimum balance, free) or set a low-balance alert one month ahead in Vasool Raja.",
                     prevention_ta="Basic Savings account-ஆ மாத்துங்க அல்லது Vasool Raja-ல ஒரு மாசம் முன்னாடி alert வைங்க.",
-                    group_key="MINBAL", occurred_on=t.date,
+                    group_key="MINBAL", occurred_on=t.date, twin=twin,
                 ))
             else:
                 out.append(self.finding(
@@ -67,7 +72,7 @@ class MinBalanceNotice(RuleEvaluator):
                     actual=f"Penalty of {inr(t.debit)} charged. Warning: unknown.",
                     summary_en=f"A {inr(amount)} minimum-balance penalty on {dmy(t.date)}. Whether it is recoverable depends on one thing the statement can't show: did the bank warn you first?",
                     summary_ta=f"{dmy(t.date)} அன்று {inr(amount)} minimum-balance penalty. Bank முன்னாடி எச்சரிச்சுதா-ங்கறது தான் கேள்வி.",
-                    questions=questions_of(rule), group_key="MINBAL", occurred_on=t.date,
+                    questions=questions_of(rule), group_key="MINBAL", occurred_on=t.date, twin=twin,
                 ))
         return out
 

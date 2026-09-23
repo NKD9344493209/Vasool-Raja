@@ -35,42 +35,89 @@ class GuardianMessage:
     approve_token: str
 
 
-def holder_voice_script(amount: float, guardian: Guardian | None, lang: str = "ta") -> VoiceScript:
+def _case_findings(case: Case, findings: list[Finding] | None) -> list[Finding]:
+    fs = [f for f in (findings or []) if f.id in set(case.finding_ids)] if case else []
+    return sorted(fs, key=lambda f: -f.amount)
+
+
+def _rule(rule_id: str):
+    try:
+        from . import rulebook as rb
+        return rb.load().get(rule_id)
+    except Exception:
+        return None
+
+
+def _spoken_items(fs: list[Finding], lang: str, limit: int = 2) -> list[str]:
+    """One spoken sentence per finding — what happened, on which date, how much (kept short: a phone call)."""
+    out = [(f.summary_ta if lang == "ta" else f.summary_en).strip() for f in fs[:limit]]
+    if len(fs) > limit:
+        out.append(f"இன்னும் {len(fs) - limit} item இருக்கு." if lang == "ta" else f"And {len(fs) - limit} more item(s).")
+    return out
+
+
+def holder_voice_script(amount: float, guardian: Guardian | None, lang: str = "ta", holder_name: str = "", bank: str = "",
+                        case: Case | None = None, findings: list[Finding] | None = None) -> VoiceScript:
+    """The Tamil call to the account holder: what happened, how much, which rule, what happens next."""
     gname = guardian.name if guardian else None
+    fs = _case_findings(case, findings)
+    items = _spoken_items(fs, lang)
+    bank_word = f"{bank} " if bank else ""
+    name = holder_name.split()[0] if holder_name else ""
     if lang == "ta":
+        hello = f"வணக்கம் {name}." if name else "வணக்கம்."
+        opening = (f"{hello} Vasool Raja பேசுறோம். உங்க {bank_word}bank statement-ஐ RBI rules வெச்சு check பண்ணோம். "
+                   f"மொத்தம் {inr(amount)} bank உங்களுக்கு திரும்ப தரணும்-னு தெரியுது.")
+        details = " ".join(items) if items else ""
         if gname:
-            text = (f"வணக்கம். Vasool Raja பேசுறோம். உங்க bank account-ல {inr(amount)} தப்பா cut ஆயிருக்கலாம்-னு கண்டுபிடிச்சிருக்கோம். "
-                    f"இதை திரும்ப வாங்க {gname}-க்கு சொல்லியிருக்கோம். {gname}-கிட்ட பேச 1-ஐ அழுத்துங்க. இதை விட்டுடலாம்-னா 2-ஐ அழுத்துங்க.")
+            nxt = (f"இதை திரும்ப வாங்க complaint தயாரா இருக்கு. {gname}-க்கு ஒரு message போகும். {gname} OK சொன்னா மட்டும் bank-க்கு போகும். "
+                   f"நீங்க எதுவும் பண்ண வேண்டாம். நாங்க பாத்துக்கறோம்.")
             opts = {"1": f"call_guardian:{guardian.phone}", "2": "dismiss"}
         else:
-            text = (f"வணக்கம். Vasool Raja பேசுறோம். உங்க bank account-ல {inr(amount)} தப்பா cut ஆயிருக்கலாம். "
-                    f"அருகில் உள்ள உதவி மையத்தை தெரிஞ்சுக்க 2-ஐ அழுத்துங்க. திரும்ப கேக்க 3-ஐ அழுத்துங்க.")
+            nxt = "இதை திரும்ப வாங்க complaint தயாரா இருக்கு. நீங்க OK சொன்னா மட்டும் bank-க்கு போகும். நாங்க பாத்துக்கறோம்."
             opts = {"2": "nearest_help_centre", "3": "repeat"}
+        text = f"{opening} {details} {nxt}".replace("  ", " ").strip()
     else:
+        hello = f"Hello {name}." if name else "Hello."
+        opening = (f"{hello} This is Vasool Raja. We checked your {bank_word}bank statement against the RBI rules. "
+                   f"It looks like the bank owes you {inr(amount)} in total.")
+        details = " ".join(items) if items else ""
         if gname:
-            text = (f"Hello. This is Vasool Raja. We found {inr(amount)} that may have been wrongly taken from your bank account. "
-                    f"We have told {gname}, who can get it back for you. Press 1 to speak to {gname}. Press 2 to ignore this.")
+            nxt = (f"A complaint is ready to get it back. {gname} will get one message with one button. Nothing goes to the bank until {gname} says OK. "
+                   f"You don't have to do anything. We are watching this for you.")
             opts = {"1": f"call_guardian:{guardian.phone}", "2": "dismiss"}
         else:
-            text = (f"Hello. This is Vasool Raja. We found {inr(amount)} that may have been wrongly taken from your bank account. "
-                    f"Press 2 to hear the nearest help centre. Press 3 to hear this again.")
+            nxt = "A complaint is ready to get it back. Nothing goes to the bank until you say OK. We are watching this for you."
             opts = {"2": "nearest_help_centre", "3": "repeat"}
+        text = f"{opening} {details} {nxt}".replace("  ", " ").strip()
     return VoiceScript(language=lang, text=text, ivr_options=opts)
 
 
 def guardian_message(case: Case, findings: list[Finding], guardian: Guardian, holder_name: str, approve_token: str, lang: str = "ta") -> GuardianMessage:
-    rules = ", ".join(sorted({f.rule_id for f in findings if f.id in case.finding_ids}))
-    who = holder_name or "the account holder"
+    """One message to the guardian: each item on its own line (date · what · amount · rule), the total, the one action.
+    Still minimum-information: only the evidence lines — never the balance, never the rest of the spending."""
+    fs = _case_findings(case, findings)
+    who = holder_name or "account holder"
+    lines = []
+    for i, f in enumerate(fs, 1):
+        r = _rule(f.rule_id)
+        cite = r.source.get("circular", f.rule_id).split(" ")[0] if r and r.source else f.rule_id
+        summary = f.summary_ta if lang == "ta" else f.summary_en
+        lines.append(f"{i}. {summary} ({cite}) — {inr(f.amount)}")
+    body = "\n".join(lines)
     if lang == "ta":
-        text = (f"Vasool Raja: {who}-ஓட bank account-ல ஒரு பிரச்சனை. {inr(case.amount)} திரும்ப வாங்கலாம். "
-                f"RBI rule: {rules}. Complaint தயார்; ஆதாரம் attach ஆயிருக்கு. அனுப்ப OK சொல்லுங்க: {approve_token}. "
-                f"(நாங்க {who}-க்கு முதல்ல phone பண்ணி சொல்லிட்டோம். Balance, செலவு விவரம் எதுவும் இதுல இல்ல.)")
+        text = (f"Vasool Raja: {who}-ஓட bank account-ல {len(fs)} பிரச்சனை கண்டுபிடிச்சோம். மொத்தம் {inr(case.amount)} bank திரும்ப தரணும்.\n\n"
+                f"{body}\n\n"
+                f"Complaint தயார் — ஒவ்வொரு item-க்கும் RBI rule, கணக்கு, statement line attach ஆயிருக்கு. Bank 30 நாளுக்குள்ள பதில் சொல்லணும்; இல்லைன்னா RBI Ombudsman.\n"
+                f"நீங்க OK சொன்னா மட்டும் bank-க்கு போகும். OK code: {approve_token}\n\n"
+                f"({who}-க்கு முதல்ல phone பண்ணி சொல்லிட்டோம். Balance, மத்த செலவு விவரம் எதுவும் இதுல இல்ல.)")
     else:
-        text = (f"Vasool Raja: a banking issue on {who}'s account. {inr(case.amount)} may be recoverable. "
-                f"RBI rule: {rules}. Complaint prepared, evidence attached. Reply OK to send: {approve_token}. "
-                f"({who} has been called first. No balance or spending details are included in this message.)")
+        text = (f"Vasool Raja: we found {len(fs)} issue(s) on {who}'s bank account. The bank owes {inr(case.amount)} in total.\n\n"
+                f"{body}\n\n"
+                f"A complaint is ready — each item carries the RBI rule, the arithmetic and the statement line. The bank must reply within 30 days, else RBI Ombudsman.\n"
+                f"Nothing goes to the bank until you say OK. OK code: {approve_token}\n\n"
+                f"({who} was called first. No balance or other spending details are in this message.)")
     return GuardianMessage(to=guardian.phone, text=text, approve_token=approve_token)
-
 
 class Channel(Protocol):
     def call(self, to: str, script: VoiceScript) -> str: ...

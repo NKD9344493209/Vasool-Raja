@@ -61,7 +61,7 @@ class RuleEvaluator(ABC):
                 evidence: list[str], calculation: str, expected: str, actual: str,
                 summary_en: str, summary_ta: str, questions: Optional[list[Question]] = None,
                 prevention_en: str = "", prevention_ta: str = "", group_key: str = "",
-                occurred_on: Optional[date] = None) -> Finding:
+                occurred_on: Optional[date] = None, twin: Optional[dict] = None) -> Finding:
         rule = self.rule(ctx)
         # A 'suggest' rule may never produce a RECOVERABLE claim on its own.
         if not rule.can_claim and label == Label.RECOVERABLE:
@@ -71,5 +71,5 @@ class RuleEvaluator(ABC):
             evidence=evidence, calculation=calculation, expected=expected, actual=actual,
             summary_en=summary_en, summary_ta=summary_ta, questions=questions or [],
             prevention_en=prevention_en, prevention_ta=prevention_ta,
-            group_key=group_key or rule.id, occurred_on=occurred_on,
+            group_key=group_key or rule.id, occurred_on=occurred_on, twin=twin or {},
         )

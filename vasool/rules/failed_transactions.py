@@ -68,6 +68,10 @@ class FailedTransactionTAT(RuleEvaluator):
                 summary_en=f"Your {inr(d.debit)} {d.channel.value} transaction failed and came back {days_late} days late. RBI says the bank owes you {inr(net)} for the delay.",
                 summary_ta=f"உங்க {inr(d.debit)} {d.channel.value} transaction fail ஆயி {days_late} நாள் late-ஆ திரும்பி வந்துச்சு. RBI படி bank உங்களுக்கு {inr(net)} தரணும்.",
                 group_key="TAT", occurred_on=d.date,
+                twin={"kind": "tat", "channel": d.channel.value, "debit_date": d.date.isoformat(), "amount": d.debit, "narration": d.narration,
+                      "tat_days": tat, "deadline": due.isoformat(), "reversal_date": rev.isoformat(), "per_day": per_day,
+                      "days_late": days_late, "expected_compensation": owed, "actual_compensation": paid, "delta": net,
+                      "as_of": ctx.as_of.isoformat(), "rule_id": rid, "reversed": True},
             ))
 
         # (b) debits that say FAILED but were never reversed — principal + compensation
@@ -103,6 +107,10 @@ class FailedTransactionTAT(RuleEvaluator):
             summary_en=f"{inr(d.debit)} left your account on {dmy(d.date)} in a failed {d.channel.value} transaction and has not come back. The bank owes the {inr(d.debit)} plus {inr(comp)} compensation.",
             summary_ta=f"{dmy(d.date)} அன்று fail ஆன {d.channel.value} transaction-ல {inr(d.debit)} போச்சு, இன்னும் திரும்பி வரல. Bank {inr(d.debit)}-ம் {inr(comp)} compensation-ம் தரணும்.",
             group_key="TAT", occurred_on=d.date,
+            twin={"kind": "tat", "channel": d.channel.value, "debit_date": d.date.isoformat(), "amount": d.debit, "narration": d.narration,
+                  "tat_days": tat, "deadline": due.isoformat(), "reversal_date": None, "per_day": per_day,
+                  "days_late": days_late, "expected_compensation": comp, "actual_compensation": 0.0, "delta": total,
+                  "as_of": ctx.as_of.isoformat(), "rule_id": self.rule_id, "reversed": False, "principal_outstanding": d.debit},
         )
 
 

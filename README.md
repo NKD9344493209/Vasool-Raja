@@ -20,6 +20,9 @@ Built by **Mad Angles, Coimbatore Institute of Technology** for HackVerse 2.0 (D
 | **Guardian** | The account holder is called first, in Tamil. One trusted person gets one message with one button. Nothing is sent until a human taps. |
 | **History** | Upload as many statements of an account as you have — months, quarters, a passbook page. Overlaps are de-duplicated, gaps are named, and the rules run on the *whole* history (a June penalty is judged on May's balances). Every account you have scanned stays in the local database with what was found and what came back. |
 | **Real delivery** | Optional. With a Gmail app password in `.env`, the guardian's one-button message and the complaint copy go out as real emails — to a *person*, never to a bank (`VASOOL_DEMO_TO` redirects every mail to one safe address). The guardian taps **Yes, send** on their phone; the laptop screen moves to *Sent to the bank* by itself. |
+| **Twin View** | Every ₹/day and minimum-balance finding opens as the twin itself: two lanes — *actual financial state* and *expected regulatory state* — drawn from the statement, with the gap hatched in red and the claim counting up day by day. A blind month (no statement) is shown as blind, with the button to add it. |
+| **Time slider** | "Every day the bank waits, the number grows." Drag the *as-of* date and every unreversed failed transaction is recomputed at ₹100/day (RBI/2019-20/67); reversed ones stay frozen. The date is stored with the account and drives the complaint. |
+| **Real call** | Optional. With Twilio keys in `.env`, the Tamil call to the account holder is a *real* phone call (Google ta-IN voice) placed the moment a case asks for approval; `VASOOL_DEMO_PHONE` redirects every call to one safe number. Without keys the call is simulated on screen, as before. |
 | **Paper** | Every case prints as an A4 complaint — letter, numbered claims with the RBI reference and arithmetic, signature block, bank acknowledgement box, Annexure A with the statement lines — plus the RBI Ombudsman draft. *Print / Save as PDF* from the browser; take two copies to the branch. |
 
 **The rule engine decides. AI only explains.** "Ask Vasool Raja" answers questions from the account's own findings, cases and the rulebook; it cannot create a claim. A ₹50,000 college fee is never flagged — there is no anomaly detection, only compliance checking.
@@ -42,7 +45,7 @@ python -m vasool scan data/samples/canara_amma_pension_2026.csv --bank CANARA --
 python -m vasool rules --on 2025-04-30
 ```
 
-Tests (35, including every trap case): `python -m pytest -q`
+Tests (84, including every trap case): `python -m pytest -q`
 
 ### Passbook photos (OCR)
 

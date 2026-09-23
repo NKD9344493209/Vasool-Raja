@@ -15,9 +15,15 @@
       "hist.h": "History", "hist.lede": "Every account scanned on this device, with what was found and what came back. Open one to continue where you left off.", "hist.none": "Nothing scanned yet.",
       "hist.open": "Open", "hist.current": "Open now", "hist.found": "found", "hist.recovered": "recovered", "hist.stmts": "{n} statement(s)", "hist.cases": "{n} case(s)", "hist.opencases": "{n} open",
       "case.print": "Print complaint", "case.printomb": "Print Ombudsman draft", "case.printhint": "A4 letter with Annexure A — take 2 copies to the branch, get one stamped.",
+      "time.h": "Every day the bank waits", "time.lede": "Drag the date. Unreversed failed transactions accrue ₹100 a day under RBI/2019-20/67 — the twin recomputes every claim for that day.", "time.asof": "As of", "time.today": "today",
+      "twin.h": "The twin", "twin.open": "See the twin", "twin.actual": "ACTUAL FINANCIAL STATE", "twin.expected": "EXPECTED REGULATORY STATE", "twin.delta": "REGULATORY DELTA", "twin.claim": "POTENTIAL CLAIM", "twin.replay": "Replay", "twin.back": "Back to findings",
+      "twin.debited": "debited · failed", "twin.due": "reversal due (T+{n})", "twin.perday": "₹{p}/day owed from here", "twin.reversed": "reversed", "twin.noreversal": "no reversal as of {d}", "twin.comp0": "compensation credited: ₹0", "twin.late": "{n} days late", "twin.day": "Day {n}",
+      "twin.mb.expected": "balance stays at or above ₹{r} all of {m} → no penalty allowed", "twin.mb.actual": "penalty ₹{p} charged on {d}", "twin.mb.lowest": "lowest balance in {m}: ₹{l}", "twin.mb.blind": "The twin cannot see {m} — that month is not in any uploaded statement. Add it and the verdict can change.", "twin.mb.add": "Add that statement", "twin.mb.required": "required ₹{r}",
+      "twin.chain": "TRANSACTION + ACCOUNT STATE + RULE IN FORCE + CALCULATION + EVIDENCE → VERDICT. Without all five: no claim.",
+      "call.placed": "📞 Calling {to}…", "call.sim": "Call simulated ({r})", "n.voice.on": "Voice is ON — a real Tamil call goes out from {f}", "n.voice.off": "Voice is OFF — the call is simulated on screen (add VASOOL_TWILIO_* to .env).", "n.testcall": "Test call", "home.phone": "Your phone (for the Tamil call)",
       "mail.sent": "Email delivered to {to}", "mail.sim": "Email simulated ({r})", "mail.also": "Also emailed to {to}",
       "g.email": "Email (the real one-button message goes here)", "n.h": "Real delivery", "n.on": "Email is ON — messages go out for real (from {f})", "n.off": "Email is OFF — the guardian message and complaint are simulated on screen.",
-      "n.demo": "Safety: every mail is redirected to {to}", "n.how": "To turn it on, create a .env file next to run.bat with VASOOL_SMTP_USER, VASOOL_SMTP_PASS (Gmail app password) and VASOOL_DEMO_TO. Nothing is ever sent to a bank.", "n.test": "Send test mail", "n.bank": "The bank itself is never emailed by this demo.",
+      "n.demo": "Safety: every mail is redirected to {to}", "n.demo.phone": "Safety: every call is redirected to {to}", "n.how": "To turn it on, create a .env file next to run.bat with VASOOL_SMTP_USER, VASOOL_SMTP_PASS (Gmail app password) and VASOOL_DEMO_TO. Nothing is ever sent to a bank.", "n.test": "Send test mail", "n.bank": "The bank itself is never emailed by this demo.",
       "ap.h": "Vasool Raja asks for your OK", "ap.for": "For {h}'s account at {b}", "ap.yes": "✓ Yes, send the complaint", "ap.no": "Not now", "ap.done": "Sent to the bank. Thank you — we're watching the 30-day clock.", "ap.used": "This request was already answered.", "ap.note": "No balance or spending details are shown. Only the complaint goes to the bank.",
       "foot.privacy": "We check transactions. We don't sell them. No passwords, ever.",
       "home.h1": "What if your bank owed you money right now?",
@@ -60,9 +66,15 @@
       "hist.h": "History", "hist.lede": "இந்த device-ல scan பண்ண எல்லா account-ம் — என்ன கிடைச்சது, என்ன திரும்ப வந்தது. விட்ட இடத்துல இருந்து தொடர ஒண்ணை open பண்ணுங்க.", "hist.none": "இன்னும் எதுவும் scan பண்ணல.",
       "hist.open": "Open", "hist.current": "இப்போ open", "hist.found": "கிடைச்சது", "hist.recovered": "திரும்ப வந்தது", "hist.stmts": "{n} statement", "hist.cases": "{n} case", "hist.opencases": "{n} open",
       "case.print": "Complaint print", "case.printomb": "Ombudsman draft print", "case.printhint": "A4 letter + Annexure A — 2 copy எடுத்து branch-க்கு போங்க, ஒண்ணுல seal வாங்குங்க.",
+      "time.h": "Bank தாமதிக்கற ஒவ்வொரு நாளும்", "time.lede": "தேதியை இழுங்க. Reverse ஆகாத failed transaction-க்கு RBI/2019-20/67 படி நாளுக்கு ₹100 சேரும் — twin அந்த நாளுக்கு எல்லா claim-ஐயும் மறுபடி கணக்கிடும்.", "time.asof": "இந்த தேதி வரை", "time.today": "இன்று",
+      "twin.h": "Twin", "twin.open": "Twin-ஐ பாரு", "twin.actual": "நடந்தது · ACTUAL", "twin.expected": "நடந்திருக்க வேண்டியது · EXPECTED", "twin.delta": "வித்தியாசம் · DELTA", "twin.claim": "POTENTIAL CLAIM", "twin.replay": "மறுபடி", "twin.back": "Findings-க்கு",
+      "twin.debited": "debit · fail", "twin.due": "reversal due (T+{n})", "twin.perday": "இங்கிருந்து நாளுக்கு ₹{p}", "twin.reversed": "reverse ஆச்சு", "twin.noreversal": "{d} வரை reversal இல்ல", "twin.comp0": "compensation வந்தது: ₹0", "twin.late": "{n} நாள் late", "twin.day": "நாள் {n}",
+      "twin.mb.expected": "{m} முழுசும் balance ₹{r}-க்கு மேல → penalty போடக்கூடாது", "twin.mb.actual": "{d} அன்று ₹{p} penalty", "twin.mb.lowest": "{m}-ல குறைந்த balance: ₹{l}", "twin.mb.blind": "{m} மாசத்தை twin பாக்க முடியல — அந்த statement upload ஆகல. சேர்த்தா verdict மாறலாம்.", "twin.mb.add": "அந்த statement-ஐ சேர்", "twin.mb.required": "தேவை ₹{r}",
+      "twin.chain": "TRANSACTION + ACCOUNT STATE + RULE + CALCULATION + EVIDENCE → VERDICT. ஐந்தும் இல்லாம claim இல்ல.",
+      "call.placed": "📞 {to}-க்கு call போகுது…", "call.sim": "Call simulate ({r})", "n.voice.on": "Voice ON — {f}-ல இருந்து உண்மையான தமிழ் call போகும்", "n.voice.off": "Voice OFF — call screen-ல simulate மட்டும் (.env-ல VASOOL_TWILIO_* போடுங்க).", "n.testcall": "Test call", "home.phone": "உங்க phone (தமிழ் call-க்கு)",
       "mail.sent": "{to}-க்கு email போயிடுச்சு", "mail.sim": "Email simulate பண்ணினோம் ({r})", "mail.also": "{to}-க்கும் email போச்சு",
       "g.email": "Email (உண்மையான one-button message இங்க போகும்)", "n.h": "உண்மையான delivery", "n.on": "Email ON — message-கள் உண்மையா போகும் ({f}-ல இருந்து)", "n.off": "Email OFF — காப்பாளர் message, complaint எல்லாம் screen-ல simulate மட்டும்.",
-      "n.demo": "பாதுகாப்பு: எல்லா mail-ம் {to}-க்கு மட்டும் போகும்", "n.how": "ON பண்ண run.bat பக்கத்துல .env file-ல VASOOL_SMTP_USER, VASOOL_SMTP_PASS (Gmail app password), VASOOL_DEMO_TO போடுங்க. Bank-க்கு எப்பவும் அனுப்ப மாட்டோம்.", "n.test": "Test mail அனுப்பு", "n.bank": "இந்த demo bank-க்கு நேரடியா mail பண்ணாது.",
+      "n.demo": "பாதுகாப்பு: எல்லா mail-ம் {to}-க்கு மட்டும் போகும்", "n.demo.phone": "பாதுகாப்பு: எல்லா call-ம் {to}-க்கு மட்டும் போகும்", "n.how": "ON பண்ண run.bat பக்கத்துல .env file-ல VASOOL_SMTP_USER, VASOOL_SMTP_PASS (Gmail app password), VASOOL_DEMO_TO போடுங்க. Bank-க்கு எப்பவும் அனுப்ப மாட்டோம்.", "n.test": "Test mail அனுப்பு", "n.bank": "இந்த demo bank-க்கு நேரடியா mail பண்ணாது.",
       "ap.h": "Vasool Raja உங்க OK கேக்குது", "ap.for": "{b}-ல {h}-ஓட account-க்கு", "ap.yes": "✓ சரி, complaint அனுப்பு", "ap.no": "இப்போ வேண்டாம்", "ap.done": "Bank-க்கு போயிடுச்சு. நன்றி — 30 நாள் clock-ஐ நாங்க பாத்துக்கறோம்.", "ap.used": "இந்த request-க்கு ஏற்கனவே பதில் சொல்லியாச்சு.", "ap.note": "Balance, செலவு விவரம் எதுவும் இதுல இல்ல. Complaint மட்டும் bank-க்கு போகும்.",
       "foot.privacy": "Transactions-ஐ check பண்றோம்; விக்கறது இல்ல. Password எப்பவும் கேக்க மாட்டோம்.",
       "home.h1": "உங்க bank உங்களுக்கு பணம் கடன் பட்டிருந்தா?",
@@ -182,6 +194,7 @@
           <label class="field">${esc(t("home.city"))}<select name="city_tier"><option value="NON_METRO">Non-metro (Coimbatore, Madurai…)</option><option value="METRO">Metro (Chennai, Bengaluru, Mumbai…)</option></select></label>
           <label class="field">${esc(t("home.minbal"))}<input name="min_balance_required" type="number" min="0" step="1" placeholder="e.g. 500 / 1000 / 10000"></label>
           <label class="field">${esc(t("home.name"))}<input name="holder_name" placeholder="Selvi R"></label>
+          <label class="field">${esc(t("home.phone"))}<input name="holder_phone" placeholder="+91 98765 43210"></label>
           <label class="field">As of (for demo)<input name="as_of" type="date" value="${new Date().toISOString().slice(0, 10)}"></label>
         </div>
         <div class="row" style="justify-content:space-between">
@@ -216,7 +229,7 @@
       if (sampleName) { fd.append("file", await (await fetch(`/api/samples/${sampleName}`)).blob(), sampleName); }
       else if (file.files.length) { [...file.files].forEach((f) => fd.append("files", f, f.name)); }
       else { toast(t("home.drop")); return; }
-      fd.append("profile", JSON.stringify({ bank: f.bank.value, account_type: f.account_type.value, city_tier: f.city_tier.value, min_balance_required: f.min_balance_required.value ? Number(f.min_balance_required.value) : null, holder_name: f.holder_name.value, language: S.lang }));
+      fd.append("profile", JSON.stringify({ bank: f.bank.value, account_type: f.account_type.value, city_tier: f.city_tier.value, min_balance_required: f.min_balance_required.value ? Number(f.min_balance_required.value) : null, holder_name: f.holder_name.value, holder_phone: f.holder_phone.value, language: S.lang }));
       if (f.as_of.value) fd.append("as_of", f.as_of.value);
       $("#scanbtn").disabled = true; $("#scanbtn").textContent = "Vasool Scan…";
       try {
@@ -253,6 +266,7 @@
       <div class="actions">
         <button class="btn sm why-toggle">${open ? esc(t("hide")) : esc(t("why"))}</button>
         <button class="btn sm ghost speak" data-text="${esc(lang === "ta" ? f.summary_ta : f.summary_en)}">🔊</button>
+        ${f.twin && f.twin.kind ? `<button class="btn sm gold twin-open" data-id="${esc(f.id)}">⇄ ${esc(t("twin.open"))}</button>` : ""}
         ${qs}
       </div>
       ${open ? `<div class="why" data-why="${esc(f.id)}"><div class="muted">…</div></div>` : ""}
@@ -289,12 +303,13 @@
     const section = (key, arr) => arr.length ? `<div class="section-title"><h2>${esc(t(key))}</h2><span class="count">${arr.length}</span></div>${arr.map(findingCard).join("")}` : "";
     const openCase = S.cases.find((c) => !["RECOVERED", "CLOSED_BANK_RIGHT", "CLOSED_BY_USER"].includes(c.state));
     const cov = d.coverage || {};
+    const hasTat = F.some((f) => f.twin && f.twin.kind === "tat" && !f.twin.reversed);
     return `
     <div class="stack">
       <section class="card ${s.total_recoverable > 0 ? "dark" : "soft"}">
         <div class="eyebrow">Vasool Scan · ${esc(s.bank || "")} ${d.profile.account_last4 ? "····" + esc(d.profile.account_last4) : ""} · ${esc(cov.from || s.period.from || "")} → ${esc(cov.to || s.period.to || "")}${(d.statements || []).length > 1 ? " · " + esc(t("hist.stmts", { n: d.statements.length })) : ""}</div>
         ${s.total_recoverable > 0 ? `
-          <div class="hero-amount" style="margin-top:10px">${inr(s.total_recoverable)} <span style="font-size:.45em">${esc(t("found.h"))}</span></div>
+          <div class="hero-amount" style="margin-top:10px"><span id="hero-n" data-v="${s.total_recoverable}">${inr(s.total_recoverable)}</span> <span style="font-size:.45em">${esc(t("found.h"))}</span></div>
           <p style="margin-top:8px;color:#DCE8E0">${esc(t("found.sub", { n: rec.length }))}${unc.length ? " · " + esc(t("found.unclear", { n: unc.length })) : ""}${avo.length ? " · " + esc(t("found.avoid", { n: avo.length })) : ""}</p>
           <p class="muted" style="color:#9DB8A8">${esc(t("found.charges", { a: inr(s.total_bank_charges_in_period) }))}</p>
           <div class="row" style="margin-top:8px">
@@ -305,6 +320,7 @@
           <p class="muted">${esc(t("found.watch"))}${unc.length ? " · " + esc(t("found.unclear", { n: unc.length })) : ""}</p>`}
         ${s.warnings?.length ? `<p class="muted" style="font-size:.82rem;margin-top:8px">${s.warnings.map(esc).join("<br>")}</p>` : ""}
       </section>
+      ${hasTat ? timeCard(d) : ""}
       ${sus.length ? `<section class="card warn"><h3>${esc(t("suspicious"))}</h3>${sus.map((x) => `<div class="qbtns" data-q="txn_failed" data-txn="${esc(x.id)}" style="margin-top:8px"><span class="mono">${esc(x.date)} · ${esc(x.narration)} · ${inr(x.debit)}</span>${["yes", "no", "not_sure"].map((o) => `<button class="btn sm ans" data-val="${o}">${esc(t(o))}</button>`).join("")}</div>`).join("")}</section>` : ""}
       ${section("sec.now", now)}
       ${section("sec.ask", unc)}
@@ -313,6 +329,30 @@
       ${section("sec.prevent", avo)}
       ${statementsCard(d)}
     </div>`;
+  }
+
+  function timeCard(d) {
+    const from = (d.coverage && d.coverage.to) || d.summary.period.to || d.as_of, today = new Date().toISOString().slice(0, 10);
+    const max = addDays(today > from ? today : from, 120), cur = d.as_of || today;
+    const perDay = d.findings.filter((f) => f.twin && f.twin.kind === "tat" && !f.twin.reversed).reduce((a, f) => a + f.twin.per_day, 0);
+    return `
+    <section class="card time" id="timecard">
+      <div class="section-title" style="margin-top:0"><h2>${esc(t("time.h"))}</h2><span class="count">+${inr(perDay)}/day</span></div>
+      <p class="muted" style="margin:0 0 8px">${esc(t("time.lede"))}</p>
+      <div class="row" style="gap:14px">
+        <span class="mono muted" style="min-width:150px">${esc(t("time.asof"))} <b id="asof-label" style="color:var(--ink)">${esc(cur)}</b></span>
+        <input type="range" id="asof" min="${dayNum(from)}" max="${dayNum(max)}" value="${dayNum(cur)}" step="1" style="flex:1;accent-color:var(--gold)">
+        <button class="btn sm ghost" id="asof-today">${esc(t("time.today"))}</button>
+      </div>
+    </section>`;
+  }
+  const dayNum = (iso) => Math.round(new Date(iso + "T00:00:00Z").getTime() / 86400000);
+  const isoOf = (n) => new Date(n * 86400000).toISOString().slice(0, 10);
+  const addDays = (iso, n) => isoOf(dayNum(iso) + n);
+  function countUp(el, from, to, ms = 900) {
+    const t0 = performance.now();
+    const step = (now) => { const k = Math.min(1, (now - t0) / ms), e = 1 - Math.pow(1 - k, 3); el.textContent = inr(from + (to - from) * e); if (k < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
   }
 
   function statementsCard(d) {
@@ -362,6 +402,17 @@
       try { S.data = await post(`/accounts/${S.accountId}/answers`, { answers: { [key]: b.dataset.val } }); S.cases = S.data.cases || []; toast("✓"); route(); }
       catch (e) { toast(t("err") + e.message); }
     }));
+    const hero = $("#hero-n");
+    if (hero && S.prevTotal != null && S.prevTotal !== Number(hero.dataset.v)) countUp(hero, S.prevTotal, Number(hero.dataset.v));
+    if (hero) S.prevTotal = Number(hero.dataset.v);
+    const asof = $("#asof");
+    if (asof) {
+      asof.oninput = () => { $("#asof-label").textContent = isoOf(Number(asof.value)); };
+      const commit = async (iso) => { try { S.data = await post(`/accounts/${S.accountId}/as-of`, { as_of: iso }); S.cases = S.data.cases || []; route(); } catch (e) { toast(t("err") + e.message); } };
+      asof.onchange = () => commit(isoOf(Number(asof.value)));
+      $("#asof-today").onclick = () => commit(new Date().toISOString().slice(0, 10));
+    }
+    $$(".twin-open").forEach((b) => (b.onclick = () => { location.hash = `#/twin/${b.dataset.id}`; }));
     const add = $("#addstmt");
     if (add) add.onchange = () => addStatements([...add.files].map((f) => [f, f.name]));
     $$(".add-sample").forEach((b) => (b.onclick = async () => { b.disabled = true; const blob = await (await fetch(`/api/samples/${b.dataset.name}`)).blob(); await addStatements([[blob, b.dataset.name]]); }));
@@ -470,7 +521,7 @@
   const waitingNow = (id) => location.hash === `#/case/${id}` && $("#approve, #approve-self");
   function bindCase(id) {
     const askg = $("#askg");
-    if (askg) askg.onclick = async () => { askg.disabled = true; try { const r = await post(`/cases/${id}/request-approval?lang=${S.lang}`); await route(); if (r.email) toast(r.email.sent ? "📧 " + t("mail.sent", { to: r.email.to }) : t("mail.sim", { r: r.email.reason }), 6000); setTimeout(() => speak(r.holder_call.text, r.holder_call.lang), 400); } catch (e) { toast(t("err") + e.message); askg.disabled = false; } };
+    if (askg) askg.onclick = async () => { askg.disabled = true; try { const r = await post(`/cases/${id}/request-approval?lang=${S.lang}`); await route(); if (r.call && r.call.placed) toast(t("call.placed", { to: r.call.to }), 6000); else if (r.email) toast(r.email.sent ? "📧 " + t("mail.sent", { to: r.email.to }) : t("mail.sim", { r: r.email.reason }), 6000); setTimeout(() => speak(r.holder_call.text, r.holder_call.lang), 400); } catch (e) { toast(t("err") + e.message); askg.disabled = false; } };
     const ss = $("#sendself");
     if (ss) ss.onclick = async () => { try { await post(`/cases/${id}/send`); toast(t("case.sent")); route(); } catch (e) { toast(t("err") + e.message); } };
     const pv = $("#preview");
@@ -491,6 +542,117 @@
     if (!S.data) return `<div class="empty">${esc(t("noacct"))} <a href="#/">Scan</a></div>`;
     if (!S.cases.length) return `<div class="stack"><h1>${esc(t("cases.h"))}</h1><div class="empty">${esc(t("cases.none"))}</div></div>`;
     return `<div class="stack"><h1>${esc(t("cases.h"))}</h1>${S.cases.map((c) => `<a class="card" href="#/case/${esc(c.id)}" style="text-decoration:none;color:inherit"><div class="row" style="justify-content:space-between"><div><div class="eyebrow">${esc(c.id)}</div><div style="font-size:1.05rem;margin-top:4px">${esc(c.status_text)}</div>${c.days_left != null ? `<div class="muted">${esc(t("case.days", { d: c.days_left }))}</div>` : ""}</div><div class="amt display" style="font-size:1.6rem;color:var(--green)">${inr(c.amount)}</div></div><div style="margin-top:10px">${tracker(c)}</div></a>`).join("")}</div>`;
+  }
+
+  // ---- Twin View ---------------------------------------------------------------
+  async function screenTwin(fid) {
+    if (!S.data) await loadAccount();
+    const f = S.data?.findings.find((x) => x.id === fid);
+    if (!f || !f.twin?.kind) return `<div class="empty">Twin not available for this finding.</div>`;
+    const rule = await getRule(f.rule_id);
+    const w = f.twin, L = S.lang;
+    const head = `
+      <section class="card dark">
+        <div class="eyebrow">${esc(t("twin.h"))} · ${esc(f.rule_id)} · ${esc(rule.source.circular)}</div>
+        <h1 style="margin-top:6px;font-size:1.6rem">${esc(t("twin.actual"))} <span style="color:var(--gold)">↔</span> ${esc(t("twin.expected"))}</h1>
+        <p style="color:#DCE8E0;margin:6px 0 0">${esc(L === "ta" ? f.summary_ta : f.summary_en)}</p>
+      </section>`;
+    const chain = `<p class="muted mono" style="font-size:.78rem;margin:0">${esc(t("twin.chain"))}</p>`;
+    const back = `<div class="row"><a class="btn" href="#/findings">← ${esc(t("twin.back"))}</a><button class="btn sm ghost" id="twin-replay">↻ ${esc(t("twin.replay"))}</button></div>`;
+    if (w.kind === "tat") return `<div class="stack">${head}${twinTat(f, w)}${chain}${back}</div>`;
+    if (w.kind === "minbal") return `<div class="stack">${head}${twinMinbal(f, w)}${chain}${back}</div>`;
+    return `<div class="empty">Twin not available.</div>`;
+  }
+
+  function twinTat(f, w) {
+    const start = dayNum(w.debit_date), end = Math.max(dayNum(w.reversal_date || w.as_of), dayNum(w.deadline) + 1);
+    const span = Math.max(end - start, 1), W = 1000, PAD = 70, X = (iso) => PAD + (dayNum(iso) - start) / span * (W - 2 * PAD);
+    const xDebit = X(w.debit_date), xDue = X(w.deadline), xEnd = X(w.reversal_date || w.as_of);
+    const ticks = []; for (let n = start; n <= end; n += Math.max(1, Math.round(span / 8))) ticks.push(isoOf(n));
+    const lane = (y, label, up) => `<text x="${PAD}" y="${y - (up ? 54 : 34)}" class="lane">${esc(label)}</text><line x1="${PAD}" x2="${W - PAD}" y1="${y}" y2="${y}" class="axis"/>`;
+    const mark = (x, y, cls, txt, above, lift = 0) => `<circle cx="${x}" cy="${y}" r="7" class="dot ${cls}"/><text x="${x}" y="${above ? y - 14 - lift : y + 24}" text-anchor="${above && x < PAD + 60 ? "start" : "middle"}" class="lbl ${cls}">${esc(txt)}</text>`;
+    const days = w.days_late, total = w.delta, expectedTotal = w.reversed ? w.expected_compensation : w.expected_compensation + w.amount;
+    return `
+    <section class="card twinview">
+      <svg viewBox="0 0 ${W} 330" width="100%" preserveAspectRatio="xMidYMid meet" id="twin-svg">
+        <defs><pattern id="hz" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="var(--red)" stroke-width="2" opacity=".35"/></pattern></defs>
+        ${ticks.map((d) => `<text x="${X(d)}" y="318" text-anchor="middle" class="tick">${esc(d.slice(5))}</text><line x1="${X(d)}" x2="${X(d)}" y1="60" y2="300" class="grid"/>`).join("")}
+        ${lane(110, t("twin.expected"), true)}
+        ${mark(xDebit, 110, "ink", `₹${w.amount} ${t("twin.debited")}`, true)}
+        ${mark(xDue, 110, "gold", t("twin.due", { n: w.tat_days }), true, 20)}
+        <rect x="${xDue}" y="104" width="0" height="12" class="band gold" id="band-exp"/>
+        <text x="${(xDue + xEnd) / 2}" y="140" text-anchor="middle" class="lbl gold">${esc(t("twin.perday", { p: w.per_day }))}</text>
+        ${lane(250, t("twin.actual"))}
+        ${mark(xDebit, 250, "ink", `₹${w.amount} ${t("twin.debited")}`, false)}
+        ${w.reversed ? mark(xEnd, 250, "green", `${t("twin.reversed")} · ${w.reversal_date}`, false) : `<circle cx="${xEnd}" cy="250" r="7" class="dot red hollow"/><text x="${xEnd}" y="274" text-anchor="end" class="lbl red">${esc(t("twin.noreversal", { d: w.as_of }))}</text>`}
+        <text x="${xDebit}" y="298" class="lbl muted" text-anchor="start">${esc(t("twin.comp0"))}</text>
+        <rect x="${xDue}" y="122" width="0" height="116" fill="url(#hz)" id="band-delta"/>
+        <line x1="${xDue}" x2="${xDue}" y1="104" y2="256" class="vline"/>
+        <text x="${(xDue + xEnd) / 2}" y="186" text-anchor="middle" class="late" id="late-lbl"></text>
+      </svg>
+      <div class="twin-math">
+        <div><span class="eyebrow">${esc(t("twin.expected"))}</span><b>${inr(expectedTotal)}</b><small>${days} × ₹${w.per_day}${w.reversed ? "" : " + ₹" + w.amount + " principal"}</small></div>
+        <div class="op">−</div>
+        <div><span class="eyebrow">${esc(t("twin.actual"))}</span><b>${inr(w.actual_compensation)}</b><small>${esc(t("twin.comp0"))}</small></div>
+        <div class="op">=</div>
+        <div class="delta"><span class="eyebrow">${esc(t("twin.delta"))}</span><b id="twin-counter" data-total="${total}" data-days="${days}">₹0</b><small id="twin-day"></small></div>
+        <div class="op">→</div>
+        <div class="claim"><span class="eyebrow">${esc(t("twin.claim"))}</span><b>${inr(total)}</b><small>${esc(f.confidence)} · ${f.evidence.length} evidence line(s)</small></div>
+      </div>
+    </section>`;
+  }
+
+  function twinMinbal(f, w) {
+    const req = w.required, path = w.path || [];
+    if (!path.length) return `
+    <section class="card twinview stack">
+      <div class="twin-math"><div><span class="eyebrow">${esc(t("twin.expected"))}</span><b style="font-size:1.1rem">${esc(t("twin.mb.expected", { r: req, m: w.month }))}</b></div><div class="op">vs</div><div><span class="eyebrow">${esc(t("twin.actual"))}</span><b style="font-size:1.1rem">${esc(t("twin.mb.actual", { p: w.penalty, d: w.charge_date }))}</b></div></div>
+      <div class="card warn"><b>${esc(t("twin.mb.blind", { m: w.month }))}</b><div style="margin-top:8px"><a class="btn gold" href="#/findings#statements">＋ ${esc(t("twin.mb.add"))}</a></div></div>
+    </section>`;
+    const W = 1000, PAD = 70, H = 300, vals = path.map((p) => p[1]), lo = Math.min(...vals, req) * 0.9, hi = Math.max(...vals, req) * 1.05;
+    const X = (i) => PAD + i / Math.max(path.length - 1, 1) * (W - 2 * PAD), Y = (v) => 40 + (1 - (v - lo) / (hi - lo)) * (H - 80);
+    const pts = path.map((p, i) => `${X(i)},${Y(p[1])}`).join(" ");
+    const ok = w.lowest != null && w.lowest >= req;
+    return `
+    <section class="card twinview">
+      <svg viewBox="0 0 ${W} ${H + 30}" width="100%" id="twin-svg">
+        <line x1="${PAD}" x2="${W - PAD}" y1="${Y(req)}" y2="${Y(req)}" class="req"/><text x="${W - PAD}" y="${Y(req) - 8}" text-anchor="end" class="lbl gold">${esc(t("twin.mb.required", { r: req }))} · ${esc(t("twin.expected"))}</text>
+        <polyline points="${pts}" class="path" id="mb-path"/>
+        ${path.map((p, i) => `<circle cx="${X(i)}" cy="${Y(p[1])}" r="4" class="dot ${p[1] < req ? "red" : "green"}"/>`).join("")}
+        ${path.filter((_, i) => i % Math.max(1, Math.round(path.length / 8)) === 0).map((p, i, a) => `<text x="${X(path.indexOf(p))}" y="${H + 18}" text-anchor="middle" class="tick">${esc(p[0].slice(5))}</text>`).join("")}
+        <text x="${PAD}" y="24" class="lane">${esc(t("twin.actual"))} · ${esc(w.month)}</text>
+        <text x="${W - PAD}" y="24" text-anchor="end" class="lbl ${ok ? "green" : "red"}">${esc(t("twin.mb.lowest", { m: w.month, l: w.lowest }))}</text>
+      </svg>
+      <div class="twin-math">
+        <div><span class="eyebrow">${esc(t("twin.expected"))}</span><b style="font-size:1.05rem">${esc(t("twin.mb.expected", { r: req, m: w.month }))}</b></div>
+        <div class="op">vs</div>
+        <div><span class="eyebrow">${esc(t("twin.actual"))}</span><b style="font-size:1.05rem">${esc(t("twin.mb.actual", { p: w.penalty, d: w.charge_date }))}</b><small>${esc(t("twin.mb.lowest", { m: w.month, l: w.lowest }))}</small></div>
+        <div class="op">→</div>
+        <div class="${ok ? "claim" : ""}"><span class="eyebrow">${esc(f.label === "RECOVERABLE" ? t("twin.claim") : t("label." + f.label))}</span><b>${f.amount ? inr(f.amount) : "—"}</b><small>${esc(t("conf." + f.confidence))}</small></div>
+      </div>
+    </section>`;
+  }
+
+  function bindTwin() {
+    const play = () => {
+      const c = $("#twin-counter"), be = $("#band-exp"), bd = $("#band-delta"), ll = $("#late-lbl"), dl = $("#twin-day");
+      if (c && be) {
+        const total = Number(c.dataset.total), days = Number(c.dataset.days);
+        const svg = $("#twin-svg"), xDue = Number(be.getAttribute("x")), xEnd = Number($(".dot.green, .dot.hollow", svg)?.getAttribute("cx") || xDue);
+        const width = Math.max(0, xEnd - xDue), ms = Math.min(4000, 400 + days * 180), t0 = performance.now();
+        const step = (now) => {
+          const k = Math.min(1, (now - t0) / ms), d = Math.round(k * days);
+          be.setAttribute("width", width * k); bd.setAttribute("width", width * k);
+          c.textContent = inr(total * k); dl.textContent = t("twin.day", { n: d }); ll.textContent = t("twin.late", { n: d });
+          if (k < 1) requestAnimationFrame(step); else { c.textContent = inr(total); ll.textContent = t("twin.late", { n: days }); }
+        };
+        requestAnimationFrame(step);
+      }
+      const mp = $("#mb-path");
+      if (mp) { const len = mp.getTotalLength(); mp.style.strokeDasharray = len; mp.style.strokeDashoffset = len; mp.getBoundingClientRect(); mp.style.transition = "stroke-dashoffset 2.2s ease-out"; mp.style.strokeDashoffset = "0"; }
+    };
+    play();
+    const r = $("#twin-replay"); if (r) r.onclick = () => route();
   }
 
   // ---- approve (opened from the guardian's phone) --------------------------
@@ -602,6 +764,9 @@
         ${n.demo_to ? `<p class="muted" style="margin:0">🔒 ${esc(t("n.demo", { to: n.demo_to }))}</p>` : ""}
         <p class="muted" style="margin:0;font-size:.88rem">${esc(t("n.bank"))} ${n.email ? "" : esc(t("n.how"))}</p>
         ${n.email ? `<div class="row"><input id="testto" placeholder="${esc(n.demo_to || "someone@gmail.com")}" style="max-width:280px"><button class="btn sm" id="testmail">${esc(t("n.test"))}</button></div>` : ""}
+        <p style="margin:8px 0 0">${n.voice ? "📞 " + esc(t("n.voice.on", { f: n.from })) : esc(t("n.voice.off"))}</p>
+        ${n.demo_phone ? `<p class="muted" style="margin:0">🔒 ${esc(t("n.demo.phone", { to: n.demo_phone }))}</p>` : ""}
+        ${n.voice ? `<div class="row"><input id="testcallto" placeholder="${esc(n.demo_phone || "+91 98765 43210")}" style="max-width:280px"><button class="btn sm" id="testcall">${esc(t("n.testcall"))}</button></div>` : ""}
       </section>
       <section class="card stack"><h2>${esc(t("g.h"))}</h2><p class="muted">${esc(t("g.lede"))}</p>
         ${S.data ? `<form id="gform" class="grid2">
@@ -619,6 +784,8 @@
     </div>`;
   }
   function bindSettings() {
+    const tc = $("#testcall");
+    if (tc) tc.onclick = async () => { tc.disabled = true; try { const r = await post(`/notify/test-call`, { to: $("#testcallto").value, lang: S.lang }); toast(r.placed ? t("call.placed", { to: r.to }) : t("call.sim", { r: r.reason }), 6000); } catch (e) { toast(t("err") + e.message); } tc.disabled = false; };
     const tm = $("#testmail");
     if (tm) tm.onclick = async () => { tm.disabled = true; try { const r = await post(`/notify/test`, { to: $("#testto").value }); toast(r.sent ? t("mail.sent", { to: r.to }) : t("mail.sim", { r: r.reason }), 6000); } catch (e) { toast(t("err") + e.message); } tm.disabled = false; };
     const f = $("#gform");
@@ -648,6 +815,7 @@
       else if (hash === "#/ask") { html = screenAsk(); bind = bindAsk; }
       else if (hash === "#/rules") { html = await screenRules(); }
       else if (hash === "#/settings") { html = await screenSettings(); bind = bindSettings; }
+      else if (hash.startsWith("#/twin/")) { const fid = hash.split("/")[2]; html = await screenTwin(fid); bind = bindTwin; }
       else if (hash.startsWith("#/approve/")) { const tok = hash.split("/")[2]; html = await screenApprove(tok); bind = () => bindApprove(tok); }
       else { html = `<div class="empty">Not found.</div>`; }
       app.innerHTML = html;

@@ -132,7 +132,7 @@ def guardian_email(holder: str, guardian_name: str, amount_text: str, message_te
     html = f"""<div style="font-family:system-ui,sans-serif;max-width:520px;margin:auto;color:#18261F">
   <div style="background:#144C31;color:#fff;padding:14px 18px;border-radius:12px 12px 0 0"><b style="font-size:18px">₹ Vasool Raja</b><div style="color:#9DB8A8;font-size:13px">{'நாங்க பாத்துக்கறோம்.' if ta else 'We watch. You don&#39;t have to.'}</div></div>
   <div style="border:1px solid #D7DDD6;border-top:0;padding:18px;border-radius:0 0 12px 12px">
-    <p style="font-size:16px;line-height:1.5">{message_text}</p>
+    <p style="font-size:16px;line-height:1.5;white-space:pre-line">{_esc(message_text)}</p>
     <p style="text-align:center;margin:22px 0"><a href="{approve_url}" style="background:#C9961A;color:#144C31;text-decoration:none;font-weight:700;font-size:17px;padding:14px 26px;border-radius:10px;display:inline-block">{btn}</a></p>
     <p style="font-size:13px;color:#4E5D55">{'Approval code' if not ta else 'OK code'}: <b style="font-family:monospace;font-size:15px">{token}</b></p>
     <p style="font-size:12px;color:#4E5D55">{note}</p>

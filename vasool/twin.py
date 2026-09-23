@@ -60,10 +60,11 @@ class TwinContext:
             return None
         return txn.balance + txn.debit - txn.credit
 
+    def prior_month_key(self, d: date) -> str:
+        return month_key(d.replace(day=1) - timedelta(days=1))
+
     def lowest_balance_in_prior_month(self, d: date) -> Optional[float]:
-        first_this = d.replace(day=1)
-        last_prev = first_this - timedelta(days=1)
-        return self.month_min_balance.get(month_key(last_prev))
+        return self.month_min_balance.get(self.prior_month_key(d))
 
     def transactions_in_month(self, key: str) -> list[Transaction]:
         return [t for t in self.txns if month_key(t.date) == key]

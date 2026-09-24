@@ -15,7 +15,7 @@ BANK_PATTERNS = [
     ("BOB", r"\b(BANK OF BARODA|BOB)\b"),
     ("UNION", r"\bUNION BANK\b"),
     ("KOTAK", r"\bKOTAK\b"),
-    ("INDIAN BANK", r"\bINDIAN BANK\b"),
+    ("INDIAN BANK", r"\bINDIAN BANK\b|\bIDIB0|INDOASIS"),
     ("IOB", r"\b(IOB|INDIAN OVERSEAS)\b"),
     ("BOI", r"\bBANK OF INDIA\b"),
     ("TMB", r"\b(TMB|TAMILNAD MERCANTILE)\b"),

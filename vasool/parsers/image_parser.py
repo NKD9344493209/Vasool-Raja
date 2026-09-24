@@ -156,9 +156,17 @@ def _rows_from_ocr_text(text: str, res: ParseResult) -> ParseResult:
         res.rows.append({"date": d, "narration": narration, "debit": debit, "credit": credit, "balance": balance, "ref": extract_ref(narration)})
     accepted = len(res.rows)
     quality = accepted / max(total_lines, 1)
-    res.warnings.append(f"OCR quality: {accepted} transaction lines recognised out of {total_lines} text lines (score {quality:.2f}).")
-    if quality < 0.25 and accepted < 5:
-        res.warnings.append("Low OCR confidence — ask for a clearer photo (flat page, good light, no shadow).")
+    # The real quality signal is the balance chain: if every row's balance equals the previous balance
+    # plus credit minus debit, OCR read the numbers right — whatever the ratio of text lines says.
+    chain = [r for r in res.rows if r["balance"] is not None]
+    links = sum(1 for a, b in zip(chain, chain[1:]) if abs(a["balance"] + b["credit"] - b["debit"] - b["balance"]) < 0.011)
+    chain_ok = len(chain) >= 2 and links == len(chain) - 1
+    if chain_ok:
+        res.warnings.append(f"OCR: {accepted} transactions read from {total_lines} text lines · balance chain verified ✓ ({links}/{links} steps reconcile).")
+    else:
+        res.warnings.append(f"OCR: {accepted} transactions read from {total_lines} text lines · balance chain {links}/{max(len(chain) - 1, 0)} steps reconcile.")
+        if accepted < 5 or (len(chain) > 2 and links < (len(chain) - 1) * 0.7):
+            res.warnings.append("Low OCR confidence — retake the photo (flat page, good light, no shadow) or upload the PDF/CSV statement.")
     return res.finalize()
 
 

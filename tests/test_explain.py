@@ -88,3 +88,39 @@ def test_upload_hygiene_extension_and_headers():
     assert r.status_code == 415
     h = client.get("/api/health")
     assert h.headers["x-content-type-options"] == "nosniff" and h.headers["x-frame-options"] == "DENY" and h.headers["cache-control"] == "no-store"
+
+
+def test_indian_bank_inr_column_pdf_layout_and_sms_chgs():
+    """Real Indian Bank (IndOASIS) PDF layout: 'INR' before every amount, '-' for an empty column,
+    narrations wrapped onto dateless lines, page headers in between. Synthetic text, same shape."""
+    from vasool.parsers import pdf_parser
+    from vasool.classify import classify
+    from vasool.models import Kind, Transaction
+    from datetime import date
+    text = """ACCOUNT ACTIVITY
+Date Transaction Details Debits Credits Balance
+10 Sep 2026 utib0000553/Google India - INR 111.00 INR 1,028.58
+Digital Services
+/XXXXX30724/gpayrefund-
+online@axisbank
+/UPI/XXXXXXXXXXXX/UPI
+11 Sep 2026 YESB0MCHUPI/DONNE INR 199.00 - INR 829.58
+BIRYANI HOUSE /XXXXX
+Page 1 of 5
+Date Transaction Details Debits Credits Balance
+12 Sep 2026 IOBA0001845/D NAVEEN INR 700.00 - INR 129.58
+KUMAR/XXXXX/UPI
+23 Sep 2026 SMS_CHGS_JUNE- INR 10.80 - INR 0.78
+26_QTR
+Ending Balance INR 0.78 Total INR 7,563.80 INR 6,647.00
+"""
+    r = pdf_parser._rows_from_text_inr(text)
+    assert len(r.rows) == 4
+    assert r.rows[0]["credit"] == 111.0 and r.rows[0]["debit"] == 0 and r.rows[0]["balance"] == 1028.58
+    assert "Digital Services" in r.rows[0]["narration"] and "Page 1" not in r.rows[1]["narration"] and "Date Transaction" not in r.rows[1]["narration"]
+    assert r.rows[2]["debit"] == 700.0 and "KUMAR" in r.rows[2]["narration"]
+    assert r.rows[3]["debit"] == 10.8 and "Ending Balance" not in r.rows[3]["narration"]
+    t = classify(Transaction(date=date(2026, 9, 23), narration=r.rows[3]["narration"], debit=10.8, balance=0.78))
+    assert t.kind == Kind.CHARGE_SMS
+    from vasool.parsers.common import detect_bank
+    assert detect_bank("IFSC IDIB000S107 Branch PEELAMEDU") == "INDIAN BANK"

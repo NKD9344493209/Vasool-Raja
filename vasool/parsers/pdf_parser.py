@@ -66,6 +66,35 @@ def _rows_from_text(text: str) -> ParseResult:
     return res.finalize()
 
 
+# Indian Bank / IndOASIS-style layout: "DD Mon YYYY  narration…  - | INR 111.00   INR 199.00 | -   INR 1,028.58"
+# The narration wraps onto following lines that carry no date; those lines belong to the row above.
+INR_AMT = r"(?:INR\s*([\d,]+\.\d{2})|-)"
+INR_LINE_RE = re.compile(rf"^\s*{DATE_TOKEN}\s+(.*?)\s+{INR_AMT}\s+{INR_AMT}\s+INR\s*([\d,]+\.\d{{2}})\s*$")
+STOP_RE = re.compile(r"^\s*(Page\s+\d+|ACCOUNT\s|Account\s|Date\s+Transaction|Opening Balance|Closing Balance|Ending Balance|Total\s|This is a|Statement|Last \d+ Transactions|Customer|Branch|IFSC|Generated|Disclaimer|\*)", re.I)
+
+
+def _rows_from_text_inr(text: str) -> ParseResult:
+    res = ParseResult(source_kind="pdf-text", raw_text=text[:5000])
+    cur = None
+    for line in text.splitlines():
+        m = INR_LINE_RE.match(line)
+        if m:
+            d = parse_date(m.group(1))
+            if not d:
+                cur = None
+                continue
+            cur = {"date": d, "narration": m.group(2).strip(), "debit": parse_amount(m.group(3)) if m.group(3) else 0.0,
+                   "credit": parse_amount(m.group(4)) if m.group(4) else 0.0, "balance": parse_amount(m.group(5)), "ref": ""}
+            res.rows.append(cur)
+        elif cur is not None and not STOP_RE.match(line) and not re.match(rf"^\s*{DATE_TOKEN}", line):
+            cur["narration"] = (cur["narration"] + " " + line.strip()).strip()
+        else:
+            cur = None
+    for r in res.rows:
+        r["ref"] = extract_ref(r["narration"])
+    return res.finalize()
+
+
 def parse(path: Path) -> ParseResult:
     import pdfplumber
 
@@ -79,6 +108,9 @@ def parse(path: Path) -> ParseResult:
             return res
     if text.strip():
         res = _rows_from_text(text)
+        if res.rows:
+            return res
+        res = _rows_from_text_inr(text)
         if res.rows:
             return res
         res.warnings.append("PDF has text but no recognisable transaction lines; try CSV export.")

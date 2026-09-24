@@ -6,15 +6,30 @@
   const T = {
     en: {
       tagline: "We watch. You don't have to.",
-      "nav.scan": "Scan", "nav.findings": "Found", "nav.cases": "Cases", "nav.history": "History", "nav.ask": "Ask", "nav.rules": "Rulebook", "nav.settings": "Settings",
-      "foot.rule": "The rule engine decides. The assistant only explains.",
+      "nav.home": "Home", "nav.scan": "Scan", "nav.findings": "Findings", "nav.twin": "My Twin", "nav.cases": "Cases", "nav.history": "History", "nav.ask": "Ask", "nav.rules": "Rulebook", "nav.settings": "Settings", "nav.guardian": "Guardian", "nav.privacy": "Privacy",
+      "foot.rule": "AI explains. Rules decide. Evidence proves.",
+      "dash.q": "Is my bank account being charged fairly?", "dash.overview": "Account overview", "dash.period": "Statement period", "dash.txns": "Transactions analysed", "dash.charges": "Charges analysed", "dash.reversals": "Reversals detected", "dash.rules": "Rules evaluated", "dash.last": "Last scan", "dash.months": "Months covered",
+      "dash.potential": "POTENTIAL RECOVERY", "dash.findings": "{n} findings", "dash.action": "{n} action required", "dash.confirm": "{n} need confirmation", "dash.info": "{n} informational", "dash.review": "Review my findings", "dash.twin": "See my digital twin", "dash.demo": "DEMONSTRATION DATA — a synthetic statement, not a real customer.", "dash.scan.more": "Scan another statement", "dash.accounts": "Your accounts",
+      "dash.honest": "A potential claim is what the evidence supports. It becomes money only when the bank or the RBI Ombudsman decides.",
+      "scan.h": "Vasool Scan", "scan.1": "Reading statement…", "scan.1d": "{n} transactions parsed", "scan.2": "Understanding account activity…", "scan.2d": "account state reconstructed · {n} months · {b} balance points", "scan.3": "Matching transactions and reversals…", "scan.3d": "{p} reversal pair(s) · {u} unreversed failure(s)", "scan.4": "Checking applicable rules…", "scan.4d": "{n} RBI rules evaluated, each at its effective date", "scan.5": "Checking edge cases…", "scan.5d": "partial reversals, retries, free-ATM counts, prior-month balances", "scan.6": "Generating findings…", "scan.6d": "{n} finding(s) · {f} statement line(s) flagged · {u} not flagged", "scan.done": "SCAN COMPLETE", "scan.open": "Open findings",
+      "chain.h": "Evidence chain", "chain.1": "What happened", "chain.2": "What should have happened", "chain.3": "What we found", "chain.4": "Why it was flagged", "chain.5": "Evidence — statement lines", "chain.6": "Rule in force", "chain.7": "Calculation", "chain.8": "Potential claim", "chain.info": "Informational finding", "chain.foot": "TRANSACTION → ACCOUNT STATE → RULE MATCH → CALCULATION → EVIDENCE → FINDING → POTENTIAL CLAIM. Without every link: no claim.",
+      "chain.inforce": "in force", "chain.cond": "condition", "chain.status.CONFIRMED": "Confirmed from evidence", "chain.status.NEEDS_CHECKING": "Requires your confirmation", "chain.status.INFO": "Informational",
+      "mytwin.h": "My banking digital twin", "mytwin.lede": "Everything below is reconstructed from the lines you uploaded — nothing is estimated. The engine judged every line; here is what it saw.",
+      "mytwin.pipe": "Customer → Account → Transactions → Balance history → Charges → Reversals → Account state → Rule engine → Findings",
+      "mytwin.balance": "Balance history", "mytwin.pairs": "Failed debits and their reversals", "mytwin.charges": "Charges the bank made", "mytwin.lines": "Every statement line, and why it was or wasn't flagged", "mytwin.flagged": "flagged", "mytwin.clean": "not flagged", "mytwin.whynot": "Why wasn't this flagged?", "mytwin.why": "Why was this flagged?", "mytwin.close": "Close", "mytwin.within": "within T+{n}", "mytwin.beyond": "{d} days · beyond T+{n}", "mytwin.open": "open {d} days · T+{n} passed", "mytwin.minreq": "required minimum ₹{r}", "mytwin.lowest": "lowest ₹{l}",
+      "scope.h": "What this prototype checks", "scope.line": "{i} RBI customer-protection rules implemented and tested · {l} listed · {m} mapped in the design. This is not complete RBI coverage.", "scope.note": "Every implemented rule links to its circular and effective window. Rules that are mapped but not implemented are never applied.",
+      "valid.h": "System validation", "valid.lede": "Real results from the test suite, written by scripts/validate.py — never typed by hand.", "valid.passed": "tests passed", "valid.none": "Not run yet on this machine: python scripts/validate.py", "valid.ran": "last run",
+      "ai.banner": "AI explains. Rules decide. Evidence proves.", "ai.lede": "Every answer is built from your account's findings and the rulebook. The assistant cannot create a claim, and says so when the evidence is not enough.",
+      "priv.h": "Privacy centre", "priv.what": "What we collect", "priv.what.d": "Only the transaction lines of the statement you upload (date, narration, debit, credit, balance) and the answers you give. The file itself is not kept.", "priv.why": "Why", "priv.why.d": "To run the RBI rules on your account state and to build the evidence pack for a complaint you choose to make.", "priv.keep": "How long", "priv.keep.d": "Until you delete it. Everything lives in one local database on this machine; nothing is uploaded to us.", "priv.who": "Who can see it", "priv.who.d": "You. Your guardian sees only the amount, the rule and one button — never balances or spending. No bank is ever contacted by this software.", "priv.delete": "Delete my data", "priv.deleted": "All data for this account has been deleted.", "priv.never": "Never asked for", "priv.controls": "Controls in this build",
+      "guard.flow": "Customer → Consent → Trusted guardian → Review → Approve action", "guard.status": "Guardian status", "guard.none": "No guardian on file", "guard.scope": "Access scope", "guard.scope.d": "Amount · rule reference · one approve button. Never: balance, salary, spending, other transactions.", "guard.consent": "Consent", "guard.revoke": "Revoke access", "guard.revoked": "Guardian access revoked.", "guard.audit": "Audit history",
+      "case.ready": "CASE READY", "case.pack": "Evidence pack (print / PDF)", "case.inside": "Inside the pack: case ID · each item with date, amount, RBI rule and effective window · the arithmetic · the statement lines as Annexure A · requested resolution · the 30-day clock.",
       "home.multi": "You can select several files at once — different months or quarters of the same account.",
       "home.current": "Open account: {a}", "home.addto": "Add a statement to it", "home.new": "This form starts a new account.",
       "st.h": "Statements", "st.lede": "Every statement of this account we have seen. Rules run on the whole history — a June penalty is judged on May's balances.",
       "st.add": "Add another statement", "st.added": "+{n} new lines · {d} duplicates skipped", "st.lines": "{n} lines", "st.new": "{n} new", "st.dup": "{n} duplicate", "st.remove": "Remove", "st.covers": "Covered: {a} → {b}", "st.gap": "Gap: {a} → {b} — upload that statement too",
       "hist.h": "History", "hist.lede": "Every account scanned on this device, with what was found and what came back. Open one to continue where you left off.", "hist.none": "Nothing scanned yet.",
-      "hist.open": "Open", "hist.current": "Open now", "hist.found": "found", "hist.recovered": "recovered", "hist.stmts": "{n} statement(s)", "hist.cases": "{n} case(s)", "hist.opencases": "{n} open",
-      "case.print": "Print complaint", "case.printomb": "Print Ombudsman draft", "case.printhint": "A4 letter with Annexure A — take 2 copies to the branch, get one stamped.",
+      "hist.open": "Open", "hist.current": "Open now", "hist.found": "potential", "hist.recovered": "recovered", "hist.stmts": "{n} statement(s)", "hist.cases": "{n} case(s)", "hist.opencases": "{n} open",
+      "case.print": "Evidence pack (print / PDF)", "case.printomb": "Print Ombudsman draft", "case.printhint": "A4 letter with Annexure A — take 2 copies to the branch, get one stamped.",
       "time.h": "Every day the bank waits", "time.lede": "Drag the date. Unreversed failed transactions accrue ₹100 a day under RBI/2019-20/67 — the twin recomputes every claim for that day.", "time.asof": "As of", "time.today": "today",
       "twin.h": "The twin", "twin.open": "See the twin", "twin.actual": "ACTUAL FINANCIAL STATE", "twin.expected": "EXPECTED REGULATORY STATE", "twin.delta": "REGULATORY DELTA", "twin.claim": "POTENTIAL CLAIM", "twin.replay": "Replay", "twin.back": "Back to findings",
       "twin.debited": "debited · failed", "twin.due": "reversal due (T+{n})", "twin.perday": "₹{p}/day owed from here", "twin.reversed": "reversed", "twin.noreversal": "no reversal as of {d}", "twin.comp0": "compensation credited: ₹0", "twin.late": "{n} days late", "twin.day": "Day {n}",
@@ -24,22 +39,22 @@
       "mail.sent": "Email delivered to {to}", "mail.sim": "Email simulated ({r})", "mail.also": "Also emailed to {to}",
       "g.email": "Email (the real one-button message goes here)", "n.h": "Real delivery", "n.on": "Email is ON — messages go out for real (from {f})", "n.off": "Email is OFF — the guardian message and complaint are simulated on screen.",
       "n.demo": "Safety: every mail is redirected to {to}", "n.demo.phone": "Safety: every call is redirected to {to}", "n.how": "To turn it on, create a .env file next to run.bat with VASOOL_SMTP_USER, VASOOL_SMTP_PASS (Gmail app password) and VASOOL_DEMO_TO. Nothing is ever sent to a bank.", "n.test": "Send test mail", "n.bank": "The bank itself is never emailed by this demo.",
-      "ap.h": "Vasool Raja asks for your OK", "ap.for": "For {h}'s account at {b}", "ap.yes": "✓ Yes, send the complaint", "ap.no": "Not now", "ap.done": "Sent to the bank. Thank you — we're watching the 30-day clock.", "ap.used": "This request was already answered.", "ap.note": "No balance or spending details are shown. Only the complaint goes to the bank.",
+      "ap.h": "Vasool Raja asks for your OK", "ap.for": "For {h}'s account at {b}", "ap.yes": "✓ Yes, send the complaint", "ap.no": "Not now", "ap.done": "Approved. Thank you — the evidence pack is ready for the branch; we're watching the 30-day clock.", "ap.used": "This request was already answered.", "ap.note": "No balance or spending details are shown. Only the complaint goes to the bank.",
       "foot.privacy": "We check transactions. We don't sell them. No passwords, ever.",
       "home.h1": "What if your bank owed you money right now?",
       "home.lede": "Give us one statement or a passbook photo. We run the RBI rulebook on it and tell you what your bank may owe you — with the rule beside every rupee. Nothing is sent to anyone unless you say so.",
       "home.drop": "Drop a statement here — PDF, CSV or a passbook photo", "home.or": "or try a sample",
       "home.bank": "Bank", "home.type": "Account type", "home.city": "City", "home.minbal": "Minimum balance your bank requires (₹)", "home.name": "Your name", "home.scan": "Check my account",
       "home.privacy": "Processed on this server, stored only as normalised transactions, deletable any time. We never ask for net-banking passwords or PINs.",
-      "found.h": "found", "found.sub": "{n} items your bank may owe you", "found.unclear": "{n} need one answer from you", "found.avoid": "{n} you can stop next time",
+      "found.h": "potential recovery", "found.sub": "{n} potential claim(s) supported by the statement", "found.unclear": "{n} need one answer from you", "found.avoid": "{n} you can stop next time",
       "found.charges": "Bank charges in this period: {a}", "found.none": "Everything looks okay. Nothing needs your attention.", "found.watch": "We'll keep watching.",
-      "found.getback": "Get it back", "found.effort": "Your effort: about 2 minutes",
+      "found.getback": "Get it back", "found.effort": "Builds the evidence pack · your effort: about 2 minutes",
       "sec.now": "Worth acting on now", "sec.ask": "One answer from you settles these", "sec.combine": "Small — we'll bundle them", "sec.skip": "Too small to bother you — we keep watching", "sec.prevent": "Allowed — but you can stop the next one",
-      "why": "Why we think so", "hide": "Hide", "expected": "Should have happened", "actual": "What happened", "calc": "Calculation", "rule": "Your right", "source": "RBI source", "confidence": "Confidence", "evidence": "Statement lines",
+      "why": "Evidence chain", "hide": "Hide", "expected": "Should have happened", "actual": "What happened", "calc": "Calculation", "rule": "Your right", "source": "RBI source", "confidence": "Confidence", "evidence": "Statement lines",
       "prevent": "How to stop the next one", "answer": "Answer:", "yes": "Yes", "no": "No", "not_sure": "Not sure",
       "case.h": "Your case", "case.prepared": "Complaint prepared. Nothing has been sent.", "case.guardian": "Ask my guardian", "case.send": "Send it myself", "case.preview": "Read the complaint",
       "case.callh": "Amma's phone rings", "case.play": "Play the call", "case.stop": "Stop", "case.press1": "Press 1 — call {g}", "case.press2": "Press 2 — not now",
-      "case.wa": "WhatsApp to {g}", "case.approve": "Approve as {g}", "case.sent": "Sent to the bank. We're watching the 30-day clock.", "case.days": "{d} days left for the bank to reply",
+      "case.wa": "WhatsApp to {g}", "case.approve": "Approve as {g}", "case.sent": "Approved. Evidence pack ready to submit — nothing is transmitted by this app. We're watching the 30-day clock.", "case.days": "{d} days left for the bank to reply",
       "case.bankreplied": "Bank replied", "case.recovered": "Money came back", "case.bankright": "Bank showed it was valid", "case.escalate": "Escalate to RBI Ombudsman", "case.check": "Check next statement for the refund",
       "case.download": "Complaint text", "case.omb": "Ombudsman draft", "case.timeline": "What happened so far",
       "cases.h": "Cases", "cases.none": "No cases yet. When something is found, 'Get it back' creates one.",
@@ -50,22 +65,37 @@
       "s.delete": "Delete all my data", "s.deleted": "Deleted.", "s.basic": "Letter to convert to a zero-charge Basic account",
       "noacct": "Scan a statement first.", "err": "Something went wrong: ",
       "priority.RECOVER_NOW": "Recover now", "priority.COMBINE": "Combine", "priority.NOT_WORTH_IT": "We keep watching", "priority.PREVENT": "Prevent",
-      "label.RECOVERABLE": "Rule broken · recoverable", "label.AVOIDABLE": "Allowed · avoidable", "label.UNCLEAR": "Needs one answer",
+      "label.RECOVERABLE": "Potential claim · rule broken", "label.AVOIDABLE": "Allowed · avoidable", "label.UNCLEAR": "Needs one answer",
       "conf.CONFIRMED": "Confirmed", "conf.NEEDS_CHECKING": "Needs checking", "conf.INFO": "Information",
       "suspicious": "This looks like a payment that may have failed and been retried. Did it fail?",
-      "state": { FOUND: "Found", PREPARED: "Prepared", AWAITING_APPROVAL: "Awaiting approval", SENT_TO_BANK: "Sent to bank", BANK_REPLIED: "Bank replied", DEADLINE_PASSED: "Deadline passed", ESCALATED_OMBUDSMAN: "Escalated", RECOVERED: "Recovered", CLOSED_BANK_RIGHT: "Bank was right", CLOSED_BY_USER: "Closed" },
+      "state": { FOUND: "Found", PREPARED: "Prepared", AWAITING_APPROVAL: "Awaiting approval", SENT_TO_BANK: "Ready to submit", BANK_REPLIED: "Bank replied", DEADLINE_PASSED: "Deadline passed", ESCALATED_OMBUDSMAN: "Escalated", RECOVERED: "Recovered", CLOSED_BANK_RIGHT: "Bank was right", CLOSED_BY_USER: "Closed" },
     },
     ta: {
       tagline: "நாங்க பாத்துக்கறோம். நீங்க கவலைப்பட வேண்டாம்.",
-      "nav.scan": "Scan", "nav.findings": "கண்டுபிடிச்சது", "nav.cases": "Cases", "nav.history": "History", "nav.ask": "கேளுங்க", "nav.rules": "Rulebook", "nav.settings": "Settings",
-      "foot.rule": "Rule engine முடிவு பண்ணும். Assistant விளக்கம் மட்டும் சொல்லும்.",
+      "nav.home": "Home", "nav.scan": "Scan", "nav.findings": "கண்டுபிடிச்சது", "nav.twin": "என் Twin", "nav.cases": "Cases", "nav.history": "History", "nav.ask": "கேளுங்க", "nav.rules": "Rulebook", "nav.settings": "Settings", "nav.guardian": "காப்பாளர்", "nav.privacy": "Privacy",
+      "foot.rule": "AI விளக்கும். Rules முடிவு பண்ணும். Evidence நிரூபிக்கும்.",
+      "dash.q": "என் bank account-ல charge சரியா போடுறாங்களா?", "dash.overview": "Account overview", "dash.period": "Statement காலம்", "dash.txns": "பார்த்த transactions", "dash.charges": "பார்த்த charges", "dash.reversals": "கண்ட reversals", "dash.rules": "பார்த்த rules", "dash.last": "கடைசி scan", "dash.months": "மாசங்கள்",
+      "dash.potential": "POTENTIAL RECOVERY · திரும்ப வரலாம்", "dash.findings": "{n} findings", "dash.action": "{n} இப்பவே", "dash.confirm": "{n}-க்கு உங்க பதில் வேணும்", "dash.info": "{n} தகவல்", "dash.review": "என் findings-ஐ பாரு", "dash.twin": "என் digital twin-ஐ பாரு", "dash.demo": "DEMONSTRATION DATA — synthetic statement, உண்மையான customer இல்ல.", "dash.scan.more": "இன்னொரு statement scan பண்ணு", "dash.accounts": "உங்க accounts",
+      "dash.honest": "Potential claim-னா evidence support பண்றது. Bank அல்லது RBI Ombudsman முடிவு பண்ணா தான் பணம்.",
+      "scan.h": "Vasool Scan", "scan.1": "Statement படிக்கிறோம்…", "scan.1d": "{n} transactions parse ஆச்சு", "scan.2": "Account activity புரிஞ்சுக்கிறோம்…", "scan.2d": "account state ready · {n} மாசம் · {b} balance points", "scan.3": "Transactions-ஐயும் reversals-ஐயும் match பண்றோம்…", "scan.3d": "{p} reversal pair · {u} reverse ஆகாத failure", "scan.4": "Rules check பண்றோம்…", "scan.4d": "{n} RBI rules, ஒவ்வொண்ணும் அதோட தேதியில", "scan.5": "Edge cases பாக்கறோம்…", "scan.5d": "partial reversal, retry, free-ATM count, முந்தைய மாச balance", "scan.6": "Findings தயார் பண்றோம்…", "scan.6d": "{n} finding · {f} line flag · {u} flag இல்ல", "scan.done": "SCAN முடிஞ்சது", "scan.open": "Findings-ஐ பாரு",
+      "chain.h": "Evidence chain", "chain.1": "நடந்தது", "chain.2": "நடந்திருக்க வேண்டியது", "chain.3": "நாங்க கண்டது", "chain.4": "ஏன் flag ஆச்சு", "chain.5": "Evidence — statement lines", "chain.6": "அமலில் இருக்கற rule", "chain.7": "கணக்கு", "chain.8": "Potential claim", "chain.info": "தகவல் finding", "chain.foot": "TRANSACTION → ACCOUNT STATE → RULE → CALCULATION → EVIDENCE → FINDING → POTENTIAL CLAIM. ஒண்ணு இல்லாட்டியும் claim இல்ல.",
+      "chain.inforce": "அமலில்", "chain.cond": "condition", "chain.status.CONFIRMED": "Evidence-ல உறுதி", "chain.status.NEEDS_CHECKING": "உங்க பதில் வேணும்", "chain.status.INFO": "தகவல்",
+      "mytwin.h": "என் banking digital twin", "mytwin.lede": "கீழ இருக்கறது எல்லாம் நீங்க upload பண்ண lines-ல இருந்து — எதுவும் அனுமானம் இல்ல. Engine ஒவ்வொரு line-ஐயும் பாத்தது; அது பாத்தது இது.",
+      "mytwin.pipe": "Customer → Account → Transactions → Balance history → Charges → Reversals → Account state → Rule engine → Findings",
+      "mytwin.balance": "Balance history", "mytwin.pairs": "Fail ஆன debits-ம் அதோட reversals-ம்", "mytwin.charges": "Bank போட்ட charges", "mytwin.lines": "ஒவ்வொரு line-ம், ஏன் flag ஆச்சு / ஆகல", "mytwin.flagged": "flag", "mytwin.clean": "flag இல்ல", "mytwin.whynot": "ஏன் இது flag ஆகல?", "mytwin.why": "ஏன் இது flag ஆச்சு?", "mytwin.close": "மூடு", "mytwin.within": "T+{n}-க்குள்ள", "mytwin.beyond": "{d} நாள் · T+{n} தாண்டி", "mytwin.open": "{d} நாளா open · T+{n} முடிஞ்சது", "mytwin.minreq": "தேவை ₹{r}", "mytwin.lowest": "குறைந்தது ₹{l}",
+      "scope.h": "இந்த prototype என்ன check பண்ணும்", "scope.line": "{i} RBI customer-protection rules implement ஆயி test ஆச்சு · {l} list-ல · {m} design-ல map ஆச்சு. இது முழு RBI coverage இல்ல.", "scope.note": "Implement ஆன ஒவ்வொரு rule-ம் அதோட circular-க்கும் தேதிக்கும் link ஆகும். Map மட்டும் ஆன rules எப்பவும் apply ஆகாது.",
+      "valid.h": "System validation", "valid.lede": "Test suite-ஓட உண்மையான results — scripts/validate.py எழுதினது, கையால இல்ல.", "valid.passed": "tests pass", "valid.none": "இந்த machine-ல இன்னும் ஓடல: python scripts/validate.py", "valid.ran": "கடைசி run",
+      "ai.banner": "AI விளக்கும். Rules முடிவு பண்ணும். Evidence நிரூபிக்கும்.", "ai.lede": "ஒவ்வொரு பதிலும் உங்க account findings-லயும் rulebook-லயும் இருந்து. Assistant claim உருவாக்காது; evidence போதலைன்னா அப்படியே சொல்லும்.",
+      "priv.h": "Privacy centre", "priv.what": "என்ன சேகரிக்கிறோம்", "priv.what.d": "நீங்க upload பண்ற statement-ஓட transaction lines மட்டும் (தேதி, narration, debit, credit, balance), உங்க பதில்கள். File-ஐ வெச்சுக்கறது இல்ல.", "priv.why": "ஏன்", "priv.why.d": "உங்க account state-ல RBI rules ஓட்டவும், நீங்க விரும்பினா complaint-க்கு evidence pack தயார் பண்ணவும்.", "priv.keep": "எவ்வளவு நாள்", "priv.keep.d": "நீங்க அழிக்கற வரை. எல்லாம் இந்த machine-ல ஒரே local database-ல; எங்களுக்கு எதுவும் upload ஆகாது.", "priv.who": "யார் பாக்கலாம்", "priv.who.d": "நீங்க. காப்பாளர் தொகை, rule, ஒரு button மட்டும் பாப்பாங்க — balance, செலவு இல்ல. இந்த software எந்த bank-ஐயும் தொடர்பு கொள்ளாது.", "priv.delete": "என் data-ஐ அழி", "priv.deleted": "இந்த account-ஓட data எல்லாம் அழிச்சாச்சு.", "priv.never": "எப்பவும் கேக்க மாட்டோம்", "priv.controls": "இந்த build-ல இருக்கற controls",
+      "guard.flow": "Customer → சம்மதம் → காப்பாளர் → Review → Approve", "guard.status": "காப்பாளர் status", "guard.none": "காப்பாளர் இல்ல", "guard.scope": "என்ன பாக்கலாம்", "guard.scope.d": "தொகை · rule reference · ஒரு approve button. எப்பவும் இல்ல: balance, சம்பளம், செலவு, மத்த transactions.", "guard.consent": "சம்மதம்", "guard.revoke": "Access-ஐ நீக்கு", "guard.revoked": "காப்பாளர் access நீக்கியாச்சு.", "guard.audit": "Audit history",
+      "case.ready": "CASE READY", "case.pack": "Evidence pack (print / PDF)", "case.inside": "Pack-ல: case ID · ஒவ்வொரு item-க்கும் தேதி, தொகை, RBI rule, தேதி வரம்பு · கணக்கு · statement lines Annexure A-ஆ · கேக்கற தீர்வு · 30 நாள் clock.",
       "home.multi": "ஒரே account-ஓட பல மாசம் / quarter statement-களை ஒரே நேரத்துல select பண்ணலாம்.",
       "home.current": "Open-ல இருக்கற account: {a}", "home.addto": "இதுக்கு இன்னொரு statement சேர்", "home.new": "இந்த form புது account-ஐ ஆரம்பிக்கும்.",
       "st.h": "Statements", "st.lede": "இந்த account-ஓட எல்லா statement-ம். Rules முழு history மேல ஓடும் — June penalty May balance வெச்சு பாக்கப்படும்.",
       "st.add": "இன்னொரு statement சேர்", "st.added": "+{n} புது lines · {d} duplicate தவிர்த்தாச்சு", "st.lines": "{n} lines", "st.new": "{n} புதுசு", "st.dup": "{n} duplicate", "st.remove": "நீக்கு", "st.covers": "இருக்கறது: {a} → {b}", "st.gap": "இடைவெளி: {a} → {b} — அந்த statement-ஐயும் upload பண்ணுங்க",
       "hist.h": "History", "hist.lede": "இந்த device-ல scan பண்ண எல்லா account-ம் — என்ன கிடைச்சது, என்ன திரும்ப வந்தது. விட்ட இடத்துல இருந்து தொடர ஒண்ணை open பண்ணுங்க.", "hist.none": "இன்னும் எதுவும் scan பண்ணல.",
       "hist.open": "Open", "hist.current": "இப்போ open", "hist.found": "கிடைச்சது", "hist.recovered": "திரும்ப வந்தது", "hist.stmts": "{n} statement", "hist.cases": "{n} case", "hist.opencases": "{n} open",
-      "case.print": "Complaint print", "case.printomb": "Ombudsman draft print", "case.printhint": "A4 letter + Annexure A — 2 copy எடுத்து branch-க்கு போங்க, ஒண்ணுல seal வாங்குங்க.",
+      "case.print": "Evidence pack (print / PDF)", "case.printomb": "Ombudsman draft print", "case.printhint": "A4 letter + Annexure A — 2 copy எடுத்து branch-க்கு போங்க, ஒண்ணுல seal வாங்குங்க.",
       "time.h": "Bank தாமதிக்கற ஒவ்வொரு நாளும்", "time.lede": "தேதியை இழுங்க. Reverse ஆகாத failed transaction-க்கு RBI/2019-20/67 படி நாளுக்கு ₹100 சேரும் — twin அந்த நாளுக்கு எல்லா claim-ஐயும் மறுபடி கணக்கிடும்.", "time.asof": "இந்த தேதி வரை", "time.today": "இன்று",
       "twin.h": "Twin", "twin.open": "Twin-ஐ பாரு", "twin.actual": "நடந்தது · ACTUAL", "twin.expected": "நடந்திருக்க வேண்டியது · EXPECTED", "twin.delta": "வித்தியாசம் · DELTA", "twin.claim": "POTENTIAL CLAIM", "twin.replay": "மறுபடி", "twin.back": "Findings-க்கு",
       "twin.debited": "debit · fail", "twin.due": "reversal due (T+{n})", "twin.perday": "இங்கிருந்து நாளுக்கு ₹{p}", "twin.reversed": "reverse ஆச்சு", "twin.noreversal": "{d} வரை reversal இல்ல", "twin.comp0": "compensation வந்தது: ₹0", "twin.late": "{n} நாள் late", "twin.day": "நாள் {n}",
@@ -82,15 +112,15 @@
       "home.drop": "Statement-ஐ இங்க போடுங்க — PDF, CSV அல்லது passbook photo", "home.or": "அல்லது sample-ஐ பாருங்க",
       "home.bank": "Bank", "home.type": "Account வகை", "home.city": "ஊர்", "home.minbal": "Bank கேக்கற minimum balance (₹)", "home.name": "உங்க பேர்", "home.scan": "என் account-ஐ check பண்ணு",
       "home.privacy": "இந்த server-ல process ஆகும்; transactions மட்டும் சேமிக்கப்படும்; எப்போ வேணா அழிக்கலாம். Net-banking password, PIN எப்பவும் கேக்க மாட்டோம்.",
-      "found.h": "கிடைச்சது", "found.sub": "{n} items bank உங்களுக்கு தர வேண்டியிருக்கலாம்", "found.unclear": "{n}-க்கு உங்க ஒரு பதில் வேணும்", "found.avoid": "{n}-ஐ அடுத்த முறை தடுக்கலாம்",
+      "found.h": "திரும்ப வரலாம்", "found.sub": "{n} potential claim — statement-ல ஆதாரம் இருக்கு", "found.unclear": "{n}-க்கு உங்க ஒரு பதில் வேணும்", "found.avoid": "{n}-ஐ அடுத்த முறை தடுக்கலாம்",
       "found.charges": "இந்த காலத்துல bank charges: {a}", "found.none": "எல்லாம் சரியா இருக்கு. எதுவும் பண்ண வேண்டாம்.", "found.watch": "நாங்க பாத்துட்டே இருப்போம்.",
       "found.getback": "திரும்ப வாங்கு", "found.effort": "உங்க வேலை: சுமார் 2 நிமிஷம்",
       "sec.now": "இப்பவே கேக்கலாம்", "sec.ask": "உங்க ஒரு பதில் போதும்", "sec.combine": "சின்னது — சேர்த்து ஒரே complaint", "sec.skip": "ரொம்ப சின்னது — நாங்க பாத்துக்கறோம்", "sec.prevent": "சரி தான் — ஆனா அடுத்ததை தடுக்கலாம்",
-      "why": "ஏன்-னு பாருங்க", "hide": "மூடு", "expected": "நடந்திருக்க வேண்டியது", "actual": "நடந்தது", "calc": "கணக்கு", "rule": "உங்க உரிமை", "source": "RBI source", "confidence": "நம்பகம்", "evidence": "Statement lines",
+      "why": "Evidence chain", "hide": "மூடு", "expected": "நடந்திருக்க வேண்டியது", "actual": "நடந்தது", "calc": "கணக்கு", "rule": "உங்க உரிமை", "source": "RBI source", "confidence": "நம்பகம்", "evidence": "Statement lines",
       "prevent": "அடுத்ததை தடுக்க", "answer": "பதில்:", "yes": "ஆமா", "no": "இல்ல", "not_sure": "தெரியல",
       "case.h": "உங்க case", "case.prepared": "Complaint தயார். இன்னும் எதுவும் அனுப்பல.", "case.guardian": "என் காப்பாளரை கேளு", "case.send": "நானே அனுப்பறேன்", "case.preview": "Complaint-ஐ படி",
       "case.callh": "அம்மா phone அடிக்குது", "case.play": "Call-ஐ கேளு", "case.stop": "நிறுத்து", "case.press1": "1 அழுத்து — {g}-ஐ கூப்பிடு", "case.press2": "2 அழுத்து — இப்போ வேண்டாம்",
-      "case.wa": "{g}-க்கு WhatsApp", "case.approve": "{g}-ஆ OK சொல்லு", "case.sent": "Bank-க்கு அனுப்பியாச்சு. 30 நாள் clock-ஐ பாத்துக்கறோம்.", "case.days": "Bank பதில் சொல்ல {d} நாள் இருக்கு",
+      "case.wa": "{g}-க்கு WhatsApp", "case.approve": "{g}-ஆ OK சொல்லு", "case.sent": "OK ஆச்சு. Evidence pack தயார் — இந்த app அனுப்பாது. 30 நாள் clock-ஐ பாத்துக்கறோம்.", "case.days": "Bank பதில் சொல்ல {d} நாள் இருக்கு",
       "case.bankreplied": "Bank பதில் சொல்லிடுச்சு", "case.recovered": "பணம் வந்துடுச்சு", "case.bankright": "Bank சரி-ன்னு காட்டிடுச்சு", "case.escalate": "RBI Ombudsman-க்கு", "case.check": "அடுத்த statement-ல refund-ஐ check பண்ணு",
       "case.download": "Complaint text", "case.omb": "Ombudsman draft", "case.timeline": "இதுவரை நடந்தது",
       "cases.h": "Cases", "cases.none": "இன்னும் case இல்ல. எதாவது கிடைச்சா 'திரும்ப வாங்கு' case உருவாக்கும்.",
@@ -101,10 +131,10 @@
       "s.delete": "என் data எல்லாத்தையும் அழி", "s.deleted": "அழிச்சாச்சு.", "s.basic": "Zero-charge Basic account-க்கு மாத்த letter",
       "noacct": "முதல்ல statement-ஐ scan பண்ணுங்க.", "err": "ஏதோ தப்பு: ",
       "priority.RECOVER_NOW": "இப்பவே", "priority.COMBINE": "சேர்த்து", "priority.NOT_WORTH_IT": "பாத்துக்கறோம்", "priority.PREVENT": "தடுக்கலாம்",
-      "label.RECOVERABLE": "Rule மீறல் · திரும்ப வாங்கலாம்", "label.AVOIDABLE": "சரி · தடுக்கலாம்", "label.UNCLEAR": "ஒரு பதில் வேணும்",
+      "label.RECOVERABLE": "Potential claim · rule மீறல்", "label.AVOIDABLE": "சரி · தடுக்கலாம்", "label.UNCLEAR": "ஒரு பதில் வேணும்",
       "conf.CONFIRMED": "உறுதி", "conf.NEEDS_CHECKING": "Check பண்ணணும்", "conf.INFO": "தகவல்",
       "suspicious": "இது fail ஆயி மறுபடி பண்ண payment மாதிரி இருக்கு. Fail ஆச்சா?",
-      "state": { FOUND: "கண்டுபிடிச்சது", PREPARED: "தயார்", AWAITING_APPROVAL: "OK-க்கு காத்திருக்கு", SENT_TO_BANK: "Bank-க்கு போச்சு", BANK_REPLIED: "Bank பதில்", DEADLINE_PASSED: "Deadline முடிஞ்சது", ESCALATED_OMBUDSMAN: "Ombudsman", RECOVERED: "வந்துடுச்சு", CLOSED_BANK_RIGHT: "Bank சரி", CLOSED_BY_USER: "மூடியது" },
+      "state": { FOUND: "கண்டுபிடிச்சது", PREPARED: "தயார்", AWAITING_APPROVAL: "OK-க்கு காத்திருக்கு", SENT_TO_BANK: "Submit பண்ண தயார்", BANK_REPLIED: "Bank பதில்", DEADLINE_PASSED: "Deadline முடிஞ்சது", ESCALATED_OMBUDSMAN: "Ombudsman", RECOVERED: "வந்துடுச்சு", CLOSED_BANK_RIGHT: "Bank சரி", CLOSED_BY_USER: "மூடியது" },
     },
   };
   const S = window.__VR = { lang: localStorage.getItem("vr.lang") || "ta", accountId: localStorage.getItem("vr.account") || null, data: null, cases: [], openWhy: new Set(), chat: [] };
@@ -171,13 +201,16 @@
   async function screenHome() {
     const samples = S.samples = await api("/samples").catch(() => []);
     const lang = S.lang;
+    const dash = S.data ? await dashboard() : "";
     return `
     <div class="stack">
-      <section class="card dark">
+      ${dash || `<section class="card dark">
         <div class="eyebrow">Vasool Scan</div>
         <h1 style="margin-top:8px">${esc(t("home.h1"))}</h1>
         <p style="margin-top:12px;max-width:62ch;color:#DCE8E0">${esc(t("home.lede"))}</p>
-      </section>
+      </section>`}
+      ${S.data ? `<div class="section-title"><h2>${esc(t("dash.scan.more"))}</h2></div>` : ""}
+      <div id="scanprogress" hidden></div>
       <form id="scanform" class="card stack">
         <label class="drop" id="drop">
           <input type="file" id="file" name="file" multiple accept=".csv,.tsv,.txt,.pdf,.xlsx,.jpg,.jpeg,.png,.webp">
@@ -202,8 +235,88 @@
           <button class="btn primary" type="submit" id="scanbtn">${esc(t("home.scan"))}</button>
         </div>
       </form>
-      ${S.accountId && S.data ? `<section class="card soft row" style="justify-content:space-between"><div><div class="eyebrow">${esc(t("home.current", { a: acctLabel(S.data) }))}</div><div class="muted" style="font-size:.9rem">${esc(t("home.new"))}</div></div><div class="row"><a class="btn" href="#/findings">↩ ${esc(t("nav.findings"))}</a><a class="btn gold" href="#/findings#statements">${esc(t("home.addto"))}</a><a class="btn ghost" href="#/history">${esc(t("nav.history"))}</a></div></section>` : ""}
+      ${S.accountId && S.data ? `<section class="card soft row" style="justify-content:space-between"><div><div class="eyebrow">${esc(t("home.current", { a: acctLabel(S.data) }))}</div><div class="muted" style="font-size:.9rem">${esc(t("home.new"))}</div></div><div class="row"><a class="btn" href="#/findings">↩ ${esc(t("nav.findings"))}</a><a class="btn gold" href="#/findings#statements">${esc(t("home.addto"))}</a></div></section>` : ""}
+      ${await accountsList()}
     </div>`;
+  }
+
+  // ---- dashboard (home, once an account is open) --------------------------------
+  const isDemo = (d) => (d.statements || []).some((x) => /^(canara|sbi|hdfc|indianbank|passbook)/.test(x.filename || ""));
+  async function dashboard() {
+    const d = S.data, s = d.summary, F = d.findings;
+    let tw = null; try { tw = S.twin = await api(`/accounts/${S.accountId}/twin`); } catch { }
+    const c = tw?.counts || {};
+    const rec = F.filter((f) => f.label === "RECOVERABLE"), action = rec.filter((f) => f.priority === "RECOVER_NOW" || f.priority === "COMBINE"), unc = F.filter((f) => f.label === "UNCLEAR"), info = F.filter((f) => f.label === "AVOIDABLE" || (f.label === "RECOVERABLE" && f.priority === "NOT_WORTH_IT"));
+    const last = (d.statements || []).map((x) => x.uploaded_at || "").sort().pop() || "";
+    const tile = (k, v) => `<div class="tile"><div class="eyebrow">${esc(t(k))}</div><div class="v">${v}</div></div>`;
+    return `
+      <section class="card dark">
+        <div class="eyebrow">${esc(t("dash.q"))}</div>
+        <div class="row" style="align-items:flex-end;gap:28px;margin-top:8px">
+          <div><div class="hero-amount" style="font-size:clamp(2.2rem,7vw,3.6rem)">${inr(s.total_recoverable)}</div><div class="eyebrow" style="color:var(--mint)">${esc(t("dash.potential"))}</div></div>
+          <div class="stack" style="gap:4px;color:#DCE8E0">
+            <div><b>${esc(t("dash.findings", { n: F.length }))}</b></div>
+            <div>🔴 ${esc(t("dash.action", { n: action.length }))}</div>
+            <div>🟡 ${esc(t("dash.confirm", { n: unc.length }))}</div>
+            <div>🟢 ${esc(t("dash.info", { n: info.length }))}</div>
+          </div>
+        </div>
+        <p class="muted" style="color:#9DB8A8;margin:10px 0 0;max-width:70ch;font-size:.9rem">${esc(t("dash.honest"))}</p>
+        <div class="row" style="margin-top:12px"><a class="btn gold" href="#/findings" style="font-size:1.05rem;padding:12px 22px">${esc(t("dash.review"))} →</a><a class="btn" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.4)" href="#/twin">${esc(t("dash.twin"))}</a></div>
+        ${isDemo(d) ? `<div class="demo-tag">${esc(t("dash.demo"))}</div>` : ""}
+      </section>
+      <section class="card">
+        <div class="section-title" style="margin-top:0"><h2>${esc(t("dash.overview"))}</h2><span class="count">${esc(acctLabel(d))}</span></div>
+        <div class="tiles">
+          ${tile("dash.period", `<span class="mono" style="font-size:.95rem">${esc(s.period.from)} → ${esc(s.period.to)}</span>`)}
+          ${tile("dash.txns", c.transactions ?? s.transactions)}
+          ${tile("dash.charges", c.charges ?? "—")}
+          ${tile("dash.reversals", c.pairs != null ? `${c.pairs} <span class="muted" style="font-size:.8rem">+${c.unreversed_failed} open</span>` : "—")}
+          ${tile("dash.rules", c.rules_evaluated ?? "—")}
+          ${tile("dash.months", c.months ?? "—")}
+          ${tile("dash.last", `<span class="mono" style="font-size:.9rem">${esc(last.slice(0, 16).replace("T", " ") || "—")}</span>`)}
+        </div>
+      </section>`;
+  }
+  async function accountsList() {
+    const accts = await api("/accounts").catch(() => []);
+    if (!accts.length) return "";
+    return `<div class="section-title"><h2>${esc(t("dash.accounts"))}</h2><span class="count">${accts.length}</span></div>` + accts.map((a) => { const cur = a.id === S.accountId; const p = a.profile || {}; return `
+      <article class="card ${cur ? "soft" : ""}" data-id="${esc(a.id)}">
+        <div class="row" style="justify-content:space-between;align-items:flex-start">
+          <div>
+            <div class="pillrow">${cur ? `<span class="chip green">${esc(t("hist.current"))}</span>` : ""}<span class="chip grey mono">${esc(a.id)}</span><span class="chip grey">${esc(t("hist.stmts", { n: a.statements }))}</span>${a.cases ? `<span class="chip ${a.open_cases ? "amb" : "grey"}">${esc(t("hist.cases", { n: a.cases }))}</span>` : ""}</div>
+            <h3 style="margin-top:6px">${esc(p.bank || "?")}${p.account_last4 ? " ····" + esc(p.account_last4) : ""}${p.holder_name ? " · " + esc(p.holder_name) : ""}</h3>
+            <div class="muted mono" style="font-size:.8rem">${esc(a.period.from || "")} → ${esc(a.period.to || "")} · ${a.transactions} lines</div>
+          </div>
+          <div style="text-align:right">
+            <div class="display" style="font-size:1.4rem;color:var(--green);font-family:var(--head);font-weight:700">${inr(a.total_recoverable)} <span class="muted" style="font-size:.75rem;font-weight:400">${esc(t("hist.found"))}</span></div>
+            <div class="row" style="justify-content:flex-end;margin-top:6px"><button class="btn sm ${cur ? "" : "primary"} h-open" data-id="${esc(a.id)}">${esc(cur ? t("nav.findings") : t("hist.open"))} →</button><button class="btn sm ghost h-del" data-id="${esc(a.id)}" style="color:var(--red)">✕</button></div>
+          </div>
+        </div>
+      </article>`; }).join("");
+  }
+
+  // ---- the scan experience: a real timeline, real numbers, no fake statistics -------------
+  async function runScanExperience(request) {
+    const box = $("#scanprogress"), form = $("#scanform");
+    const steps = [1, 2, 3, 4, 5, 6];
+    box.hidden = false; form.hidden = true;
+    box.innerHTML = `<section class="card scanning"><div class="eyebrow">${esc(t("scan.h"))}</div><ol class="steps">${steps.map((i) => `<li id="step${i}"><span class="dot"></span><div><b>${esc(t("scan." + i))}</b><small id="step${i}d"></small></div></li>`).join("")}</ol><div id="scandone" hidden><div class="done-h">${esc(t("scan.done"))}</div><a class="btn gold" href="#/findings" id="scanopen">${esc(t("scan.open"))} →</a></div></section>`;
+    window.scrollTo({ top: box.offsetTop - 80, behavior: "smooth" });
+    let i = 0; const tick = () => { if (i < 4) { $(`#step${i + 1}`).classList.add("run"); i++; } };
+    tick(); const timer = setInterval(tick, 420);
+    let d, tw;
+    try { d = await request(); } catch (e) { clearInterval(timer); box.hidden = true; form.hidden = false; throw e; }
+    S.accountId = d.account_id; localStorage.setItem("vr.account", d.account_id); S.data = d; S.cases = d.cases || [];
+    try { tw = S.twin = await api(`/accounts/${d.account_id}/twin`); } catch { tw = { counts: {} }; }
+    clearInterval(timer);
+    const c = tw.counts || {};
+    const detail = { 1: t("scan.1d", { n: c.transactions ?? d.transactions.length }), 2: t("scan.2d", { n: c.months ?? "?", b: (tw.balance_path || []).length }), 3: t("scan.3d", { p: c.pairs ?? 0, u: c.unreversed_failed ?? 0 }), 4: t("scan.4d", { n: c.rules_evaluated ?? "?" }), 5: t("scan.5d"), 6: t("scan.6d", { n: d.findings.length, f: c.flagged_lines ?? "?", u: c.unflagged_lines ?? "?" }) };
+    for (const k of steps) { await new Promise((r) => setTimeout(r, 260)); const li = $(`#step${k}`); li.classList.remove("run"); li.classList.add("ok"); $(`#step${k}d`).textContent = detail[k]; }
+    $("#scandone").hidden = false;
+    setTimeout(() => { if (location.hash === "#/" || location.hash === "") location.hash = "#/findings"; }, 1600);
+    return d;
   }
   const acctLabel = (d) => `${d.profile?.bank || d.summary?.bank || ""}${d.profile?.account_last4 ? " ····" + d.profile.account_last4 : ""}${d.profile?.holder_name ? " · " + d.profile.holder_name : ""}`;
 
@@ -233,12 +346,11 @@
       if (f.as_of.value) fd.append("as_of", f.as_of.value);
       $("#scanbtn").disabled = true; $("#scanbtn").textContent = "Vasool Scan…";
       try {
-        const d = await api("/scan", { method: "POST", body: fd });
-        S.accountId = d.account_id; localStorage.setItem("vr.account", d.account_id); S.data = d; S.cases = d.cases || [];
+        const d = await runScanExperience(() => api("/scan", { method: "POST", body: fd }));
         if ((d.upload || []).length > 1) toast(d.upload.map((u) => `${u.filename}: +${u.new}${u.duplicates ? " · " + u.duplicates + " dup" : ""}`).join("  |  "), 5000);
-        location.hash = "#/findings";
-      } catch (err) { toast(t("err") + err.message, 5000); $("#scanbtn").disabled = false; $("#scanbtn").textContent = t("home.scan"); }
+      } catch (err) { toast(t("err") + err.message, 6000); $("#scanbtn").disabled = false; $("#scanbtn").textContent = t("home.scan"); }
     };
+    bindHistory();
   }
 
   // ---- findings ------------------------------------------------------------
@@ -277,19 +389,25 @@
     const rule = await getRule(f.rule_id);
     const byId = txnById();
     const rows = f.evidence.map((id) => byId[id]).filter(Boolean);
-    el.innerHTML = `
-      <div class="kv">
-        <b>${esc(t("expected"))}</b><span>${esc(f.expected)}</span>
-        <b>${esc(t("actual"))}</b><span>${esc(f.actual)}</span>
-        <b>${esc(t("calc"))}</b><span class="mono">${esc(f.calculation)}</span>
-        <b>${esc(t("rule"))}</b><span>${esc(S.lang === "ta" ? rule.right_ta : rule.right_en)}</span>
-        <b>${esc(t("source"))}</b><span><a href="${esc(rule.source.url)}" target="_blank" rel="noopener">${esc(rule.source.circular)}</a> · ${esc(rule.source.date)} · in force from ${esc(rule.effective_from)}${rule.effective_to ? " to " + esc(rule.effective_to) : ""}</span>
-        <b>${esc(t("confidence"))}</b><span>${esc(t("conf." + f.confidence))} · ${f.evidence.length} evidence line(s) · priority ${esc(f.priority_reasons.join(" · "))}</span>
-        ${f.prevention_en ? `<b>${esc(t("prevent"))}</b><span>${esc(S.lang === "ta" ? f.prevention_ta : f.prevention_en)}</span>` : ""}
-      </div>
-      <div class="evidence"><table><thead><tr><th>Date</th><th>Narration</th><th class="r">Debit</th><th class="r">Credit</th><th class="r">Balance</th><th>Ref</th></tr></thead><tbody>
+    const L = S.lang, right = L === "ta" ? rule.right_ta || rule.right_en : rule.right_en;
+    const step = (n, title, body, cls = "") => `<li class="${cls}"><span class="n">${n}</span><div><b>${esc(title)}</b><div>${body}</div></div></li>`;
+    const table = `<div class="evidence"><table><thead><tr><th>Date</th><th>Narration</th><th class="r">Debit</th><th class="r">Credit</th><th class="r">Balance</th><th>Ref</th></tr></thead><tbody>
         ${rows.map((r) => `<tr><td>${esc(r.date)}</td><td>${esc(r.narration)}</td><td class="r">${r.debit ? inr(r.debit) : ""}</td><td class="r">${r.credit ? inr(r.credit) : ""}</td><td class="r">${r.balance != null ? inr(r.balance) : ""}</td><td>${esc(r.ref)}</td></tr>`).join("")}
       </tbody></table></div>`;
+    const claim = f.label === "RECOVERABLE";
+    el.innerHTML = `
+      <div class="eyebrow" style="margin-bottom:6px">${esc(t("chain.h"))} · ${esc(t("chain.status." + f.confidence))}</div>
+      <ol class="chain">
+        ${step(1, t("chain.1"), esc(f.actual))}
+        ${step(2, t("chain.2"), esc(f.expected))}
+        ${step(3, t("chain.3"), esc(L === "ta" ? f.summary_ta : f.summary_en))}
+        ${step(4, t("chain.4"), `${esc(right)}${f.priority_reasons?.length ? `<div class="muted" style="font-size:.85rem;margin-top:4px">${esc(t("chain.cond"))}: ${esc(f.priority_reasons.join(" · "))}</div>` : ""}`)}
+        ${step(5, t("chain.5"), table)}
+        ${step(6, t("chain.6"), `<span class="chip grey mono">${esc(rule.id)}</span> ${esc(rule.title)}<div class="src" style="margin-top:4px"><a href="${esc(rule.source.url)}" target="_blank" rel="noopener">${esc(rule.source.circular)}</a> · ${esc(rule.source.date)} · ${esc(t("chain.inforce"))} ${esc(rule.effective_from)}${rule.effective_to ? " → " + esc(rule.effective_to) : " → present"}</div>`)}
+        ${step(7, t("chain.7"), `<span class="mono">${esc(f.calculation)}</span>`)}
+        ${step(8, claim ? t("chain.8") : t("chain.info"), `<b style="font-size:1.25rem;color:var(--green)">${f.amount ? inr(f.amount) : "—"}</b> <span class="muted">· ${esc(t("conf." + f.confidence))} · ${f.evidence.length} evidence line(s)</span>${f.prevention_en ? `<div class="muted" style="margin-top:4px">${esc(t("prevent"))}: ${esc(L === "ta" ? f.prevention_ta : f.prevention_en)}</div>` : ""}`, claim ? "claim" : "")}
+      </ol>
+      <div class="mono muted" style="font-size:.72rem;margin-top:8px">${esc(t("chain.foot"))}</div>`;
   }
 
   function screenFindings() {
@@ -311,6 +429,7 @@
         ${s.total_recoverable > 0 ? `
           <div class="hero-amount" style="margin-top:10px"><span id="hero-n" data-v="${s.total_recoverable}">${inr(s.total_recoverable)}</span> <span style="font-size:.45em">${esc(t("found.h"))}</span></div>
           <p style="margin-top:8px;color:#DCE8E0">${esc(t("found.sub", { n: rec.length }))}${unc.length ? " · " + esc(t("found.unclear", { n: unc.length })) : ""}${avo.length ? " · " + esc(t("found.avoid", { n: avo.length })) : ""}</p>
+          <p class="muted" style="color:#9DB8A8;font-size:.88rem;max-width:70ch">${esc(t("dash.honest"))}</p>
           <p class="muted" style="color:#9DB8A8">${esc(t("found.charges", { a: inr(s.total_bank_charges_in_period) }))}</p>
           <div class="row" style="margin-top:8px">
             ${openCase ? `<a class="btn gold" href="#/case/${esc(openCase.id)}">${esc(t("case.h"))} ${esc(openCase.id)} →</a>` : `<button class="btn gold" id="getback" style="font-size:1.1rem;padding:14px 24px">${esc(t("found.getback"))}</button>`}
@@ -461,7 +580,9 @@
 
       ${pre ? `
       <section class="card stack">
-        <h2>${esc(t("case.prepared"))}</h2>
+        <div class="eyebrow">${esc(t("case.ready"))}</div>
+        <h2 style="margin-top:4px">${esc(t("case.prepared"))}</h2>
+        <p class="muted" style="margin:0;font-size:.9rem">${esc(t("case.inside"))}</p>
         <div class="row">
           <button class="btn primary" id="askg">${g ? esc(t("case.guardian")) : esc(t("case.guardian"))}</button>
           <button class="btn" id="sendself">${esc(t("case.send"))}</button>
@@ -554,7 +675,7 @@
     const head = `
       <section class="card dark">
         <div class="eyebrow">${esc(t("twin.h"))} · ${esc(f.rule_id)} · ${esc(rule.source.circular)}</div>
-        <h1 style="margin-top:6px;font-size:1.6rem">${esc(t("twin.actual"))} <span style="color:var(--gold)">↔</span> ${esc(t("twin.expected"))}</h1>
+        <h1 style="margin-top:6px;font-size:1.6rem">${esc(t("twin.actual"))} <span style="color:var(--mint)">↔</span> ${esc(t("twin.expected"))}</h1>
         <p style="color:#DCE8E0;margin:6px 0 0">${esc(L === "ta" ? f.summary_ta : f.summary_en)}</p>
       </section>`;
     const chain = `<p class="muted mono" style="font-size:.78rem;margin:0">${esc(t("twin.chain"))}</p>`;
@@ -718,6 +839,7 @@
     return `
     <div class="stack">
       <h1>${esc(t("ask.h"))}</h1>
+      <section class="card soft" style="padding:12px 16px"><b>${esc(t("ai.banner"))}</b><div class="muted" style="font-size:.9rem">${esc(t("ai.lede"))}</div></section>
       <p class="muted">${esc(t("ask.hint"))}</p>
       <div class="chat" id="chat">${S.chat.map((m) => `<div class="msg ${m.me ? "me" : "bot"}">${esc(m.text)}${m.sources?.length ? `<span class="g">RBI: ${m.sources.map((s) => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title.split(" ")[0])}</a>`).join(" · ")}</span>` : ""}${m.sugg?.length ? `<span class="sugg">${m.sugg.map((x) => `<button class="btn sm ghost sug">${esc(x)}</button>`).join("")}</span>` : ""}${m.kind && m.kind !== "chat" ? `<span class="g">${esc({account: S.lang === "ta" ? "உங்க account-ல இருந்து" : "from your account", knowledge: S.lang === "ta" ? "bank rules-ல இருந்து" : "from banking rules", claim_check: S.lang === "ta" ? "rulebook-ஓட சரிபார்த்தது" : "checked against the rulebook", llm: "assistant", fallback: ""}[m.kind] || "")}</span>` : ""}</div>`).join("") || `<div class="msg bot">${esc(S.lang === "ta" ? "வணக்கம். உங்க account பத்தியோ, bank rules பத்தியோ எதுவும் கேளுங்க." : "Hello. Ask me about your account, a charge, or any banking rule.")}</div>`}</div>
       <form class="askbar" id="askform">
@@ -748,10 +870,146 @@
   async function screenRules() {
     const rules = await api("/rules");
     const cats = [...new Set(rules.map((r) => r.category))];
-    return `<div class="stack"><h1>${esc(t("rules.h"))}</h1><p class="muted">${esc(t("rules.lede"))} <a href="https://github.com/" target="_blank" rel="noopener">rulebook/rules.json</a></p>
+    const sc = await api("/scope").catch(() => null), v = await api("/validation").catch(() => null);
+    return `<div class="stack"><h1>${esc(t("rules.h"))}</h1><p class="muted">${esc(t("rules.lede"))} <a href="https://github.com/NKD9344493209/Vasool-Raja" target="_blank" rel="noopener">rulebook/rules.json</a></p>
+      ${sc ? `<section class="card warn"><div class="eyebrow">${esc(t("scope.h"))}</div><p style="margin:6px 0 4px;font-weight:600">${esc(t("scope.line", { i: sc.implemented, l: sc.listed, m: sc.mapped }))}</p><p class="muted" style="margin:0;font-size:.9rem">${esc(t("scope.note"))}</p></section>` : ""}
+      ${validationCard(v)}
       ${cats.map((c) => `<div class="section-title"><h2>${esc(c.replace("_", " "))}</h2><span class="count">${rules.filter((r) => r.category === c).length}</span></div>
         ${rules.filter((r) => r.category === c).map((r) => `<article class="card rule"><div class="pillrow"><span class="chip ${r.status === "active" ? "green" : "amb"}">${esc(r.status)}</span><span class="chip grey mono">${esc(r.id)}</span><span class="chip grey">${esc(r.compensation_type)}</span></div><h3>${esc(r.title)}</h3><p>${esc(S.lang === "ta" ? r.right_ta || r.right_en : r.right_en)}</p><div class="src"><a href="${esc(r.source.url)}" target="_blank" rel="noopener">${esc(r.source.circular)}</a> · ${esc(r.source.date)} · in force ${esc(r.effective_from)}${r.effective_to ? " → " + esc(r.effective_to) : " → present"}</div><div class="src">formula: ${esc(r.formula)}</div></article>`).join("")}`).join("")}
     </div>`;
+  }
+
+  function validationCard(v) {
+    if (!v) return "";
+    if (!v.available) return `<section class="card"><div class="eyebrow">${esc(t("valid.h"))}</div><p class="muted" style="margin:6px 0 0">${esc(t("valid.none"))}</p></section>`;
+    return `<section class="card">
+      <div class="section-title" style="margin-top:0"><h2>${esc(t("valid.h"))}</h2><span class="count">${esc(t("valid.ran"))} ${esc((v.ran_at || "").slice(0, 16).replace("T", " "))} · python ${esc(v.python || "")}</span></div>
+      <p class="muted" style="margin:0 0 10px;font-size:.9rem">${esc(t("valid.lede"))}</p>
+      <div class="row" style="align-items:flex-start;gap:24px">
+        <div><div class="display" style="font-family:var(--head);font-size:2.6rem;font-weight:700;color:${v.failed ? "var(--red)" : "var(--green)"}">${v.passed}<span class="muted" style="font-size:1rem">/${v.total}</span></div><div class="eyebrow">${esc(t("valid.passed"))}</div></div>
+        <div class="tiles" style="flex:1">${v.groups.map((g) => `<div class="tile"><div class="eyebrow" style="color:${g.failed ? "var(--red)" : "var(--green)"}">${g.failed ? "✕" : "✓"} ${esc(g.title)}</div><div class="v" style="font-size:1.1rem">${g.passed}${g.failed ? ` <span style="color:var(--red)">· ${g.failed} failed</span>` : ""}</div><small class="muted">${esc(g.what)}</small></div>`).join("")}</div>
+      </div>
+    </section>`;
+  }
+
+  // ---- My Twin (account level) ------------------------------------------------------
+  async function screenMyTwin() {
+    if (!S.data) return `<div class="empty">${esc(t("noacct"))} <a href="#/">Scan</a></div>`;
+    const tw = S.twin = await api(`/accounts/${S.accountId}/twin`);
+    const c = tw.counts, L = S.lang, d = S.data, F = d.findings;
+    const flaggedBy = {}; F.forEach((f) => f.evidence.forEach((id) => (flaggedBy[id] = flaggedBy[id] || []).push(f)));
+    const node = (label, v, sub = "") => `<div class="pnode"><div class="eyebrow">${esc(label)}</div><div class="v">${v}</div>${sub ? `<small class="muted">${sub}</small>` : ""}</div><i>→</i>`;
+    // balance chart
+    const path = tw.balance_path, W = 1000, H = 260, PAD = 56;
+    let chart = "";
+    if (path.length > 1) {
+      const vals = path.map((p) => p[1]), req = tw.min_balance_required, lo = Math.min(...vals, req ?? Infinity) * 0.95, hi = Math.max(...vals) * 1.05;
+      const X = (i) => PAD + i / (path.length - 1) * (W - 2 * PAD), Y = (v) => 24 + (1 - (v - lo) / (hi - lo || 1)) * (H - 60);
+      const pts = path.map((p, i) => `${X(i)},${Y(p[1])}`).join(" ");
+      const ticks = path.filter((_, i) => i % Math.max(1, Math.round(path.length / 8)) === 0);
+      chart = `<svg viewBox="0 0 ${W} ${H}" width="100%" class="balchart">
+        ${req != null ? `<line x1="${PAD}" x2="${W - PAD}" y1="${Y(req)}" y2="${Y(req)}" class="req"/><text x="${W - PAD}" y="${Y(req) - 6}" text-anchor="end" class="lbl gold">${esc(t("mytwin.minreq", { r: req }))}</text>` : ""}
+        <polyline points="${pts}" class="path"/>
+        ${path.map((p, i) => `<circle cx="${X(i)}" cy="${Y(p[1])}" r="3.5" class="dot ${flaggedBy[(d.transactions.find((x) => x.date === p[0] && x.balance === p[1]) || {}).id] ? "red" : "green"}"><title>${esc(p[0])} · ${inr(p[1])}</title></circle>`).join("")}
+        ${ticks.map((p) => `<text x="${X(path.indexOf(p))}" y="${H - 8}" text-anchor="middle" class="tick">${esc(p[0].slice(5))}</text>`).join("")}
+        ${Object.entries(tw.month_min_balance).map(([m, v]) => { const i = path.findIndex((p) => p[0].startsWith(m) && p[1] === v); return i < 0 ? "" : `<text x="${X(i)}" y="${Y(v) + 16}" text-anchor="middle" class="tick">${esc(t("mytwin.lowest", { l: v }))}</text>`; }).join("")}
+      </svg>`;
+    }
+    const pairRow = (p) => { const bad = p.days != null && p.tat_days != null && p.days > p.tat_days; return `<div class="row pair" style="justify-content:space-between"><div><span class="mono">${esc(p.debit.date)}</span> ${esc(p.debit.channel)} <b>${inr(p.debit.debit)}</b> <span class="muted">→</span> ${p.credits.map((x) => `<span class="mono">${esc(x.date)}</span> +${inr(x.credit)}`).join(", ")}</div><div><span class="chip ${bad ? "red" : "green"}">${bad ? esc(t("mytwin.beyond", { d: p.days, n: p.tat_days })) : esc(t("mytwin.within", { n: p.tat_days }))}</span>${p.finding_ids.map((id) => `<a class="chip amb" href="#/twin/${esc(id)}">⇄ ${esc(id)}</a>`).join("")}</div></div>`; };
+    const openRow = (u) => `<div class="row pair" style="justify-content:space-between"><div><span class="mono">${esc(u.txn.date)}</span> ${esc(u.txn.channel)} <b>${inr(u.txn.debit)}</b> <span class="muted">${esc(u.txn.narration)}</span></div><div><span class="chip red">${esc(t("mytwin.open", { d: u.days_open, n: u.tat_days }))}</span>${u.finding_ids.map((id) => `<a class="chip amb" href="#/twin/${esc(id)}">⇄ ${esc(id)}</a>`).join("")}</div></div>`;
+    const kindChip = (k) => `<span class="chip ${/CHARGE|GST|PENAL/.test(k) ? "amb" : k === "REVERSAL" ? "green" : "grey"}">${esc(k.replace(/_/g, " ").toLowerCase())}</span>`;
+    return `
+    <div class="stack">
+      <section class="card dark">
+        <div class="eyebrow">${esc(t("nav.twin"))}</div>
+        <h1 style="margin-top:6px;font-size:1.7rem">${esc(t("mytwin.h"))}</h1>
+        <p style="color:#DCE8E0;max-width:70ch">${esc(t("mytwin.lede"))}</p>
+        ${isDemo(d) ? `<div class="demo-tag">${esc(t("dash.demo"))}</div>` : ""}
+      </section>
+      <section class="card">
+        <div class="pipeline">
+          ${node("Customer", esc(d.profile.holder_name || "—"))}
+          ${node("Account", esc(d.profile.bank || "") + (d.profile.account_last4 ? " ····" + esc(d.profile.account_last4) : ""), esc(d.profile.account_type || ""))}
+          ${node("Transactions", c.transactions, `${c.debits} debit · ${c.credits} credit`)}
+          ${node("Balance history", path.length, `${c.months} month(s)`)}
+          ${node("Charges", c.charges, inr(c.charges_total))}
+          ${node("Reversals", c.pairs, `${c.unreversed_failed} unreversed`)}
+          ${node("Account state", `${tw.as_of}`, `as of · min-balance ${tw.min_balance_required != null ? inr(tw.min_balance_required) : "—"}`)}
+          ${node("Rule engine", c.rules_evaluated, "RBI rules · deterministic")}
+          <div class="pnode last"><div class="eyebrow">Findings</div><div class="v" style="color:var(--green)">${c.findings}</div><small class="muted">${c.flagged_lines} ${esc(t("mytwin.flagged"))} · ${c.unflagged_lines} ${esc(t("mytwin.clean"))}</small></div>
+        </div>
+      </section>
+      ${chart ? `<section class="card"><div class="section-title" style="margin-top:0"><h2>${esc(t("mytwin.balance"))}</h2><span class="count">${path.length} points</span></div>${chart}</section>` : ""}
+      <section class="card stack"><div class="section-title" style="margin-top:0"><h2>${esc(t("mytwin.pairs"))}</h2><span class="count">${tw.pairs.length + tw.unreversed.length}</span></div>${tw.pairs.map(pairRow).join("")}${tw.unreversed.map(openRow).join("")}${!tw.pairs.length && !tw.unreversed.length ? `<p class="muted" style="margin:0">—</p>` : ""}</section>
+      <section class="card stack"><div class="section-title" style="margin-top:0"><h2>${esc(t("mytwin.charges"))}</h2><span class="count">${tw.charges.length} · ${inr(c.charges_total)}</span></div>${tw.charges.map((x) => `<div class="row pair" style="justify-content:space-between"><div><span class="mono">${esc(x.date)}</span> ${kindChip(x.kind)} <span class="muted">${esc(x.narration)}</span></div><div><b>${inr(x.debit)}</b> ${x.finding_ids.length ? `<span class="chip red">${esc(t("mytwin.flagged"))}</span>` : `<span class="chip green">${esc(t("mytwin.clean"))}</span>`}</div></div>`).join("")}</section>
+      <section class="card">
+        <div class="section-title" style="margin-top:0"><h2>${esc(t("mytwin.lines"))}</h2><span class="count">${d.transactions.length}</span></div>
+        <div class="evidence"><table><thead><tr><th>Date</th><th>Narration</th><th></th><th class="r">Debit</th><th class="r">Credit</th><th class="r">Balance</th><th></th></tr></thead><tbody>
+          ${d.transactions.map((r) => { const fl = flaggedBy[r.id]; return `<tr class="${fl ? "flag" : ""}"><td>${esc(r.date)}</td><td style="white-space:normal;max-width:360px">${esc(r.narration)}</td><td>${kindChip(r.kind)}</td><td class="r">${r.debit ? inr(r.debit) : ""}</td><td class="r">${r.credit ? inr(r.credit) : ""}</td><td class="r">${r.balance != null ? inr(r.balance) : ""}</td><td><button class="btn sm ${fl ? "ghost" : ""} whynot" data-id="${esc(r.id)}">${fl ? "🔴 " + esc(t("mytwin.why")) : esc(t("mytwin.whynot"))}</button></td></tr><tr class="whyrow" id="why-${esc(r.id)}" hidden><td colspan="7"></td></tr>`; }).join("")}
+        </tbody></table></div>
+      </section>
+    </div>`;
+  }
+  function bindMyTwin() {
+    $$(".whynot").forEach((b) => (b.onclick = async () => {
+      const row = $(`#why-${b.dataset.id}`), cell = row.firstElementChild;
+      if (!row.hidden) { row.hidden = true; return; }
+      cell.innerHTML = `<span class="muted">…</span>`; row.hidden = false;
+      try {
+        const w = await api(`/accounts/${S.accountId}/transactions/${b.dataset.id}/why-not`);
+        cell.innerHTML = `<div class="whybox"><ul class="checks">${w.checks.map((c) => `<li class="${c.ok ? "ok" : "no"}">${c.ok ? "✓" : "✕"} ${esc(S.lang === "ta" ? c.text_ta : c.text_en)}</li>`).join("")}</ul><div class="row" style="justify-content:space-between"><b>${esc(S.lang === "ta" ? w.result_ta : w.result_en)}</b>${w.finding_ids.map((id) => `<a class="btn sm gold" href="#/twin/${esc(id)}">⇄ ${esc(id)}</a>`).join("")}</div></div>`;
+      } catch (e) { cell.innerHTML = `<span class="muted">${esc(t("err"))}${esc(e.message)}</span>`; }
+    }));
+  }
+
+  // ---- Guardian screen ------------------------------------------------------------------
+  async function screenGuardian() {
+    const g = S.data?.guardian;
+    const audit = S.data ? await api(`/accounts/${S.accountId}/audit`).catch(() => []) : [];
+    const gaudit = (Array.isArray(audit) ? audit : []).filter((a) => /guardian|approval|request_approval/.test(a.action || "")).slice(0, 8);
+    return `<div class="stack"><h1>${esc(t("g.h"))}</h1><p class="muted">${esc(t("g.lede"))}</p>
+      <section class="card"><div class="flowline">${t("guard.flow").split(" → ").map((x, i, a) => `<span class="${g ? "done" : i === 0 ? "on" : ""}">${esc(x)}</span>${i < a.length - 1 ? "<i>→</i>" : ""}`).join("")}</div></section>
+      <section class="grid2">
+        <div class="card"><div class="eyebrow">${esc(t("guard.status"))}</div><div style="margin-top:6px">${g ? `<b>${esc(g.name)}</b> · ${esc(g.relation)} · ${esc(g.phone)}${g.email ? " · " + esc(g.email) : ""}<div style="margin-top:6px"><span class="chip green">${esc(t("guard.consent"))} ${g.consent_recorded_at ? esc(g.consent_recorded_at.slice(0, 10)) : "—"}</span></div>` : `<span class="muted">${esc(t("guard.none"))}</span>`}</div>${g ? `<div style="margin-top:10px"><button class="btn sm" id="revoke" style="color:var(--red)">${esc(t("guard.revoke"))}</button></div>` : ""}</div>
+        <div class="card"><div class="eyebrow">${esc(t("guard.scope"))}</div><p style="margin:6px 0 0">${esc(t("guard.scope.d"))}</p></div>
+      </section>
+      <section class="card stack">
+        ${S.data ? `<form id="gform" class="grid2">
+          <label class="field">${esc(t("g.name"))}<input name="name" value="${esc(g?.name || "")}" placeholder="Kumar"></label>
+          <label class="field">${esc(t("g.rel"))}<select name="relation">${["son", "daughter", "husband", "wife", "trusted person"].map((r) => `<option ${g?.relation === r ? "selected" : ""}>${r}</option>`).join("")}</select></label>
+          <label class="field">${esc(t("g.phone"))}<input name="phone" value="${esc(g?.phone || "")}" placeholder="+91 98765 43210"></label>
+          <label class="field">${esc(t("g.email"))}<input name="email" type="email" value="${esc(g?.email || "")}" placeholder="kumar@gmail.com"></label>
+          <label class="field">Language<select name="language"><option value="ta" ${g?.language !== "en" ? "selected" : ""}>தமிழ்</option><option value="en" ${g?.language === "en" ? "selected" : ""}>English</option></select></label>
+          <label class="field" style="grid-column:1/-1">${esc(t("g.consent"))}<textarea name="consent" style="min-height:70px;font-family:var(--body)" placeholder="En account-la edhavadhu thappa nadandha, en payyan Kumar-ku solunga.">${esc(g?.consent_note || "")}</textarea></label>
+          <div><button class="btn primary" type="submit">${esc(t("g.save"))}</button></div>
+        </form>` : `<p class="muted">${esc(t("noacct"))}</p>`}
+      </section>
+      ${gaudit.length ? `<section class="card"><div class="eyebrow">${esc(t("guard.audit"))}</div><div class="timeline" style="margin-top:6px">${gaudit.map((a) => `<div class="ev"><span class="t">${esc((a.at || "").replace("T", " ").slice(0, 16))}</span><span><b>${esc(a.action)}</b> — ${esc(a.detail || "")}</span></div>`).join("")}</div></section>` : ""}
+    </div>`;
+  }
+  function bindGuardian() {
+    const f = $("#gform");
+    if (f) f.onsubmit = async (e) => { e.preventDefault(); const el = f.elements; try { await post(`/accounts/${S.accountId}/guardian`, { name: el.name.value, relation: el.relation.value, phone: el.phone.value, email: el.email.value, language: el.language.value, consent_transcript: el.consent.value }); await loadAccount(); toast("✓"); route(); } catch (err) { toast(t("err") + err.message); } };
+    const r = $("#revoke");
+    if (r) r.onclick = async () => { if (!confirm(t("guard.revoke") + "?")) return; try { await api(`/accounts/${S.accountId}/guardian`, { method: "DELETE" }); await loadAccount(); toast(t("guard.revoked")); route(); } catch (e) { toast(t("err") + e.message); } };
+  }
+
+  // ---- Privacy centre --------------------------------------------------------------------
+  function screenPrivacy() {
+    const L = S.lang;
+    const controls = L === "ta" ? ["Upload: PDF / CSV / XLSX / படம் மட்டும், 15 MB வரை", "Statement file சேமிக்கப்படாது — transaction lines மட்டும்", "Local SQLite database; எங்க server-க்கு எதுவும் போகாது", "Secrets .env-ல மட்டும்; code-ல key இல்ல", "VASOOL_DEMO_TO / VASOOL_DEMO_PHONE: எல்லா mail / call-ம் ஒரே safe address-க்கு", "எந்த bank-க்கும் email / call இல்ல — design-ல hard-coded", "Security headers: nosniff, no framing, no referrer, API no-store", "ஒவ்வொரு மாற்றமும் audit log-ல", "ஒரே button-ல எல்லா data-ஐயும் அழிக்கலாம்"]
+      : ["Uploads: PDF / CSV / XLSX / image only, 15 MB limit, checked server-side", "The statement file is never stored — only its transaction lines", "One local SQLite database on this machine; nothing is sent to us", "Secrets live only in .env; no keys in code or logs", "VASOOL_DEMO_TO / VASOOL_DEMO_PHONE redirect every mail and call to one safe address", "No bank is ever emailed or called — hard-coded, not configurable", "Security headers on every response: nosniff, no framing, no referrer, API responses never cached", "Every state change is written to the audit log", "One button deletes everything for the account"];
+    const item = (k) => `<div class="card"><div class="eyebrow">${esc(t(k))}</div><p style="margin:6px 0 0">${esc(t(k + ".d"))}</p></div>`;
+    return `<div class="stack"><h1>${esc(t("priv.h"))}</h1><p class="muted">${esc(t("foot.privacy"))}</p>
+      <section class="grid2" style="grid-template-columns:repeat(2,minmax(0,1fr))">${item("priv.what")}${item("priv.why")}${item("priv.keep")}${item("priv.who")}</section>
+      <section class="card"><div class="eyebrow">${esc(t("priv.never"))}</div><div class="row" style="margin-top:8px">${["net-banking password", "OTP", "ATM PIN", "CVV", "Aadhaar / PAN"].map((x) => `<span class="chip green">✓ ${esc(L === "ta" ? x : x)} — ${esc(L === "ta" ? "கேக்க மாட்டோம்" : "never")}</span>`).join("")}</div></section>
+      <section class="card"><div class="eyebrow">${esc(t("priv.controls"))}</div><ul class="checks" style="margin-top:8px">${controls.map((x) => `<li class="ok">✓ ${esc(x)}</li>`).join("")}</ul></section>
+      ${S.data ? `<section class="card row" style="justify-content:space-between"><div><b>${esc(acctLabel(S.data))}</b><div class="muted" style="font-size:.85rem">${esc(S.accountId)}</div></div><div class="row"><a class="btn sm" href="/api/accounts/${esc(S.accountId)}/audit" target="_blank">${esc(t("guard.audit"))}</a><button class="btn sm" id="delete" style="color:var(--red)">${esc(t("priv.delete"))}</button></div></section>` : ""}
+    </div>`;
+  }
+  function bindPrivacy() {
+    const d = $("#delete");
+    if (d) d.onclick = async () => { if (!confirm(t("priv.delete") + "?")) return; await api(`/accounts/${S.accountId}`, { method: "DELETE" }); S.accountId = null; S.data = null; S.cases = []; localStorage.removeItem("vr.account"); toast(t("priv.deleted")); location.hash = "#/"; };
   }
 
   // ---- settings ------------------------------------------------------------
@@ -768,19 +1026,9 @@
         ${n.demo_phone ? `<p class="muted" style="margin:0">🔒 ${esc(t("n.demo.phone", { to: n.demo_phone }))}</p>` : ""}
         ${n.voice ? `<div class="row"><input id="testcallto" placeholder="${esc(n.demo_phone || "+91 98765 43210")}" style="max-width:280px"><button class="btn sm" id="testcall">${esc(t("n.testcall"))}</button></div>` : ""}
       </section>
-      <section class="card stack"><h2>${esc(t("g.h"))}</h2><p class="muted">${esc(t("g.lede"))}</p>
-        ${S.data ? `<form id="gform" class="grid2">
-          <label class="field">${esc(t("g.name"))}<input name="name" value="${esc(g?.name || "")}" placeholder="Kumar"></label>
-          <label class="field">${esc(t("g.rel"))}<select name="relation">${["son", "daughter", "husband", "wife", "trusted person"].map((r) => `<option ${g?.relation === r ? "selected" : ""}>${r}</option>`).join("")}</select></label>
-          <label class="field">${esc(t("g.phone"))}<input name="phone" value="${esc(g?.phone || "")}" placeholder="+91 98765 43210"></label>
-          <label class="field">${esc(t("g.email"))}<input name="email" type="email" value="${esc(g?.email || "")}" placeholder="kumar@gmail.com"></label>
-          <label class="field">Language<select name="language"><option value="ta" ${g?.language !== "en" ? "selected" : ""}>தமிழ்</option><option value="en" ${g?.language === "en" ? "selected" : ""}>English</option></select></label>
-          <label class="field" style="grid-column:1/-1">${esc(t("g.consent"))}<textarea name="consent" style="min-height:70px;font-family:var(--body)" placeholder="En account-la edhavadhu thappa nadandha, en payyan Kumar-ku solunga.">${esc(g?.consent_note || "")}</textarea></label>
-          <div><button class="btn primary" type="submit">${esc(t("g.save"))}</button> ${g?.consent_recorded_at ? `<span class="chip green">consent ${esc(g.consent_recorded_at.slice(0, 10))}</span>` : ""}</div>
-        </form>` : `<p class="muted">${esc(t("noacct"))}</p>`}
-      </section>
+      <section class="card"><div class="eyebrow">${esc(t("g.h"))}</div><p style="margin:6px 0 0"><a href="#/guardian">${esc(t("nav.guardian"))} →</a> · <a href="#/privacy">${esc(t("priv.h"))} →</a></p></section>
       ${S.data ? `<section class="card stack"><h2>Basic account</h2><p class="muted">${esc(S.lang === "ta" ? "Minimum balance இல்லாத, charge இல்லாத Basic Savings account-க்கு மாத்த உங்களுக்கு உரிமை இருக்கு. 7 நாளுக்குள்ள bank பண்ணணும்." : "You have the right to a zero-charge Basic Savings account with no minimum balance. The bank must convert within 7 days of asking.")}</p><a class="btn" href="/api/accounts/${esc(S.accountId)}/basic-account-letter" target="_blank">${esc(t("s.basic"))}</a></section>
-      <section class="card stack"><h2>Privacy</h2><p class="muted">${esc(t("foot.privacy"))}</p><div class="row"><a class="btn sm" href="/api/accounts/${esc(S.accountId)}/audit" target="_blank">Audit log</a><button class="btn sm" id="delete" style="color:var(--red)">${esc(t("s.delete"))}</button></div></section>` : ""}
+` : ""}
     </div>`;
   }
   function bindSettings() {
@@ -803,15 +1051,18 @@
     try {
       const hash = (location.hash || "#/").replace(/#statements$/, "");
       const anchor = /#statements$/.test(location.hash);
-      $$(".nav a").forEach((a) => a.classList.toggle("active", hash === a.getAttribute("href") || (a.getAttribute("href") === "#/cases" && hash.startsWith("#/case"))));
+      $$(".nav a").forEach((a) => a.classList.toggle("active", hash === a.getAttribute("href") || (a.getAttribute("href") === "#/cases" && hash.startsWith("#/case")) || (a.getAttribute("href") === "#/twin" && hash.startsWith("#/twin/"))));
       const app = $("#app");
       if (!S.data && S.accountId) await loadAccount();
       let html = "", bind = null;
-      if (hash === "#/") { html = await screenHome(); bind = bindHome; }
+      if (hash === "#/") { if (S.accountId) await loadAccount(); html = await screenHome(); bind = bindHome; }
       else if (hash === "#/findings") { if (S.accountId) await loadAccount(); if (!S.samples) S.samples = await api("/samples").catch(() => []); html = screenFindings(); bind = bindFindings; }
       else if (hash.startsWith("#/case/")) { const id = hash.split("/")[2]; html = await screenCase(id); bind = () => bindCase(id); }
       else if (hash === "#/cases") { if (S.accountId) await loadAccount(); html = screenCases(); }
       else if (hash === "#/history") { html = await screenHistory(); bind = bindHistory; }
+      else if (hash === "#/twin") { if (S.accountId) await loadAccount(); html = await screenMyTwin(); bind = bindMyTwin; }
+      else if (hash === "#/guardian") { if (S.accountId) await loadAccount(); html = await screenGuardian(); bind = bindGuardian; }
+      else if (hash === "#/privacy") { html = screenPrivacy(); bind = bindPrivacy; }
       else if (hash === "#/ask") { html = screenAsk(); bind = bindAsk; }
       else if (hash === "#/rules") { html = await screenRules(); }
       else if (hash === "#/settings") { html = await screenSettings(); bind = bindSettings; }

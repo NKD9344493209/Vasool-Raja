@@ -23,7 +23,7 @@ from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, PlainTex
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
-from vasool import __version__, cases as case_mod, complaint, guardian as guardian_mod, merge, notify, printable, rulebook as rb_mod, scan, voice
+from vasool import __version__, cases as case_mod, complaint, explain, guardian as guardian_mod, merge, notify, printable, rulebook as rb_mod, scan, twin as twin_mod, voice
 from vasool.assistant import Assistant
 from vasool.models import AccountProfile, AccountType, Case, CaseState, CityTier, Guardian, Label
 from vasool.rules.user_claims import card_closure_claim, gold_release_claim, unauthorised_txn_claim
@@ -34,6 +34,21 @@ WEB = ROOT / "web" / "static"
 
 app = FastAPI(title="Vasool Raja API", version=__version__, description="A Regulatory Digital Twin for Indian bank customers. The rule engine decides; AI only explains.")
 app.add_middleware(CORSMiddleware, allow_origins=os.getenv("VASOOL_CORS", "*").split(","), allow_methods=["*"], allow_headers=["*"])
+
+ALLOWED_UPLOAD_EXT = {".pdf", ".csv", ".tsv", ".txt", ".xlsx", ".xls", ".jpg", ".jpeg", ".png", ".webp", ".tif", ".tiff"}
+
+
+@app.middleware("http")
+async def security_headers(request: Request, call_next):
+    """Defensive defaults for a fintech surface: no sniffing, no framing, no referrer leakage, no caching of API JSON."""
+    resp = await call_next(request)
+    resp.headers.setdefault("X-Content-Type-Options", "nosniff")
+    resp.headers.setdefault("X-Frame-Options", "DENY")
+    resp.headers.setdefault("Referrer-Policy", "no-referrer")
+    resp.headers.setdefault("Permissions-Policy", "camera=(), microphone=(self), geolocation=()")
+    if request.url.path.startswith("/api/"):
+        resp.headers.setdefault("Cache-Control", "no-store")
+    return resp
 
 _store: Optional[Store] = None
 _channel = guardian_mod.ConsoleChannel()
@@ -266,6 +281,46 @@ def rules(category: Optional[str] = None, on: Optional[date] = None):
     return [r.to_dict() for r in out]
 
 
+@app.get("/api/scope")
+def scope():
+    """Exactly what this prototype checks — never 'all RBI regulations'."""
+    rules = rb().all()
+    active = [r for r in rules if r.status == "active"]
+    cats: dict[str, int] = {}
+    for r in active:
+        cats[r.category] = cats.get(r.category, 0) + 1
+    return {"implemented": len(active), "listed": len(rules), "mapped": 40, "categories": cats, "rulebook_version": rb().version,
+            "statement": "This prototype implements a curated set of RBI customer-protection rules, each linked to its circular and effective window. It is not complete RBI coverage, and a finding is a potential claim until the bank or the Ombudsman decides."}
+
+
+@app.get("/api/validation")
+def validation():
+    """Real test results, as written by `python scripts/validate.py` (never typed by hand)."""
+    p = ROOT / "data" / "validation.json"
+    if not p.exists():
+        return {"available": False, "hint": "run: python scripts/validate.py"}
+    return {"available": True} | json.loads(p.read_text(encoding="utf-8"))
+
+
+@app.get("/api/accounts/{account_id}/twin")
+def account_twin(account_id: str):
+    """The digital twin as data: counts, balance path, reversal pairs, charges — all derived from the uploaded lines."""
+    acct = _load(account_id)
+    ctx = twin_mod.build_twin(acct["transactions"], acct["profile"], rb(), acct["as_of"], acct["answers"])
+    return explain.twin_summary(ctx, store().get_findings(account_id))
+
+
+@app.get("/api/accounts/{account_id}/transactions/{txn_id}/why-not")
+def why_not(account_id: str, txn_id: str):
+    """'Why wasn't this flagged?' — the deterministic checklist for one line."""
+    acct = _load(account_id)
+    txn = next((t for t in acct["transactions"] if t.id == txn_id), None)
+    if not txn:
+        raise HTTPException(404, "transaction not found")
+    ctx = twin_mod.build_twin(acct["transactions"], acct["profile"], rb(), acct["as_of"], acct["answers"])
+    return explain.why_not_flagged(ctx, txn, store().get_findings(account_id))
+
+
 @app.get("/api/rules/{rule_id}")
 def rule(rule_id: str):
     try:
@@ -295,6 +350,8 @@ async def api_scan(file: Optional[UploadFile] = File(None), files: list[UploadFi
         data = await up.read()
         if len(data) > 15 * 1024 * 1024:
             raise HTTPException(413, f"{up.filename}: file too large (15 MB limit)")
+        if Path(up.filename or "").suffix.lower() not in ALLOWED_UPLOAD_EXT:
+            raise HTTPException(415, f"{up.filename}: only PDF, CSV/TSV, XLSX or an image (JPG/PNG) of a statement can be uploaded")
         account_id, res, rep = _ingest(account_id, data, up.filename or "statement.csv", prof, as_of_d)
         reports.append(rep)
     return _result_payload(account_id, res) | {"upload": reports}
@@ -618,6 +675,15 @@ def set_guardian(account_id: str, body: GuardianIn):
     store().save_guardian(account_id, g)
     store().audit(account_id, "guardian.set", f"{g.relation}")
     return g.to_dict()
+
+
+@app.delete("/api/accounts/{account_id}/guardian")
+def revoke_guardian(account_id: str):
+    """Revoke: the guardian is removed and every unused approval link for this account stops working."""
+    _load(account_id)
+    removed = store().delete_guardian(account_id)
+    store().audit(account_id, "guardian.revoked", "guardian removed by the account holder")
+    return {"revoked": removed}
 
 
 @app.get("/api/accounts/{account_id}/notifications")

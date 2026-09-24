@@ -30,7 +30,7 @@ USER_STATUS = {
     CaseState.FOUND: ("We found this. Nothing sent yet.", "கண்டுபிடிச்சோம். இன்னும் எதுவும் அனுப்பல."),
     CaseState.PREPARED: ("Complaint prepared. Waiting for your OK.", "Complaint தயார். உங்க OK-க்கு காத்திருக்கோம்."),
     CaseState.AWAITING_APPROVAL: ("Waiting for your guardian to approve.", "உங்க காப்பாளர் OK சொல்ல காத்திருக்கோம்."),
-    CaseState.SENT_TO_BANK: ("Sent to the bank. We're watching the 30-day clock.", "Bank-க்கு அனுப்பியாச்சு. 30 நாள் clock-ஐ நாங்க பாத்துக்கறோம்."),
+    CaseState.SENT_TO_BANK: ("Approved — evidence pack ready to submit. Hand it to the branch or file it at cms.rbi.org.in; this app does not transmit it. We're watching the 30-day clock.", "OK ஆச்சு — evidence pack தயார். Branch-ல கொடுங்க அல்லது cms.rbi.org.in-ல file பண்ணுங்க; இந்த app அனுப்பாது. 30 நாள் clock-ஐ நாங்க பாத்துக்கறோம்."),
     CaseState.BANK_REPLIED: ("The bank replied. Checking it.", "Bank பதில் சொல்லிடுச்சு. Check பண்றோம்."),
     CaseState.DEADLINE_PASSED: ("Bank didn't reply in 30 days. We're preparing the next step.", "30 நாள்ல bank பதில் சொல்லல. அடுத்த step தயார் பண்றோம்."),
     CaseState.ESCALATED_OMBUDSMAN: ("Escalated to the RBI Ombudsman. Free, and we're tracking it.", "RBI Ombudsman-க்கு போயாச்சு. Free. நாங்க track பண்றோம்."),

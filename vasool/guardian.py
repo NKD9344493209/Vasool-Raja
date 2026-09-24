@@ -58,7 +58,11 @@ def _spoken_items(fs: list[Finding], lang: str, limit: int = 2) -> list[str]:
 
 def holder_voice_script(amount: float, guardian: Guardian | None, lang: str = "ta", holder_name: str = "", bank: str = "",
                         case: Case | None = None, findings: list[Finding] | None = None) -> VoiceScript:
-    """The Tamil call to the account holder: what happened, how much, which rule, what happens next."""
+    """The Tamil call to the account holder: what happened, how much, which rule, what happens next.
+
+    Spoken by a real phone call (no key-press menu — Twilio's <Say> cannot listen), so every
+    sentence carries information: date, amount, the RBI rule in plain words, and the one fact
+    that matters most — nothing is sent to the bank until the guardian (or the holder) says OK."""
     gname = guardian.name if guardian else None
     fs = _case_findings(case, findings)
     items = _spoken_items(fs, lang)
@@ -94,10 +98,11 @@ def holder_voice_script(amount: float, guardian: Guardian | None, lang: str = "t
 
 
 def guardian_message(case: Case, findings: list[Finding], guardian: Guardian, holder_name: str, approve_token: str, lang: str = "ta") -> GuardianMessage:
-    """One message to the guardian: each item on its own line (date · what · amount · rule), the total, the one action.
-    Still minimum-information: only the evidence lines — never the balance, never the rest of the spending."""
+    """The one message to the guardian: each item on its own line (date · what · amount · rule), the total,
+    what the complaint asks for, and the one action. Still minimum-information: only the evidence lines —
+    never the balance, never the rest of the spending."""
     fs = _case_findings(case, findings)
-    who = holder_name or "account holder"
+    who = holder_name or ("account holder" if lang != "ta" else "account holder")
     lines = []
     for i, f in enumerate(fs, 1):
         r = _rule(f.rule_id)
@@ -118,6 +123,7 @@ def guardian_message(case: Case, findings: list[Finding], guardian: Guardian, ho
                 f"Nothing goes to the bank until you say OK. OK code: {approve_token}\n\n"
                 f"({who} was called first. No balance or other spending details are in this message.)")
     return GuardianMessage(to=guardian.phone, text=text, approve_token=approve_token)
+
 
 class Channel(Protocol):
     def call(self, to: str, script: VoiceScript) -> str: ...

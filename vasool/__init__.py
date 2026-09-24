@@ -9,4 +9,4 @@ produces findings that are deterministic, cited and explainable.
 The rule engine decides. Language models, where used at all, only explain.
 """
 
-__version__ = "0.5.1"
+__version__ = "0.6.0"

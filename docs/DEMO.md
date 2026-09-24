@@ -1,20 +1,24 @@
-# Demo script (2 minutes + Q&A)
+# Demo script — 3 minutes, one flow
 
-**Before:** `python -m uvicorn api.main:app --host 0.0.0.0 --port 8000` (or `run.bat`), open http://localhost:8000, language தமிழ் for the call, English for the judges' reading. Have `data/samples/` open in a second tab. Wi-Fi is not needed after load (Google Fonts fall back to system fonts) — except for the real call and the real mail.
+**Before:** `python -m uvicorn api.main:app --host 0.0.0.0 --port 8000`, open http://localhost:8000, **English** for the judges' reading (switch to தமிழ் for the call). Windows dark mode is fine — the app stays white and green. Rehearse the three lines in bold.
 
-The three moments that make people look up are **the Twin View** (0:25), **the time slider** (0:45) and **the phone actually ringing** (1:15). Rehearse those three.
+Flow: **Statement → Digital twin → Regulatory engine → Evidence → AI explanation → User confirmation → Evidence pack → Action.**
 
 | t | Say | Do |
 |---|---|---|
-| 0:00 | "This is Amma's Canara pension passbook, three months. Her phone number goes here — you'll see why." | Home → pick *canara amma pension 2026* → type the demo phone in **Your phone** → Check my account |
-| 0:10 | "₹5,027 the bank may owe her. Two failed transactions with ₹100 a day running. One penalty that needs one answer." | Found screen |
-| 0:25 | "This is the digital twin — not a chart, the twin. Top lane: what RBI says should have happened. Bottom lane: what her statement says happened. The red is the gap. Watch it count." | ⇄ **See the twin** on the ₹3,800 UPI card → the band grows day by day, the counter climbs to ₹3,800 → point at *expected − actual = delta → claim* |
-| 0:45 | "Every day the bank waits, the number grows. Here is today. Here is next month." | ← Back → **Bank waits** card → drag the slider a month ahead → the big number rolls up live, the UPI card re-prices; the ATM card doesn't move ("already reversed — frozen") → **Today** |
-| 0:55 | "The statement can't show whether the bank warned her. The twin says: blind month." | ⇄ See the twin on the ₹348 card → *blind month* warning → **Add that statement** → add *canara amma pension 2026 mar may* → twin now shows May's balance line never touching ₹500 → card is **Confirmed** |
-| 1:05 | "Get it back. Nothing is sent yet. It prints — Kumar can hand it over at the branch." | Get it back → case prepared → **Print complaint** (glance only) |
-| 1:15 | "Amma can't read this. So her phone rings first — in Tamil." | **Ask my guardian** → hold the phone up; it rings within ~5 s; put it on speaker for one sentence → toast on screen: *📞 Calling +91…* |
-| 1:30 | "Kumar gets one message. No balance, no spending. One button." | **Real:** teammate's phone gets the mail → tap *Yes, send the complaint* → laptop flips to *Sent to the bank* by itself. **Fallback:** WhatsApp bubble → Approve as Kumar |
-| 1:45 | "Sent. Thirty-day clock. We watch it, she doesn't. And the assistant only explains what the engine decided." | Case screen → Ask → *why did the bank charge me 295?* |
+| 0:00 | "Amma's Canara pension passbook, three months. Synthetic — it says so on screen." | Home → *canara amma pension 2026* → type the demo phone → **Check my account** |
+| 0:10 | "Watch the twin build: 23 lines, 3 months, 1 reversal pair and 1 open failure, 19 RBI rules — each at its own date." | the scan timeline fills with real numbers → **SCAN COMPLETE** |
+| 0:25 | "**Is her account being charged fairly?** ₹5,027 potential — not guaranteed — 5 findings: 2 need action, 2 need one answer, 1 is only information." | Home dashboard (click **Home** once) → **Review my findings** |
+| 0:40 | "Every rupee has its chain." | ₹3,800 card → **Evidence chain** → walk 1→8: what happened, what should have, what we found, why, statement line, rule in force with circular and date, calculation, potential claim |
+| 1:00 | "This is the twin itself: the actual lane, the expected lane, the gap growing ₹100 a day." | **See the twin** → band fills → ← Back |
+| 1:10 | "Every day the bank waits, the number grows." | drag the **as-of** slider a month ahead → the total rolls up; the reversed ATM one stays frozen → **today** |
+| 1:25 | "And here is what we did *not* flag. ₹50,000 college fees — a big number, not a finding. This is why." | **My Twin** → scroll to the lines → **Why wasn't this flagged?** on the ₹50,000 line → checklist: no failure hint, no reversal, successful payment, size is never a reason |
+| 1:45 | "The AI only explains. The engine decided." | **Ask** → *why was ₹295 charged?* → it names the rule and asks the one question → answer **No** on the Findings card → the ₹348 becomes a potential claim |
+| 2:05 | "Get it back builds the evidence pack. Nothing is sent." | **Get it back** → **CASE READY** → *Evidence pack (print / PDF)* — glance at the A4: numbered claims, RBI reference, Annexure A |
+| 2:20 | "Amma can't read this. Her phone rings first — in Tamil. Kumar gets one message with one button." | **Ask my guardian** → phone rings (speaker, one sentence) → Kumar's mail → **Approve** → status *Ready to submit* |
+| 2:45 | "Rulebook: 19 rules implemented, 22 listed, 40 mapped — not all of RBI, and we say so. 92 tests, real results on screen." | **Rulebook** → scope box → System validation card |
+
+**Say out loud, once:** *potential, not guaranteed* · *the app never contacts a bank; the pack is yours to hand in* · *no real claim filed yet*.
 
 ## Real-phone setup (do this the night before)
 

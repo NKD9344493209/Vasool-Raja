@@ -82,8 +82,8 @@ amma = [
     (D(2026, 7, 9), "ATM CASH WDL CHRG", "", 23, 0),
     (D(2026, 7, 9), "GST ON CHARGES", "", 4.14, 0),
     (D(2026, 7, 15), "UPI/DR/619977001/TNEB BILL/CNRB/tneb@sbi", "619977001", 812, 0),
+    (D(2026, 7, 19), "BY TRANSFER FROM KUMAR S", "TFR7720", 0, 52000),
     (D(2026, 7, 21), "UPI/DR/620311902/PSG COLLEGE FEES/CNRB/psg@icici", "620311902", 50000, 0),
-    (D(2026, 7, 25), "BY TRANSFER FROM KUMAR S", "TFR7720", 0, 52000),
     (D(2026, 8, 2), "NEFT CR-PENSION-TN TREASURY-AUG", "N152280041", 0, 6500),
     (D(2026, 8, 3), "NFS/ATM WDL/IOB PEELAMEDU/CBE", "NFS803110", 1200, 0),           # failed; reversed 20 Aug
     (D(2026, 8, 5), "ATM WDL CANARA RS PURAM CBE", "ATM402510", 1200, 0),            # retry — succeeded

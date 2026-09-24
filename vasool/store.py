@@ -170,6 +170,10 @@ class Store:
         with self._lock, self._conn:
             self._conn.execute("INSERT INTO guardians (account_id, doc) VALUES (?,?) ON CONFLICT(account_id) DO UPDATE SET doc=excluded.doc", (account_id, json.dumps(g.to_dict())))
 
+    def delete_guardian(self, account_id: str) -> bool:
+        with self._lock, self._conn:
+            return self._conn.execute("DELETE FROM guardians WHERE account_id=?", (account_id,)).rowcount > 0
+
     def get_guardian(self, account_id: str) -> Optional[Guardian]:
         row = self._conn.execute("SELECT doc FROM guardians WHERE account_id=?", (account_id,)).fetchone()
         if not row:

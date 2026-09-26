@@ -22,6 +22,8 @@
       "ai.banner": "AI explains. Rules decide. Evidence proves.", "ai.lede": "Every answer is built from your account's findings and the rulebook. The assistant cannot create a claim, and says so when the evidence is not enough.",
       "priv.h": "Privacy centre", "priv.what": "What we collect", "priv.what.d": "Only the transaction lines of the statement you upload (date, narration, debit, credit, balance) and the answers you give. The file itself is not kept.", "priv.why": "Why", "priv.why.d": "To run the RBI rules on your account state and to build the evidence pack for a complaint you choose to make.", "priv.keep": "How long", "priv.keep.d": "Until you delete it. Everything lives in one local database on this machine; nothing is uploaded to us.", "priv.who": "Who can see it", "priv.who.d": "You. Your guardian sees only the amount, the rule and one button — never balances or spending. No bank is ever contacted by this software.", "priv.delete": "Delete my data", "priv.deleted": "All data for this account has been deleted.", "priv.never": "Never asked for", "priv.controls": "Controls in this build",
       "guard.flow": "Customer → Consent → Trusted guardian → Review → Approve action", "guard.status": "Guardian status", "guard.none": "No guardian on file", "guard.scope": "Access scope", "guard.scope.d": "Amount · rule reference · one approve button. Never: balance, salary, spending, other transactions.", "guard.consent": "Consent", "guard.revoke": "Revoke access", "guard.revoked": "Guardian access revoked.", "guard.audit": "Audit history",
+      "auth.h": "Sign in to Vasool Raja", "auth.lede": "Your statements are stored only on this machine, encrypted (AES-256-GCM). Your password is never stored — only a salted PBKDF2 hash.", "auth.login": "Phone or email", "auth.name": "Your name", "auth.pass": "Password (6+ characters)", "auth.signin": "Sign in", "auth.signup": "Create account", "auth.toggle.up": "New here? Create an account", "auth.toggle.in": "Already have an account? Sign in", "auth.out": "Sign out", "auth.never": "We never ask for your net-banking password, OTP, PIN or CVV — only a statement you download yourself.",
+      "alert.h": "Act before the clock runs out", "alert.lede": "Small claims are not ignored: every finding carries an act-by date. Inside {n} days it turns red, is promoted to Recover now whatever the amount, and an alert is sent.", "alert.chip": "⏰ act by {d} · {n} days", "alert.over": "⏰ act-by {d} passed · {n} days ago — file now", "alert.open": "⏰ open failure · ₹{p}/day accruing", "alert.sent": "Alert sent to Telegram", "alert.sim": "Alert simulated ({r})", "n.tg.on": "Telegram alerts are ON — red alerts go to chat {c}", "n.tg.off": "Telegram alerts are OFF (add VASOOL_TELEGRAM_TOKEN and VASOOL_TELEGRAM_CHAT in .env).", "n.tgtest": "Send test alert",
       "case.ready": "CASE READY", "case.pack": "Evidence pack (print / PDF)", "case.inside": "Inside the pack: case ID · each item with date, amount, RBI rule and effective window · the arithmetic · the statement lines as Annexure A · requested resolution · the 30-day clock.",
       "home.multi": "You can select several files at once — different months or quarters of the same account.",
       "home.current": "Open account: {a}", "home.addto": "Add a statement to it", "home.new": "This form starts a new account.",
@@ -88,6 +90,8 @@
       "ai.banner": "AI விளக்கும். Rules முடிவு பண்ணும். Evidence நிரூபிக்கும்.", "ai.lede": "ஒவ்வொரு பதிலும் உங்க account findings-லயும் rulebook-லயும் இருந்து. Assistant claim உருவாக்காது; evidence போதலைன்னா அப்படியே சொல்லும்.",
       "priv.h": "Privacy centre", "priv.what": "என்ன சேகரிக்கிறோம்", "priv.what.d": "நீங்க upload பண்ற statement-ஓட transaction lines மட்டும் (தேதி, narration, debit, credit, balance), உங்க பதில்கள். File-ஐ வெச்சுக்கறது இல்ல.", "priv.why": "ஏன்", "priv.why.d": "உங்க account state-ல RBI rules ஓட்டவும், நீங்க விரும்பினா complaint-க்கு evidence pack தயார் பண்ணவும்.", "priv.keep": "எவ்வளவு நாள்", "priv.keep.d": "நீங்க அழிக்கற வரை. எல்லாம் இந்த machine-ல ஒரே local database-ல; எங்களுக்கு எதுவும் upload ஆகாது.", "priv.who": "யார் பாக்கலாம்", "priv.who.d": "நீங்க. காப்பாளர் தொகை, rule, ஒரு button மட்டும் பாப்பாங்க — balance, செலவு இல்ல. இந்த software எந்த bank-ஐயும் தொடர்பு கொள்ளாது.", "priv.delete": "என் data-ஐ அழி", "priv.deleted": "இந்த account-ஓட data எல்லாம் அழிச்சாச்சு.", "priv.never": "எப்பவும் கேக்க மாட்டோம்", "priv.controls": "இந்த build-ல இருக்கற controls",
       "guard.flow": "Customer → சம்மதம் → காப்பாளர் → Review → Approve", "guard.status": "காப்பாளர் status", "guard.none": "காப்பாளர் இல்ல", "guard.scope": "என்ன பாக்கலாம்", "guard.scope.d": "தொகை · rule reference · ஒரு approve button. எப்பவும் இல்ல: balance, சம்பளம், செலவு, மத்த transactions.", "guard.consent": "சம்மதம்", "guard.revoke": "Access-ஐ நீக்கு", "guard.revoked": "காப்பாளர் access நீக்கியாச்சு.", "guard.audit": "Audit history",
+      "auth.h": "Vasool Raja-ல sign in", "auth.lede": "உங்க statements இந்த machine-ல மட்டும், encrypt ஆயி (AES-256-GCM) இருக்கும். Password சேமிக்கப்படாது — salted PBKDF2 hash மட்டும்.", "auth.login": "Phone அல்லது email", "auth.name": "உங்க பேர்", "auth.pass": "Password (6+ எழுத்து)", "auth.signin": "Sign in", "auth.signup": "Account உருவாக்கு", "auth.toggle.up": "புதுசா? Account உருவாக்குங்க", "auth.toggle.in": "Account இருக்கா? Sign in", "auth.out": "Sign out", "auth.never": "Net-banking password, OTP, PIN, CVV எப்பவும் கேக்க மாட்டோம் — நீங்களே download பண்ற statement மட்டும்.",
+      "alert.h": "Clock முடியறதுக்குள்ள action", "alert.lede": "சின்ன claim-ஐயும் விடமாட்டோம்: ஒவ்வொரு finding-க்கும் act-by தேதி இருக்கு. {n} நாளுக்குள்ள வந்தா சிவப்பு ஆகும், தொகை எவ்வளவானாலும் 'இப்பவே'-க்கு போகும், alert அனுப்பப்படும்.", "alert.chip": "⏰ {d}-க்குள்ள · {n} நாள்", "alert.over": "⏰ {d} தாண்டிடுச்சு · {n} நாள் — இப்பவே file பண்ணுங்க", "alert.open": "⏰ reverse ஆகல · நாளுக்கு ₹{p} சேருது", "alert.sent": "Telegram-க்கு alert போச்சு", "alert.sim": "Alert simulate ({r})", "n.tg.on": "Telegram alerts ON — chat {c}-க்கு போகும்", "n.tg.off": "Telegram alerts OFF (.env-ல VASOOL_TELEGRAM_TOKEN, VASOOL_TELEGRAM_CHAT போடுங்க).", "n.tgtest": "Test alert அனுப்பு",
       "case.ready": "CASE READY", "case.pack": "Evidence pack (print / PDF)", "case.inside": "Pack-ல: case ID · ஒவ்வொரு item-க்கும் தேதி, தொகை, RBI rule, தேதி வரம்பு · கணக்கு · statement lines Annexure A-ஆ · கேக்கற தீர்வு · 30 நாள் clock.",
       "home.multi": "ஒரே account-ஓட பல மாசம் / quarter statement-களை ஒரே நேரத்துல select பண்ணலாம்.",
       "home.current": "Open-ல இருக்கற account: {a}", "home.addto": "இதுக்கு இன்னொரு statement சேர்", "home.new": "இந்த form புது account-ஐ ஆரம்பிக்கும்.",
@@ -147,6 +151,7 @@
   // ------------------------------------------------------------------ api
   async function api(path, opts = {}) {
     const r = await fetch("/api" + path, opts);
+    if (r.status === 401 && !path.startsWith("/auth/")) { S.user = null; if (!location.hash.startsWith("#/login")) { S.after = location.hash; location.hash = "#/login"; } throw new Error("login required"); }
     if (!r.ok) { let m = r.statusText; try { const j = await r.json(); const d = j.detail ?? j; m = typeof d === "string" ? d : (d.message ? d.message + (d.warnings?.length ? " · " + d.warnings.join(" · ") : "") : JSON.stringify(d)); } catch { } throw new Error(m); }
     const ct = r.headers.get("content-type") || "";
     return ct.includes("json") ? r.json() : r.text();
@@ -259,6 +264,7 @@
             <div>🔴 ${esc(t("dash.action", { n: action.length }))}</div>
             <div>🟡 ${esc(t("dash.confirm", { n: unc.length }))}</div>
             <div>🟢 ${esc(t("dash.info", { n: info.length }))}</div>
+            ${F.some((f) => f.alert) ? `<div style="color:#FFB4A8;font-weight:600">⏰ ${F.filter((f) => f.alert).length} ${esc(t("alert.h").toLowerCase())}</div>` : ""}
           </div>
         </div>
         <p class="muted" style="color:#9DB8A8;margin:10px 0 0;max-width:70ch;font-size:.9rem">${esc(t("dash.honest"))}</p>
@@ -370,7 +376,7 @@
     return `
     <article class="card finding" data-id="${esc(f.id)}">
       <div>
-        <div class="pillrow"><span class="chip ${chipCls}">${esc(t("label." + f.label))}</span><span class="chip grey">${esc(t("conf." + f.confidence))}</span><span class="chip green">${esc(t("priority." + f.priority))}</span><span class="chip grey mono">${esc(f.rule_id)}</span></div>
+        <div class="pillrow"><span class="chip ${chipCls}">${esc(t("label." + f.label))}</span><span class="chip grey">${esc(t("conf." + f.confidence))}</span><span class="chip green">${esc(t("priority." + f.priority))}</span><span class="chip grey mono">${esc(f.rule_id)}</span>${f.alert ? `<span class="chip red alert">${esc(f.twin && f.twin.kind === "tat" && f.twin.reversed === false ? t("alert.open", { p: f.twin.per_day }) : f.days_left < 0 ? t("alert.over", { d: f.act_by, n: -f.days_left }) : t("alert.chip", { d: f.act_by, n: f.days_left }))}</span>` : (f.act_by && f.label !== "AVOIDABLE" ? `<span class="chip grey">${esc(t("alert.chip", { d: f.act_by, n: f.days_left }))}</span>` : "")}</div>
         <p class="summary" style="margin-top:8px">${esc(lang === "ta" ? f.summary_ta : f.summary_en)}</p>
         ${amb && (f.prevention_en || f.prevention_ta) ? `<p class="muted" style="font-size:.92rem">↳ ${esc(lang === "ta" ? f.prevention_ta : f.prevention_en)}</p>` : ""}
       </div>
@@ -439,6 +445,7 @@
           <p class="muted">${esc(t("found.watch"))}${unc.length ? " · " + esc(t("found.unclear", { n: unc.length })) : ""}</p>`}
         ${s.warnings?.length ? `<p class="muted" style="font-size:.82rem;margin-top:8px">${s.warnings.map(esc).join("<br>")}</p>` : ""}
       </section>
+      ${(() => { const al = F.filter((f) => f.alert); return al.length ? `<section class="card alertbar"><div class="section-title" style="margin-top:0"><h2>🔴 ${esc(t("alert.h"))}</h2><span class="count">${al.length}</span></div><p style="margin:0">${esc(t("alert.lede", { n: d.alert_days || 60 }))}</p><div class="pillrow" style="margin-top:8px">${al.map((f) => `<span class="chip red">${inr(f.amount)} · ${esc(f.rule_id)} · ${f.days_left}d</span>`).join("")}</div></section>` : ""; })()}
       ${hasTat ? timeCard(d) : ""}
       ${sus.length ? `<section class="card warn"><h3>${esc(t("suspicious"))}</h3>${sus.map((x) => `<div class="qbtns" data-q="txn_failed" data-txn="${esc(x.id)}" style="margin-top:8px"><span class="mono">${esc(x.date)} · ${esc(x.narration)} · ${inr(x.debit)}</span>${["yes", "no", "not_sure"].map((o) => `<button class="btn sm ans" data-val="${o}">${esc(t(o))}</button>`).join("")}</div>`).join("")}</section>` : ""}
       ${section("sec.now", now)}
@@ -452,7 +459,7 @@
 
   function timeCard(d) {
     const from = (d.coverage && d.coverage.to) || d.summary.period.to || d.as_of, today = new Date().toISOString().slice(0, 10);
-    const max = addDays(today > from ? today : from, 120), cur = d.as_of || today;
+    const max = addDays(today > from ? today : from, 400), cur = d.as_of || today;
     const perDay = d.findings.filter((f) => f.twin && f.twin.kind === "tat" && !f.twin.reversed).reduce((a, f) => a + f.twin.per_day, 0);
     return `
     <section class="card time" id="timecard">
@@ -527,7 +534,7 @@
     const asof = $("#asof");
     if (asof) {
       asof.oninput = () => { $("#asof-label").textContent = isoOf(Number(asof.value)); };
-      const commit = async (iso) => { try { S.data = await post(`/accounts/${S.accountId}/as-of`, { as_of: iso }); S.cases = S.data.cases || []; route(); } catch (e) { toast(t("err") + e.message); } };
+      const commit = async (iso) => { try { S.data = await post(`/accounts/${S.accountId}/as-of`, { as_of: iso }); S.cases = S.data.cases || []; route(); const al = S.data.alerts || []; if (al.length) toast(al[0].sent ? "🔴 " + t("alert.sent") + ` (${al.length})` : "🔴 " + t("alert.sim", { r: al[0].reason }), 6000); } catch (e) { toast(t("err") + e.message); } };
       asof.onchange = () => commit(isoOf(Number(asof.value)));
       $("#asof-today").onclick = () => commit(new Date().toISOString().slice(0, 10));
     }
@@ -997,8 +1004,8 @@
   // ---- Privacy centre --------------------------------------------------------------------
   function screenPrivacy() {
     const L = S.lang;
-    const controls = L === "ta" ? ["Upload: PDF / CSV / XLSX / படம் மட்டும், 15 MB வரை", "Statement file சேமிக்கப்படாது — transaction lines மட்டும்", "Local SQLite database; எங்க server-க்கு எதுவும் போகாது", "Secrets .env-ல மட்டும்; code-ல key இல்ல", "VASOOL_DEMO_TO / VASOOL_DEMO_PHONE: எல்லா mail / call-ம் ஒரே safe address-க்கு", "எந்த bank-க்கும் email / call இல்ல — design-ல hard-coded", "Security headers: nosniff, no framing, no referrer, API no-store", "ஒவ்வொரு மாற்றமும் audit log-ல", "ஒரே button-ல எல்லா data-ஐயும் அழிக்கலாம்"]
-      : ["Uploads: PDF / CSV / XLSX / image only, 15 MB limit, checked server-side", "The statement file is never stored — only its transaction lines", "One local SQLite database on this machine; nothing is sent to us", "Secrets live only in .env; no keys in code or logs", "VASOOL_DEMO_TO / VASOOL_DEMO_PHONE redirect every mail and call to one safe address", "No bank is ever emailed or called — hard-coded, not configurable", "Security headers on every response: nosniff, no framing, no referrer, API responses never cached", "Every state change is written to the audit log", "One button deletes everything for the account"];
+    const controls = L === "ta" ? ["Sign-in கட்டாயம்: password salted PBKDF2-HMAC-SHA256 hash-ஆ மட்டும் (200,000 rounds); session HttpOnly cookie", "Database-ல எல்லாம் AES-256-GCM encrypt — statements, findings, cases, காப்பாளர்; key database-க்கு வெளியே", "ஒவ்வொரு account-ம் ஒரு user-க்கு மட்டும்; வேற user-க்கு 404", "Upload: PDF / CSV / XLSX / படம் மட்டும், 15 MB வரை", "Statement file சேமிக்கப்படாது — transaction lines மட்டும்", "Local SQLite database; எங்க server-க்கு எதுவும் போகாது", "Secrets .env-ல மட்டும்; code-ல key இல்ல", "VASOOL_DEMO_TO / VASOOL_DEMO_PHONE: எல்லா mail / call-ம் ஒரே safe address-க்கு", "எந்த bank-க்கும் email / call இல்ல — design-ல hard-coded", "Security headers: nosniff, no framing, no referrer, API no-store", "ஒவ்வொரு மாற்றமும் audit log-ல", "ஒரே button-ல எல்லா data-ஐயும் அழிக்கலாம்"]
+      : ["Sign-in required: passwords stored only as salted PBKDF2-HMAC-SHA256 hashes (200,000 rounds); sessions are HttpOnly cookies", "Everything in the database is encrypted at rest with AES-256-GCM — statements, findings, cases, guardian; the key lives outside the database", "Each account belongs to one user; another user gets 404, not 403 — existence is never confirmed", "Uploads: PDF / CSV / XLSX / image only, 15 MB limit, checked server-side", "The statement file is never stored — only its transaction lines", "One local SQLite database on this machine; nothing is sent to us", "Secrets live only in .env; no keys in code or logs", "VASOOL_DEMO_TO / VASOOL_DEMO_PHONE redirect every mail and call to one safe address", "No bank is ever emailed or called — hard-coded, not configurable", "Security headers on every response: nosniff, no framing, no referrer, API responses never cached", "Every state change is written to the audit log", "One button deletes everything for the account"];
     const item = (k) => `<div class="card"><div class="eyebrow">${esc(t(k))}</div><p style="margin:6px 0 0">${esc(t(k + ".d"))}</p></div>`;
     return `<div class="stack"><h1>${esc(t("priv.h"))}</h1><p class="muted">${esc(t("foot.privacy"))}</p>
       <section class="grid2" style="grid-template-columns:repeat(2,minmax(0,1fr))">${item("priv.what")}${item("priv.why")}${item("priv.keep")}${item("priv.who")}</section>
@@ -1011,6 +1018,43 @@
     const d = $("#delete");
     if (d) d.onclick = async () => { if (!confirm(t("priv.delete") + "?")) return; await api(`/accounts/${S.accountId}`, { method: "DELETE" }); S.accountId = null; S.data = null; S.cases = []; localStorage.removeItem("vr.account"); toast(t("priv.deleted")); location.hash = "#/"; };
   }
+
+  // ---- login / signup ----------------------------------------------------------------------
+  function screenLogin() {
+    const up = S.authMode === "signup";
+    return `
+    <div class="stack" style="max-width:480px;margin:0 auto">
+      <section class="card dark"><div class="eyebrow">Vasool Raja</div><h1 style="margin-top:6px;font-size:1.6rem">${esc(t("auth.h"))}</h1><p style="color:#DCE8E0;margin:8px 0 0">${esc(t("auth.lede"))}</p></section>
+      <form id="authform" class="card stack">
+        <label class="field">${esc(t("auth.login"))}<input name="login" autocomplete="username" placeholder="+91 98765 43210 / you@gmail.com" required minlength="3"></label>
+        ${up ? `<label class="field">${esc(t("auth.name"))}<input name="name" autocomplete="name" placeholder="Selvi R" required></label>` : ""}
+        <label class="field">${esc(t("auth.pass"))}<input name="password" type="password" autocomplete="${up ? "new-password" : "current-password"}" required minlength="6"></label>
+        <button class="btn primary" type="submit">${esc(up ? t("auth.signup") : t("auth.signin"))}</button>
+        <button class="btn ghost" type="button" id="authtoggle">${esc(up ? t("auth.toggle.in") : t("auth.toggle.up"))}</button>
+        <p class="muted" style="margin:0;font-size:.85rem">🔒 ${esc(t("auth.never"))}</p>
+      </form>
+    </div>`;
+  }
+  function bindLogin() {
+    $("#authtoggle").onclick = () => { S.authMode = S.authMode === "signup" ? "login" : "signup"; route(); };
+    $("#authform").onsubmit = async (e) => {
+      e.preventDefault(); const f = e.target.elements;
+      try {
+        const body = { login: f.login.value.trim(), password: f.password.value };
+        if (S.authMode === "signup") body.name = f.name.value.trim();
+        const r = await post(S.authMode === "signup" ? "/auth/signup" : "/auth/login", body);
+        S.user = r.user; renderUser(); toast("✓ " + (r.user.name || r.user.login));
+        const target = S.after && !S.after.startsWith("#/login") ? S.after : "#/"; S.after = null;
+        if (location.hash === target || (!location.hash && target === "#/")) route(); else location.hash = target;
+      } catch (err) { toast(t("err") + err.message, 5000); }
+    };
+  }
+  function renderUser() {
+    const el = $("#userchip"); if (!el) return;
+    el.innerHTML = S.user && S.auth ? `<span class="muted" style="color:#DCE8E0;font-size:.85rem">${esc(S.user.name || S.user.login)}</span> <button class="langbtn" id="logout">${esc(t("auth.out"))}</button>` : "";
+    const lo = $("#logout"); if (lo) lo.onclick = async () => { await post("/auth/logout").catch(() => { }); S.user = null; S.accountId = null; S.data = null; S.cases = []; localStorage.removeItem("vr.account"); renderUser(); location.hash = "#/login"; };
+  }
+  const PUBLIC_ROUTES = ["#/login", "#/rules", "#/privacy"];
 
   // ---- settings ------------------------------------------------------------
   async function screenSettings() {
@@ -1025,6 +1069,8 @@
         <p style="margin:8px 0 0">${n.voice ? "📞 " + esc(t("n.voice.on", { f: n.from })) : esc(t("n.voice.off"))}</p>
         ${n.demo_phone ? `<p class="muted" style="margin:0">🔒 ${esc(t("n.demo.phone", { to: n.demo_phone }))}</p>` : ""}
         ${n.voice ? `<div class="row"><input id="testcallto" placeholder="${esc(n.demo_phone || "+91 98765 43210")}" style="max-width:280px"><button class="btn sm" id="testcall">${esc(t("n.testcall"))}</button></div>` : ""}
+        <p style="margin:8px 0 0">${n.telegram ? "🔴 " + esc(t("n.tg.on", { c: n.telegram_chat })) : esc(t("n.tg.off"))}</p>
+        ${n.telegram ? `<div class="row"><button class="btn sm" id="testtg">${esc(t("n.tgtest"))}</button></div>` : ""}
       </section>
       <section class="card"><div class="eyebrow">${esc(t("g.h"))}</div><p style="margin:6px 0 0"><a href="#/guardian">${esc(t("nav.guardian"))} →</a> · <a href="#/privacy">${esc(t("priv.h"))} →</a></p></section>
       ${S.data ? `<section class="card stack"><h2>Basic account</h2><p class="muted">${esc(S.lang === "ta" ? "Minimum balance இல்லாத, charge இல்லாத Basic Savings account-க்கு மாத்த உங்களுக்கு உரிமை இருக்கு. 7 நாளுக்குள்ள bank பண்ணணும்." : "You have the right to a zero-charge Basic Savings account with no minimum balance. The bank must convert within 7 days of asking.")}</p><a class="btn" href="/api/accounts/${esc(S.accountId)}/basic-account-letter" target="_blank">${esc(t("s.basic"))}</a></section>
@@ -1034,6 +1080,8 @@
   function bindSettings() {
     const tc = $("#testcall");
     if (tc) tc.onclick = async () => { tc.disabled = true; try { const r = await post(`/notify/test-call`, { to: $("#testcallto").value, lang: S.lang }); toast(r.placed ? t("call.placed", { to: r.to }) : t("call.sim", { r: r.reason }), 6000); } catch (e) { toast(t("err") + e.message); } tc.disabled = false; };
+    const tg = $("#testtg");
+    if (tg) tg.onclick = async () => { tg.disabled = true; try { const r = await post(`/notify/test-alert`); toast(r.sent ? t("alert.sent") : t("alert.sim", { r: r.reason }), 6000); } catch (e) { toast(t("err") + e.message); } tg.disabled = false; };
     const tm = $("#testmail");
     if (tm) tm.onclick = async () => { tm.disabled = true; try { const r = await post(`/notify/test`, { to: $("#testto").value }); toast(r.sent ? t("mail.sent", { to: r.to }) : t("mail.sim", { r: r.reason }), 6000); } catch (e) { toast(t("err") + e.message); } tm.disabled = false; };
     const f = $("#gform");
@@ -1053,6 +1101,9 @@
       const anchor = /#statements$/.test(location.hash);
       $$(".nav a").forEach((a) => a.classList.toggle("active", hash === a.getAttribute("href") || (a.getAttribute("href") === "#/cases" && hash.startsWith("#/case")) || (a.getAttribute("href") === "#/twin" && hash.startsWith("#/twin/"))));
       const app = $("#app");
+      if (S.auth === undefined) { try { const m = await api("/auth/me"); S.auth = m.auth; S.user = m.user; } catch { S.auth = true; S.user = null; } renderUser(); }
+      if (S.auth && !S.user && !PUBLIC_ROUTES.includes(hash) && !hash.startsWith("#/approve/")) { if (hash !== "#/login") S.after = hash; app.innerHTML = screenLogin(); bindLogin(); return; }
+      if (hash === "#/login") { if (S.user) { location.hash = "#/"; return; } app.innerHTML = screenLogin(); bindLogin(); return; }
       if (!S.data && S.accountId) await loadAccount();
       let html = "", bind = null;
       if (hash === "#/") { if (S.accountId) await loadAccount(); html = await screenHome(); bind = bindHome; }

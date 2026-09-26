@@ -6,3 +6,4 @@ data/*.db-journal
 .env
 node_modules/
 /tmp/
+data/.vasool.key

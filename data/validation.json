@@ -1,8 +1,8 @@
 {
- "ran_at": "2026-09-24T07:09:39+00:00",
+ "ran_at": "2026-09-25T09:17:34+00:00",
  "python": "3.11.15",
- "total": 93,
- "passed": 93,
+ "total": 101,
+ "passed": 101,
  "failed": 0,
  "skipped": 0,
  "exit_code": 0,
@@ -323,6 +323,48 @@
     },
     {
      "name": "test_custom_twiml_bin_is_used_directly",
+     "status": "passed"
+    }
+   ]
+  },
+  {
+   "module": "test_security",
+   "title": "test_security",
+   "what": "",
+   "passed": 8,
+   "failed": 0,
+   "skipped": 0,
+   "tests": [
+    {
+     "name": "test_login_required_for_account_apis_but_not_public_ones",
+     "status": "passed"
+    },
+    {
+     "name": "test_signup_login_logout_and_password_rules",
+     "status": "passed"
+    },
+    {
+     "name": "test_users_cannot_see_each_others_accounts",
+     "status": "passed"
+    },
+    {
+     "name": "test_everything_in_sqlite_is_ciphertext",
+     "status": "passed"
+    },
+    {
+     "name": "test_crypto_roundtrip_and_password_hash",
+     "status": "passed"
+    },
+    {
+     "name": "test_deadline_clock_promotes_small_claims_and_alerts_once",
+     "status": "passed"
+    },
+    {
+     "name": "test_telegram_unconfigured_is_simulated",
+     "status": "passed"
+    },
+    {
+     "name": "test_red_alert_message_is_actionable_and_minimal",
      "status": "passed"
     }
    ]

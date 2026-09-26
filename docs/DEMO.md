@@ -16,9 +16,14 @@ Flow: **Statement → Digital twin → Regulatory engine → Evidence → AI exp
 | 1:45 | "The AI only explains. The engine decided." | **Ask** → *why was ₹295 charged?* → it names the rule and asks the one question → answer **No** on the Findings card → the ₹348 becomes a potential claim |
 | 2:05 | "Get it back builds the evidence pack. Nothing is sent." | **Get it back** → **CASE READY** → *Evidence pack (print / PDF)* — glance at the A4: numbered claims, RBI reference, Annexure A |
 | 2:20 | "Amma can't read this. Her phone rings first — in Tamil. Kumar gets one message with one button." | **Ask my guardian** → phone rings (speaker, one sentence) → Kumar's mail → **Approve** → status *Ready to submit* |
-| 2:45 | "Rulebook: 19 rules implemented, 22 listed, 40 mapped — not all of RBI, and we say so. 92 tests, real results on screen." | **Rulebook** → scope box → System validation card |
+| 2:45 | "Rulebook: 19 rules implemented, 22 listed, 40 mapped — not all of RBI, and we say so. 101 tests, real results on screen." | **Rulebook** → scope box → System validation card |
 
 **Say out loud, once:** *potential, not guaranteed* · *the app never contacts a bank; the pack is yours to hand in* · *no real claim filed yet*.
+
+## Jury feedback from Evaluation 1 (25 Sep, noon) — and what changed by 3 PM
+
+1. **"A ₹5 claim may run out of time while you wait to club it into a bigger amount."** → Every finding now carries an *act-by* date from the RBI Ombudsman limitation clock. Inside 60 days it turns red, is promoted to *Recover now* whatever the amount, and a **Telegram red alert** goes out once. Unreversed failures are always urgent. Show it: drag the as-of slider forward → the ₹27 turns red → the phone buzzes.
+2. **"How securely do you store this? Why would a common person trust you with bank data?"** → Sign-in with PBKDF2-hashed passwords and HttpOnly sessions; every account belongs to one user; **everything in the database is AES-256-GCM encrypted**. Show it: open `data/vasool.db` in the SQLite viewer → ciphertext. Privacy centre lists exactly these controls.
 
 ## Real-phone setup (do this the night before)
 
@@ -27,6 +32,11 @@ Flow: **Statement → Digital twin → Regulatory engine → Evidence → AI exp
 2. Copy `.env.example` to `.env` in the app folder and fill `VASOOL_SMTP_USER`, `VASOOL_SMTP_PASS`, and `VASOOL_DEMO_TO` = the teammate's Gmail (the phone shown to the judges). With `VASOOL_DEMO_TO` set, every mail goes there — no address typed anywhere else can leak out.
 3. Laptop and that phone on the **same hotspot** (the phone's own hotspot — college Wi-Fi often blocks port 465 and device-to-device traffic). The server prints the laptop's IPv4; put it in `.env` as `VASOOL_PUBLIC_URL=http://<ip>:8000` so the button in the mail opens the app on the phone.
 4. Settings → **Real delivery** → *Send test mail* → arrives in under 10 s. Open `http://<ip>:8000` on the phone once to confirm reach.
+
+### Red alerts on Telegram
+1. Telegram → **@BotFather** → `/newbot` → copy the token into `.env` as `VASOOL_TELEGRAM_TOKEN`.
+2. Open your new bot in Telegram and send it any message. Then open `https://api.telegram.org/bot<TOKEN>/getUpdates` in a browser and copy `"chat":{"id": …}` into `.env` as `VASOOL_TELEGRAM_CHAT`.
+3. Restart → Settings → *Telegram alerts are ON* → **Send test alert** — it sends a full red alert built from a real finding (your most urgent one, else the demo statement), so the judges see the actual message shape: statement line, RBI rule + circular, arithmetic, act-by date, three steps.
 
 ### The call (Amma's phone rings)
 1. twilio.com → free trial → verify your own mobile → **Get a trial number**.

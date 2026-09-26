@@ -38,6 +38,7 @@ The twin is derived from the uploaded lines only. The **My Twin** screen shows i
 | **Scan experience** | a real timeline while the engine runs, finished with real numbers from the scan (transactions parsed, months, reversal pairs, rules evaluated, lines flagged / not flagged) |
 | **Findings** | each card opens an **Evidence chain**: what happened → what should have happened → what we found → why flagged → statement lines → rule in force (circular, date, window) → calculation → potential claim |
 | **Twin View** | for every ₹/day and minimum-balance finding: two lanes (actual vs expected regulatory state), the gap growing day by day, blind months shown as blind |
+| **Red alerts** | every finding carries an *act-by* date (RBI Integrated Ombudsman Scheme limitation: one year); inside the alert window a claim is promoted to *Recover now* whatever the amount, marked ⏰, and a **Telegram alert** is sent once — a complete notice: the statement line, what the bank did, the RBI rule with circular and date, the arithmetic, the act-by date and the three steps (branch → grievance portal → cms.rbi.org.in); never the balance; unreversed failures are always urgent |
 | **Time slider** | "every day the bank waits, the number grows" — move the as-of date and every unreversed failure re-prices at ₹100/day |
 | **My Twin** | the account state as a picture, plus "Why wasn't this flagged?" on every line |
 | **Ask Vasool Raja** | answers from the account's findings and the rulebook; corrects wrong claims with the source; says when evidence is insufficient; voice in and out |
@@ -60,6 +61,9 @@ The rule engine (`vasool/rules/`) is deterministic and produces every finding. T
 
 Implemented in this build (see the Privacy centre in the app):
 
+* **sign-in required** — passwords stored only as salted PBKDF2-HMAC-SHA256 hashes (200,000 rounds); sessions are HttpOnly cookies; each account belongs to one user and another user gets 404, never a confirmation it exists
+* **encryption at rest** — every document in SQLite (statements, findings, cases, guardian, notifications, user names) is sealed with AES-256-GCM; the key lives in `.env` (`VASOOL_SECRET_KEY`) or a once-generated `data/.vasool.key`, never in the database or the repo; opening `vasool.db` in a viewer shows ciphertext
+
 * uploads limited to PDF / CSV / TSV / XLSX / images, 15 MB, checked server-side (415 / 413 otherwise); the file itself is never stored — only its transaction lines
 * one local SQLite database; nothing is sent anywhere by default
 * secrets only in `.env` (loaded by a tiny loader; never logged); `VASOOL_DEMO_TO` / `VASOOL_DEMO_PHONE` redirect every mail and call to one safe address
@@ -68,11 +72,11 @@ Implemented in this build (see the Privacy centre in the app):
 * every state change in an audit log; one-button deletion of all data for an account; guardian access revocable
 * never asked for: net-banking password, OTP, ATM PIN, CVV, Aadhaar/PAN
 
-Not in this build (see limitations): user accounts / login, rate limiting, encryption at rest.
+Not in this build (see limitations): rate limiting, 2-factor login, key rotation.
 
 ## Testing
 
-`python -m pytest -q` — **92 tests**, and `python scripts/validate.py` writes the real results to `data/validation.json`, which the Rulebook screen shows (never typed by hand). Groups: rule engine (28), assistant (22), statement merging & history (10), twin / time slider / voice (10), API & human loop (7), explainability (6), real delivery (5), passbook OCR (4).
+`python -m pytest -q` — **101 tests**, and `python scripts/validate.py` writes the real results to `data/validation.json`, which the Rulebook screen shows (never typed by hand). Groups: rule engine (28), assistant (22), statement merging & history (10), twin / time slider / voice (10), API & human loop (7), explainability (7), security & alerts (8), real delivery (5), passbook OCR (4).
 
 ## Run it
 
@@ -97,7 +101,7 @@ vasool/explain.py        twin summary + "why wasn't this flagged?" (derived from
 api/main.py              FastAPI: scan, twin, why-not, scope, validation, answers, cases, approvals, guardian, ask
 web/static/              the app (vanilla JS, Tamil/English, voice via the browser)
 data/samples/            synthetic statements + passbook image — DEMONSTRATION DATA
-tests/                   92 tests; scripts/validate.py turns them into data/validation.json
+tests/                   101 tests; scripts/validate.py turns them into data/validation.json
 docs/                    ARCHITECTURE.md · DEMO.md · RULEBOOK.md · PRIVACY.md · screenshots
 ```
 
@@ -108,7 +112,7 @@ docs/                    ARCHITECTURE.md · DEMO.md · RULEBOOK.md · PRIVACY.md
 * **Submission is not automated** — the app never contacts a bank. "Ready to submit" means the evidence pack is yours to hand in or file at cms.rbi.org.in.
 * **Passbook OCR** is conservative and asks for a retake rather than guess.
 * **Working days** for card-closure / gold-release rules are Mon–Fri; bank holidays are not modelled.
-* **No login.** The prototype is single-user on one machine; production needs accounts, rate limiting and encryption at rest.
+* **Single machine.** Accounts and encryption exist, but there is no rate limiting, no 2-factor, no key rotation yet; the key file must be backed up with the database.
 * Rules marked `suggest` raise a "needs checking" finding only.
 
 ## Roadmap

@@ -10,8 +10,10 @@ score = amount × confidence × effort × legal strength (+ deadline urgency)
 from __future__ import annotations
 
 import math
+import os
 from collections import defaultdict
-from datetime import date
+from datetime import date, timedelta
+from typing import Optional
 
 from .models import Confidence, Finding, Label, Priority
 from .rulebook import Rulebook
@@ -23,6 +25,27 @@ RECOVER_NOW_MIN = 500.0       # rupees, single finding
 COMBINE_MIN_GROUP = 300.0     # rupees, group total
 ASK_MIN = 100.0              # rupees: below this we do not even ask the question
 OLD_CASE_DAYS = 300           # bank complaint should go before Ombudsman limitation bites
+
+# The clock. RBI Integrated Ombudsman Scheme 2021, cl. 10(2): a complaint reaches the Ombudsman within one year
+# of the bank's reply (or one year + 30 days if the bank never replies). So the bank complaint itself must be
+# raised well inside a year of the event. We call that the act-by date, and turn red ALERT_DAYS before it.
+LIMITATION_DAYS = int(os.getenv("VASOOL_LIMITATION_DAYS", "365"))
+ALERT_DAYS = int(os.getenv("VASOOL_ALERT_DAYS", "60"))
+
+
+def deadline(f: Finding, as_of: date) -> tuple[Optional[date], Optional[int], bool, str]:
+    """→ (act_by, days_left, alert, reason). Unreversed failures are always urgent: every day adds ₹100
+    but the principal is still gone, and the trail gets colder."""
+    if f.twin.get("kind") == "tat" and f.twin.get("reversed") is False:
+        by = date.fromisoformat(f.twin["debit_date"]) + timedelta(days=LIMITATION_DAYS)
+        return by, (by - as_of).days, True, f"open failure — ₹{f.twin.get('per_day', 100):.0f}/day accruing; raise it now, don't wait to bundle"
+    if not f.occurred_on:
+        return None, None, False, ""
+    by = f.occurred_on + timedelta(days=LIMITATION_DAYS)
+    left = (by - as_of).days
+    if f.label in (Label.RECOVERABLE, Label.UNCLEAR) and left <= ALERT_DAYS:
+        return by, left, True, (f"{left} days to the limitation clock — raise it now, whatever the amount" if left >= 0 else "limitation clock has passed — raise it immediately; the Ombudsman may still admit it")
+    return by, left, False, ""
 
 
 def _amount_factor(a: float) -> float:
@@ -61,10 +84,14 @@ def score_findings(findings: list[Finding], rb: Rulebook, as_of: date) -> list[F
         if urgency:
             reasons.append("older than 10 months — act before limitation")
 
+        f.act_by, f.days_left, f.alert, f.alert_reason = deadline(f, as_of)
         if f.label == Label.AVOIDABLE:
             f.priority = Priority.PREVENT
         elif f.label in (Label.RECOVERABLE, Label.UNCLEAR):
-            if f.amount >= RECOVER_NOW_MIN or (f.priority_score >= 0.75 and f.amount >= 100):
+            if f.alert:
+                f.priority = Priority.RECOVER_NOW
+                reasons.append("⏰ " + f.alert_reason)
+            elif f.amount >= RECOVER_NOW_MIN or (f.priority_score >= 0.75 and f.amount >= 100):
                 f.priority = Priority.RECOVER_NOW
             elif group_totals[f.group_key] >= COMBINE_MIN_GROUP:
                 f.priority = Priority.COMBINE

@@ -218,3 +218,7 @@ textarea{min-height:120px;font-family:var(--mono);font-size:.82rem}
 .flowline span.done{background:var(--green);border-color:var(--green);color:#fff}
 .flowline i{color:var(--ink-2);font-style:normal}
 @media (max-width:640px){.pipeline{flex-direction:column}.pipeline i{transform:rotate(90deg);align-self:flex-start;margin-left:18px}}
+
+.card.alertbar{background:var(--red-soft);border-color:var(--red)}
+.chip.alert{animation:blink 1.4s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.55}}

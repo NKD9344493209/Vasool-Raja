@@ -205,6 +205,10 @@ class Finding:
     group_key: str = ""                    # findings with the same key can be combined
     occurred_on: Optional[date] = None
     twin: dict[str, Any] = field(default_factory=dict)   # structured actual-vs-expected data for the Twin View
+    act_by: Optional[date] = None          # last sensible day to raise this with the bank (limitation clock)
+    days_left: Optional[int] = None        # act_by - as_of
+    alert: bool = False                    # inside the red-alert window → promoted whatever the amount
+    alert_reason: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -218,6 +222,7 @@ class Finding:
             "priority": self.priority.value, "priority_score": round(self.priority_score, 3),
             "priority_reasons": self.priority_reasons, "group_key": self.group_key,
             "occurred_on": self.occurred_on.isoformat() if self.occurred_on else None,
+            "act_by": self.act_by.isoformat() if self.act_by else None, "days_left": self.days_left, "alert": self.alert, "alert_reason": self.alert_reason,
         }
 
 

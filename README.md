@@ -121,4 +121,4 @@ consent-based bank data via Account Aggregator · more rules (the 21 mapped-not-
 
 ## Licence
 
-Apache 2.0. The rulebook is open data — copy it, audit it, correct it.
+Copyright © 2026 Mad Angles (Nandana R, Naveen Kumar D, Nethra Devi R, Sandhru Duraisamy), Coimbatore Institute of Technology. **All rights reserved.** Source is published for evaluation and portfolio viewing only; see `LICENSE`. The rulebook cites RBI circulars, which remain RBI publications.

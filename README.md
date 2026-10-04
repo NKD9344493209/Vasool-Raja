@@ -4,7 +4,7 @@
 
 Give it a bank statement or a passbook photo. It reconstructs your account as a **digital twin**, runs a **deterministic RBI rule engine** over that twin, and turns every difference between *what happened* and *what the rule says should have happened* into a **finding with an evidence chain** — the statement line, the account state, the rule in force on that date, the arithmetic, the potential claim. The assistant explains it in Tamil or English; a trusted family member can approve the action from their phone; the output is an **evidence pack** ready for the branch or the RBI Ombudsman.
 
-Built by **Mad Angles, Coimbatore Institute of Technology** for HackVerse 2.0 (Digital Twins & FinTech), Karpagam College of Engineering.
+Built by Naveen Kumar D and team.
 
 ## Product
 
@@ -121,4 +121,4 @@ consent-based bank data via Account Aggregator · more rules (the 21 mapped-not-
 
 ## Licence
 
-Copyright © 2026 Mad Angles (Nandana R, Naveen Kumar D, Nethra Devi R, Sandhru Duraisamy), Coimbatore Institute of Technology. **All rights reserved.** Source is published for evaluation and portfolio viewing only; see `LICENSE`. The rulebook cites RBI circulars, which remain RBI publications.
+Apache License 2.0 — see `LICENSE`. Copyright © 2026 Naveen Kumar D. The rulebook cites RBI circulars, which remain RBI publications.
